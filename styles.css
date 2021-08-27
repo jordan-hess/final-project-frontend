@@ -83,10 +83,10 @@ i{
     background-color: black;
 }
 
-.tick img{
-    height: 140px;
-    margin-left: 500px;
-}
+    .tick img{
+        height: 140px;
+        margin-left: 500px;
+    }
 
 .sep{
     display: flex;
