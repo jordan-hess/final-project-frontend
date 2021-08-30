@@ -110,6 +110,7 @@ i{
 .card-pic{
     width: 150px;
     height: 150px;
+    object-fit: cover;
 }
 
 .card-body{
@@ -186,15 +187,18 @@ i{
     width: 10vw;
     height: 20vh;
     margin-right: 60px;
+    object-fit: cover;
 }
 
 .six-card-pic{
     width: 10vw;
     height: 20vh;
     margin-right: 50px;
+    object-fit: cover;
 }
 
 .sev-card-pic{
     width: 10vw;
     height: 20vh;
+    object-fit: cover;
 }

@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
-}                           
+}
 
 .divid{
     display: flex;
@@ -40,10 +40,6 @@ i{
     margin-left: 20px;
 }
 
-.sep{
-    margin-left: 20%;
-}
-
 .tick{
     background-color: black;
     width: 80vw;
@@ -55,13 +51,11 @@ i{
     margin-left: 500px ;
 }
 
-.bottom{
-    padding: 4%;
-    display: flex;
+.sep{
+    margin-left: 20%;
 }
 
-
-.bottom h1{
+.access h1{
     font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     margin-left: 50px;
@@ -69,65 +63,38 @@ i{
     width: 40vw;
 }
 
-.three{
-    margin-top: 25px;
-    display: flex;
+.access-con{
+    padding: 4%;
 }
 
-.three input{
-    height: 30px;
-    border-radius: 20px;
-    width: 15vw;
-}
-
-.sale-card-pic{
-    width: 15vw;
-    height: 35vh;
-    object-fit: cover;
-}
-
-.sale-products{
+.ass{
     display: flex;
     flex-wrap: wrap;
 }
 
-.sale-card-body{
-    width: 33vw;
-}
-
-.sale-card{
+.card-body{
     padding: 4%;
-    display: flex;
+    margin: 20px;
 }
 
-.info{
-    display: flex;
+.card-body img{
+    width: 15vw;
+    height: 25vh;
+    object-fit: cover;
 }
 
-.details{
-    display: flex;
-    flex-direction: column;
-    font-size: 22px;
-    padding: 3%;
-}
-
-.card-was-price{
+.cards-was-price{
     text-decoration: line-through;
     text-decoration-thickness: 2px;
     text-decoration-color: red;
 }
 
-.button-container{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
+.cards-body{
+    padding: 3%;
 }
 
-.button-container button{
-    padding: 1%;
-    background-color: black;
-    color: white;
-    border-radius: 15px;
-    font-family: 'Luckiest Guy', cursive;
+.cards-body img{
+    width: 15vw;
+    height: 25vh;
+    object-fit: cover;
 }
-

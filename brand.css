@@ -74,3 +74,49 @@ i{
 .all-brands{
     padding: 1%;
 }
+
+.line{
+    height: 5px;
+    width: 86.5%;
+    float: right;
+  background: linear-gradient(
+    to bottom,
+    transparent 2px,
+    black 2px,
+    black 3px,
+    transparent 3px
+  );
+  margin-right: 100px;
+}
+
+.policy{
+    width: 80%;
+    padding: 4%;
+}
+
+.fill-con{
+    display: flex;
+    flex-direction:row;
+    padding: 4%;
+}
+
+.deliver{
+    flex-direction: column;
+    width: 18vw;
+}
+
+.fill{
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.deliver h1, h2, h3, h4 {
+    padding: 1%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.deliver p{
+    text-align: center;
+}
+
