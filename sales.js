@@ -1,4 +1,3 @@
-let products;
 const saleProducts = document.querySelector('.sale-products');
 
 // Function allows users to see products on sale

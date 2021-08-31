@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
-}
+}                           
 
 .divid{
     display: flex;
@@ -40,6 +40,10 @@ i{
     margin-left: 20px;
 }
 
+.sep{
+    margin-left: 20%;
+}
+
 .tick{
     background-color: black;
     width: 80vw;
@@ -51,69 +55,8 @@ i{
     margin-left: 500px ;
 }
 
-.sep{
-    margin-left: 20%;
-}
-
-.access h1{
-    font-family: 'Luckiest Guy', cursive;
-    font-size: 60px;
-    margin-left: 50px;
-    margin-right: 50px;
-    width: 40vw;
-}
-
-.access-con{
+.kick-con{
     padding: 4%;
-}
-
-.ass{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.card-body{
-    padding: 4%;
-    margin: 20px;
-}
-
-.card-body img{
-    width: 15vw;
-    height: 25vh;
-    object-fit: cover;
-}
-
-.cards-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: red;
-}
-
-.cards-body{
-    padding: 3%;
-    width: 15vw;
-    margin-right: 50px;
-}
-
-.cards-body img{
-    width: 15vw;
-    height: 25vh;
-    object-fit: cover;
-}
-
-.card-ass{
-    padding: 3%;
-}
-
-.card-ass img{
-    width: 15vw;
-    height: 25vh;
-    object-fit: cover;
-}
-
-.sale-ass{
-    display: flex;
-    padding: 2%;
 }
 
 h1{
@@ -121,45 +64,76 @@ h1{
     font-size: 60px;
     margin-left: 50px;
     margin-right: 50px;
-    width: 40vw;
+    width: 70vw;
 }
 
-.ass-cards-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: red;
+.trend{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4%;
 }
 
-.card-3-body img{
-    width: 15vw;
+.card{
+    margin: 20px;
+}
+
+.cards-pic{
+    width: 19vw;
     height: 25vh;
     object-fit: cover;
 }
 
-.card-3-body{
-    padding: 3%;
-    margin-left: 50px;
+.card-3 img{
+    width: 19vw;
+    height: 25vh;
+    object-fit: cover;
 }
 
-.card3-was-price{
+.three-kicks{
+    padding: 4%; 
+}
+
+
+.card-2 img{
+    width: 19vw;
+    height: 25vh;
+    object-fit: cover;
+}
+
+.all-kicks{
+    display: flex;
+}
+
+.one-kick{
+    padding: 4%;
+}
+
+.two-kicks{
+    padding: 4%;
+}
+
+.card-1 img{
+    width: 19vw;
+    height: 25vh;
+    object-fit: cover;
+}
+
+.kicks-sale{
+    display: flex;
+}
+
+.sale-card-body{
+    margin: 40px;
+}
+
+.card-was-price{
     text-decoration: line-through;
     text-decoration-thickness: 2px;
     text-decoration-color: red;
 }
 
-.card-4-body{
-    padding: 3%;
-    margin-left: 50px;
-}
-
-.card4-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: red;
-}
-
-.card-4-body img{
-    width: 15vw;
+.info img{
+    width: 19vw;
     height: 25vh;
     object-fit: cover;
 }
