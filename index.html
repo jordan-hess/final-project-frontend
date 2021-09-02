@@ -35,10 +35,10 @@
                     <i class="fas fa-shoe-prints"></i><a href="kicks.html" class="navbar-home">FOOTWEAR</a>
                 </li>
                 <li>
-                    <i class="fas fa-tshirt"></i><a href="" class="navbar-about">APPAREL</a>
+                    <i class="fas fa-tshirt"></i><a href="clothes.html" class="navbar-about">APPAREL</a>
                 </li>
                 <li>
-                    <i class="fas fa-phone"></i><a href="" class="navbar-about">CONTACT</a>
+                    <i class="fas fa-phone"></i><a href="contact.html" class="navbar-about">CONTACT</a>
                 </li>
             </ul>
         </nav>
@@ -50,8 +50,11 @@
                 <div class="top">
                     <h1>JUST DROPPED</h1>
                     <div class="three">
-                        <input type="text" placeholder=""><i class="fas fa-search"></i>
-                    <i class="fas fa-shopping-basket"></i>
+                        <input type="text" placeholder="What are you looking for?">
+                        <div class="icons">
+                            <i class="fas fa-shopping-basket"></i>
+                            <button class="user"><i class="far fa-user" onclick="openModal()"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,7 +75,32 @@
                     <div class="right6"></div>
                     <div class="right7"></div>
                 </div>
-                
+                <div id="modal">
+                    <button class="close" onclick="openModal()">X</button>
+                    <form>
+                        <header>Register</header>
+                        <div class="user-details">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required name="name" class="regi-name" placeholder="Your name">
+                            <div class="line"></div>
+                            <label for="username">Username</label>
+                            <input type="text" id="username" required name="username" class="log-usernm" placeholder="Type your username">
+                            <div class="line"></div>
+                            <label for="password">Password</label>
+                            <input type="text" id="password" required name="password" class="log-pass" placeholder="Type your password">
+                            <div class="line"></div>
+                            <label for="email">Email</label>
+                            <input type="text" id="email" required name="email" class="log-pass" placeholder="Email Address">
+                            <div class="line"></div>
+                            <div class="reg-btn">
+                                <input type="submit" value="Submit">
+                            </div>
+                            <div class="log">
+                                <label><a href="login.html">Already a registered user? Log in</a></label>
+                            </div>
+                        </div> 
+                    </form>
+                </div>
             </div>
         </div>
     </div>
