@@ -24,7 +24,7 @@
 }
 
 li{
-    padding: 10%;
+    padding: 8%;
     list-style: none;
     text-decoration: none;
 }
@@ -38,7 +38,6 @@ i{
     margin-right: 30px;
     font-size: 20px;
     margin-left: 20px;
-    padding: 9px;
 }
 
 
@@ -260,6 +259,16 @@ input ::after{
 
 .user-details label{
     margin: 10px;
+}
+
+.user {
+    background-color: white;
+    border: none;
+}
+
+.user :hover{
+    background-color: #e4e9f1;
+    border-radius: 50%;
 }
 
 header{

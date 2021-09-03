@@ -40,6 +40,7 @@ i{
     margin-left: 20px;
 }
 
+
 .tick{
     background-color: black;
     width: 80vw;
@@ -55,38 +56,14 @@ i{
     margin-left: 20%;
 }
 
-h1{
+.cart h1{
     font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     margin-left: 50px;
     margin-right: 50px;
     width: 40vw;
+}
+
+.cart{
     padding: 4%;
-}
-
-.card-body{
-    margin: 20px;
-}
-
-.card-body img{
-    width: 15vw;
-    height: 25vh;
-    object-fit: cover;
-}
-
-.pros{
-    padding: 0% 4% 4% 6%;
-    display: flex;
-}
-
-.sale-con{
-    padding: 0% 4% 4% 6%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.cards-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: red;
 }

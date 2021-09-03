@@ -20,6 +20,7 @@ const renderProduct = (item) => {
                 <h2 class="card-title">${item.access_name}</h2>
                 <h3 class="card-desc">${item.access_desc}</h3>
                 <h4 class="card-price">R${item.access_price}</h4>
+                <button class="btn btn-primary shop-item-button" onclick=addtoCartclick(event) type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -44,6 +45,7 @@ const renderSale = (item) => {
                 <h3 class="cards-desc">${item.sale_pro_desc}</h3>
                 <h4 class="cards-price">R${item.sale_pro_price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary shop-item-button" onclick=addtoCartclick(event) type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -70,6 +72,7 @@ function secondSale(){
                 <h3 class="ass-cards-desc">${item.sale_pro_desc}</h3>
                 <h4 class="ass-cards-price">R${item.sale_pro_price}</h4>
                 <h5 class="ass-cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -100,6 +103,7 @@ function thirdSale(){
                 <h3 class="card3-desc">${item.sale_pro_desc}</h3>
                 <h4 class="card3-price">R${item.sale_pro_price}</h4>
                 <h5 class="card3-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -130,6 +134,7 @@ function fourthSale(){
                 <h3 class="card4-desc">${item.sale_pro_desc}</h3>
                 <h4 class="card4-price">R${item.sale_pro_price}</h4>
                 <h5 class="card4-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -139,3 +144,28 @@ function fourthSale(){
 }
 
 fourthSale()
+
+function toCart(){
+
+    var addToCartButton = document.getElementsByClassName('shop-item-button')
+    for (var i = 0; i < addToCartButton.length; i++) {
+        var button = addToCartButton[i]
+        button.addEventListener('click', addtoCartclick)
+    }
+}
+
+function addtoCartclick(event) {
+    var button = event.target
+    var shopItem = button.parentElement.parentElement
+    var title = shopItem.getElementsByClassName('card-title')[0].innerText 
+    var price = shopItem.getElementsByClassName('card-price')[0].innerText
+    var imageScr = shopItem.getElementsByClassName('ass-card-pic')[0].src
+    addItemToCart(title , price, imageScr)
+}
+
+function addItemToCart(title, price, imageScr) {
+    var cartRow = document.createElement('div')
+    cartRow.innerText = title
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    cartItems.append(cartRow)
+}

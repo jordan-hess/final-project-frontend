@@ -4,8 +4,13 @@ const allTrends = document.querySelector('.right-con');
 const thirdTrend = document.querySelector('.right-right-con');
 const forthTrend = document.querySelector('.right4');
 const fifthTrend = document.querySelector('.right5');
-const sixTrend = document.querySelector('.right6')
-const sevTrend = document.querySelector('.right7')
+const sixTrend = document.querySelector('.right6');
+const sevTrend = document.querySelector('.right7');
+const form = document.getElementById('form');
+const userName = document.getElementById('name');
+const username = document.getElementById('username');
+const password = document.getElementById('password');
+const email = document.getElementById('email');
 
 
 
@@ -247,3 +252,40 @@ addSev()
 function openModal() {
     document.getElementById("modal").classList.toggle("modal-active");
   }
+
+function registerUser(){
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+    
+        // const formData = new FormData(form);
+        // const newFormData = Object.fromEntries(formData);
+        let name = userName.value;
+        let user = username.value;
+        let pass = password.value;
+        let mail = email.value;
+    
+        fetch('https://final-project-api1.herokuapp.com/adding-users/', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: name,
+                username: user,
+                email: mail,
+                password: pass,
+                }),
+            Headers: {
+                'Content-Type' : 'application/json'
+            },
+        })
+        .then(res => console.log(res.json()))
+        .then(() =>{
+            console.log(window.localStorage.setItem("name", name))
+            console.log(window.localStorage.setItem("username", user))
+            console.log(window.localStorage.setItem("email", mail))
+            console.log(window.localStorage.setItem("password", pass))
+        }) 
+        
+        ;
+    });
+}
+registerUser()
