@@ -3,11 +3,13 @@ const saleList = document.querySelector('.onsale')
 const secondassSale = document.querySelector('.for-sale')
 const tHirdSale = document.querySelector('.three')
 const fourSale = document.querySelector('.four')
+const cart = []
+console.log(cart)
 
 // to view products 
 fetch('https://final-project-api1.herokuapp.com/view-access/')
     .then(res => res.json())
-    .then(data => renderProduct(data))
+    .then(data => renderProduct(data));
 
 
 const renderProduct = (item) => {
@@ -16,11 +18,12 @@ const renderProduct = (item) => {
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.access_id}>
+                <p style="display: none" class="class-id">${item.access_id}<p>
                 <img src="${item.access_image}" class="ass-card-pic"/>
                 <h2 class="card-title">${item.access_name}</h2>
                 <h3 class="card-desc">${item.access_desc}</h3>
                 <h4 class="card-price">R${item.access_price}</h4>
-                <button class="btn btn-primary shop-item-button" onclick=addtoCartclick(event) type="button">ADD TO CART</button>
+                <button class="btn btn-primary shop-item-button" value="${item.access_id}" onclick="addtoCartclick(event, ${item.access_id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -39,13 +42,13 @@ const renderSale = (item) => {
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="cards-body" data-id=${item.sale_pro_id}>
+            <div class="cards-body" value="${item.sale_pro_id}">
                 <img src="${item.sale_pro_image}" class="sale-card-pic"/>
                 <h2 class="cards-title">${item.sale_pro_name}</h2>
                 <h3 class="cards-desc">${item.sale_pro_desc}</h3>
                 <h4 class="cards-price">R${item.sale_pro_price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
-                <button class="btn btn-primary shop-item-button" onclick=addtoCartclick(event) type="button">ADD TO CART</button>
+                <button class="shop-sale sale-btn" value="${item.sale_pro_id}" onclick="addtoCartclick2(event, ${item.sale_pro_id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -154,18 +157,109 @@ function toCart(){
     }
 }
 
-function addtoCartclick(event) {
+function addtoCartclick(event, id) {
+    console.log(id);
     var button = event.target
     var shopItem = button.parentElement.parentElement
     var title = shopItem.getElementsByClassName('card-title')[0].innerText 
     var price = shopItem.getElementsByClassName('card-price')[0].innerText
     var imageScr = shopItem.getElementsByClassName('ass-card-pic')[0].src
-    addItemToCart(title , price, imageScr)
+  
+    let card = [title, price, imageScr]
+    console.log(card)
+    addItemToCart(title , price, imageScr, id)
 }
 
-function addItemToCart(title, price, imageScr) {
-    var cartRow = document.createElement('div')
-    cartRow.innerText = title
-    var cartItems = document.getElementsByClassName('cart-items')[0]
-    cartItems.append(cartRow)
+function addItemToCart(title, price, imageScr, cartItemId) {
+    let cartPage = document.querySelector(".cart-items") 
+    let inCart = document.querySelectorAll(".btn.btn-primary.shop-item-button")[cartItemId - 1]
+
+    
+    let item = {
+        "name": title, 
+        "price": price,
+        "url": imageScr, 
+        "id": cartItemId, 
+        }
+
+    if (inCart.value == item["id"]){
+        cart.push(item)
+        cart.forEach(() => {
+        inCart.innerHTML = "";
+        inCart.disabled = true;
+        inCart.innerHTML += "In Cart Already";
+    },
+        cartPage.innerHTML +=`
+        <div class="card">
+        <div class="cards-body">
+            <p style="display: none" class="id">${cartItemId}<p>
+            <img src="${imageScr}" class="sale-card-pic"/>
+            <h2 class="cards-title">${title}</h2>
+            <h3 class="cards-desc">${price}</h3>
+        </div>
+    </div>
+        `)
+        console.log(cart)
+    }
+    
+}
+
+
+function saleToCart(){
+
+    var addToCartButton2 = document.querySelectorAll('.shop-sale.btn')
+    for (var i = 0; i < addToCartButton2.length; i++) {
+        var button = addToCartButton2[i]
+        button.addEventListener('click', addtoCartclick2)
+    }
+}
+
+
+function addtoCartclick2(event, saleId) {
+    console.log(saleId);
+    var button2 = event.target
+    let shopSale = button2.parentElement.parentElement
+    var saleName = shopSale.getElementsByClassName('cards-title')[0].innerText 
+    var salePrice = shopSale.getElementsByClassName('cards-price')[0].innerText
+    var saleImg = shopSale.getElementsByClassName('sale-card-pic')[0].src
+  
+    let cards = [saleName, salePrice, saleImg]
+    addSaleToCart( saleImg, saleName, salePrice, saleId)
+}
+
+
+function addSaleToCart(saleImg, saleName, salePrice, saleId) {
+    let cartPage2 = document.querySelector(".cart-sale") 
+    let saleCart = document.querySelector(".shop-sale.sale-btn")[saleId - 1]
+    console.log(saleCart);
+    let saleValue = saleCart.value
+    
+    let items = {
+        "name": saleName, 
+        "price": salePrice,
+        "img": saleImg, 
+        "saleId": saleId, 
+        }
+
+        console.log(items)
+    if (saleValue === items["saleId"]){
+        cart.push(items)
+        cart.forEach(() => {
+        saleValue.innerHTML = "";
+        saleValue.disabled = true;
+        saleValue.innerHTML += "In Cart Already";
+    },
+        cartPage2.innerHTML +=`
+        <div class="card">
+            <div class="cards-body">
+                <p style="display: none" class="id">${saleId}<p>
+                <img src="${saleImg}" class="sale-card-pic"/>
+                <h2 class="cards-title">${saleName}</h2>
+                <h3 class="cards-desc">${salePrice}</h3>
+            </div>
+        </div>
+        `)
+        console.log(cart)
+    }
+    
 }
