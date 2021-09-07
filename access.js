@@ -69,13 +69,13 @@ function secondSale(){
     item.forEach(item => {
         output += `
         <div class="card-ass">
-            <div class="cards-ass" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="sale-card-ass"/>
-                <h2 class="ass-cards-title">${item.sale_pro_name}</h2>
-                <h3 class="ass-cards-desc">${item.sale_pro_desc}</h3>
-                <h4 class="ass-cards-price">R${item.sale_pro_price}</h4>
-                <h5 class="ass-cards-was-price">R${item.was_price}<h5>
-                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            <div class="cards-ass" data-id=${item.sale_pro_id} >
+                <img src="${item.sale_pro_image}" class="sale-card-pic"/>
+                <h2 class="cards-title">${item.sale_pro_name}</h2>
+                <h3 class="cards-desc">${item.sale_pro_desc}</h3>
+                <h4 class="cards-price">R${item.sale_pro_price}</h4>
+                <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="shop-sale-btn saleBtn" value="${item.sale_pro_id}" onclick="addtoCartclick3(event, ${item.sale_pro_id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -106,7 +106,7 @@ function thirdSale(){
                 <h3 class="card3-desc">${item.sale_pro_desc}</h3>
                 <h4 class="card3-price">R${item.sale_pro_price}</h4>
                 <h5 class="card3-was-price">R${item.was_price}<h5>
-                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                <button class="shop-this-sale salesBtn" value="${item.sale_pro_id}" onclick="addtoCartclick4(event, ${item.sale_pro_id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -137,7 +137,7 @@ function fourthSale(){
                 <h3 class="card4-desc">${item.sale_pro_desc}</h3>
                 <h4 class="card4-price">R${item.sale_pro_price}</h4>
                 <h5 class="card4-was-price">R${item.was_price}<h5>
-                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                <button class="last-saleBtn" value="${item.sale_pro_id}" onclick="addtoCartclick5(event, ${item.sale_pro_id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -191,7 +191,7 @@ function addItemToCart(title, price, imageScr, cartItemId) {
     },
         cartPage.innerHTML +=`
         <div class="card">
-        <div class="cards-body">
+        <div class="incart-item">
             <p style="display: none" class="id">${cartItemId}<p>
             <img src="${imageScr}" class="sale-card-pic"/>
             <h2 class="cards-title">${title}</h2>
@@ -207,7 +207,7 @@ function addItemToCart(title, price, imageScr, cartItemId) {
 
 function saleToCart(){
 
-    var addToCartButton2 = document.querySelectorAll('.shop-sale.btn')
+    var addToCartButton2 = document.querySelectorAll('.shop-sale sale-btn')
     for (var i = 0; i < addToCartButton2.length; i++) {
         var button = addToCartButton2[i]
         button.addEventListener('click', addtoCartclick2)
@@ -224,34 +224,37 @@ function addtoCartclick2(event, saleId) {
     var saleImg = shopSale.getElementsByClassName('sale-card-pic')[0].src
   
     let cards = [saleName, salePrice, saleImg]
+    console.log(cards);
     addSaleToCart( saleImg, saleName, salePrice, saleId)
 }
 
 
 function addSaleToCart(saleImg, saleName, salePrice, saleId) {
     let cartPage2 = document.querySelector(".cart-sale") 
-    let saleCart = document.querySelector(".shop-sale.sale-btn")[saleId - 1]
-    console.log(saleCart);
-    let saleValue = saleCart.value
-    
+    let saleCart = document.querySelector(".shop-sale.sale-btn").value
+    let saleCartBtn = document.querySelector('.shop-sale.sale-btn')
+
     let items = {
         "name": saleName, 
         "price": salePrice,
         "img": saleImg, 
-        "saleId": saleId, 
-        }
+        "salesId": saleId, 
+        };
+    let itemId = items["salesId"]
+    console.log(itemId)
 
-        console.log(items)
-    if (saleValue === items["saleId"]){
-        cart.push(items)
+    if (saleId == itemId){
+        cart.push(itemId)
         cart.forEach(() => {
-        saleValue.innerHTML = "";
-        saleValue.disabled = true;
-        saleValue.innerHTML += "In Cart Already";
+            saleCartBtn.innerHTML = "";
+            saleCartBtn.disabled = true;
+            saleCartBtn.innerHTML += "In cart already";
+        console.log(saleCartBtn);
+
     },
         cartPage2.innerHTML +=`
         <div class="card">
-            <div class="cards-body">
+            <div class="incart-item">
                 <p style="display: none" class="id">${saleId}<p>
                 <img src="${saleImg}" class="sale-card-pic"/>
                 <h2 class="cards-title">${saleName}</h2>
@@ -262,4 +265,195 @@ function addSaleToCart(saleImg, saleName, salePrice, saleId) {
         console.log(cart)
     }
     
+}
+
+
+function saleTwoCart(){
+
+    var addToCartButton2 = document.querySelectorAll('.shop-sale-btn saleBtn')
+    for (var i = 0; i < addToCartButton2.length; i++) {
+        var button3 = addToCartButton2[i]
+        button3.addEventListener('click', addtoCartclick3)
+    }
+}
+
+
+function addtoCartclick3(event2, sale2Id) {
+    console.log(sale2Id);
+    var button3 = event2.target
+    let shopSale2 = button3.parentElement.parentElement
+    var salesName = shopSale2.getElementsByClassName('cards-title')[0].innerText 
+    var salesPrice = shopSale2.getElementsByClassName('cards-price')[0].innerText
+    var salesImg = shopSale2.getElementsByClassName('sale-card-pic')[0].src
+  
+    let cards2 = [salesName, salesPrice, salesImg]
+    console.log(cards2);
+    addSaleToCart2( salesImg, salesName, salesPrice, sale2Id)
+}
+
+
+function addSaleToCart2(salesImg, salesName, salesPrice, sale2Id) {
+    let cartPage2 = document.querySelector(".cart-sale") 
+    let sale2Btn = document.querySelector('.shop-sale-btn.saleBtn')
+
+    let item = {
+        "name": salesName, 
+        "price": salesPrice,
+        "img": salesImg, 
+        "saleId": sale2Id, 
+        };
+    let item2Id = item["saleId"]
+    console.log(item2Id)
+
+    if (sale2Id == 10){
+        cart.push(item2Id)
+        cart.forEach(() => {
+            sale2Btn.innerHTML = "";
+            sale2Btn.disabled = true;
+            sale2Btn.innerHTML += "In cart already";
+        console.log(sale2Btn);
+    },
+    
+        cartPage2.innerHTML +=`
+        <div class="card">
+            <div class="incart-item">
+                <p style="display: none" class="id">${sale2Id}<p>
+                <img src="${salesImg}" class="sale-card-pic"/>
+                <h2 class="cards-title">${salesName}</h2>
+                <h3 class="cards-desc">${salesPrice}</h3>
+            </div>
+        </div>
+        `)
+        console.log(cart)
+    }
+    
+}
+
+
+
+function saleThreeCart(){
+
+    var addToCartButton3 = document.querySelectorAll('.shop-this-sale salesBtn')
+    for (var i = 0; i < addToCartButton3.length; i++) {
+        var button4 = addToCartButton3[i]
+        button4.addEventListener('click', addtoCartclick4)
+    }
+}
+
+
+function addtoCartclick4(event3, sale3Id) {
+    console.log(sale3Id);
+    var button4 = event3.target
+    let shopSale3 = button4.parentElement.parentElement
+    var sale3Name = shopSale3.getElementsByClassName('cards3title')[0].innerText 
+    var sale3Price = shopSale3.getElementsByClassName('card3-price')[0].innerText
+    var sale3Img = shopSale3.getElementsByClassName('card3-img')[0].src
+  
+    let cards2 = [sale3Name, sale3Price, sale3Img]
+    console.log(cards2);
+    addSaleToCart3( sale3Img, sale3Name, sale3Price, sale3Id)
+}
+
+
+function addSaleToCart3(sale3Img, sale3Name, sale3Price, sale3Id) {
+    let cartPage2 = document.querySelector(".cart-sale") 
+    let sale3Btn = document.querySelector('.shop-this-sale.salesBtn')
+
+    let item = {
+        "name": sale3Name, 
+        "price": sale3Price,
+        "img": sale3Img, 
+        "sale3id": sale3Id, 
+        };
+    let item3Id = item["sale3id"]
+    console.log(item3Id)
+
+    if (sale3Id == 17){
+        cart.push(item3Id)
+        cart.forEach(() => {
+            sale3Btn.innerHTML = "";
+            sale3Btn.disabled = true;
+            sale3Btn.innerHTML += "In cart already";
+        console.log(sale3Btn);
+    },
+    
+        cartPage2.innerHTML +=`
+        <div class="card">
+            <div class="incart-item">
+                <p style="display: none" class="id">${sale3Id}<p>
+                <img src="${sale3Img}" class="sale-card-pic"/>
+                <h2 class="cards-title">${sale3Name}</h2>
+                <h3 class="cards-desc">${sale3Price}</h3>
+            </div>
+        </div>
+        `)
+        console.log(cart)
+    }
+    
+}
+
+function saleLastCart(){
+
+    var addToCartButton4 = document.querySelectorAll('.last-saleBtn')
+    for (var i = 0; i < addToCartButton4.length; i++) {
+        var button5 = addToCartButton4[i]
+        button5.addEventListener('click', addtoCartclick5)
+    }
+}
+
+
+function addtoCartclick5(event4, sale4Id) {
+    console.log(sale4Id);
+    var button5 = event4.target
+    let shopSale4 = button5.parentElement.parentElement
+    var sale4Name = shopSale4.getElementsByClassName('cards4title')[0].innerText 
+    var sale4Price = shopSale4.getElementsByClassName('card4-price')[0].innerText
+    var sale4Img = shopSale4.getElementsByClassName('card4-img')[0].src
+  
+    let cards3 = [sale4Name, sale4Price, sale4Img]
+    console.log(cards3);
+    addSaleToCart5( sale4Img, sale4Name, sale4Price, sale4Id)
+}
+
+
+function addSaleToCart5(sale4Img, sale4Name, sale4Price, sale4Id) {
+    let cartPage2 = document.querySelector(".cart-sale") 
+    let sale4Btn = document.querySelector('.last-saleBtn')
+
+    let item = {
+        "name": sale4Name, 
+        "price": sale4Price,
+        "img": sale4Img, 
+        "sale4id": sale4Id, 
+        };
+    let item4Id = item["sale4id"]
+    console.log(item4Id)
+
+    if (sale4Id == 14){
+        cart.push(item4Id)
+        cart.forEach(() => {
+            sale4Btn.innerHTML = "";
+            sale4Btn.disabled = true;
+            sale4Btn.innerHTML += "In cart already";
+        console.log(sale4Btn);
+    },
+    
+        cartPage2.innerHTML +=`
+        <div class="card">
+            <div class="incart-item">
+            <img src="${sale4Img}" class="sale-card-pic"/>
+                <p style="display: none" class="id">${sale4Id}<p>
+                <h2 class="cards-title">${sale4Name}</h2>
+                <h3 class="cards-desc">${sale4Price}</h3>
+            </div>
+        </div>
+        `)
+        console.log(cart)
+    }
+    
+}
+
+//   function to open modal
+function openCart() {
+    document.getElementById("carts-items").classList.toggle("carts-active");
 }

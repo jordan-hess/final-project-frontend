@@ -289,3 +289,49 @@ header{
     background-color: white;
     border: none;
 }
+
+#carts-items.carts-active {
+    display: block;
+    position: absolute;
+    left: 57%;
+    color: black;
+    transform: translate(-10%, -25%);
+    height: 170vh;
+    width: 50vw;
+    top: 470px;
+    background-color: white;
+    box-shadow: 5px;
+    padding: 5%;
+}
+
+#carts-items{
+    display: none;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.incart-item{
+    display: flex;
+    padding: 2%;
+}
+
+.incart-item h2{
+    margin-left: 50px;
+    margin-top: 10px;       
+}
+
+.incart-item h3{
+    margin-left: 80px;
+    margin-top: 14px;
+}
+
+.incart-item img{
+    width: 5vw;
+    height: 8vh;
+    object-fit: cover;    
+}
+

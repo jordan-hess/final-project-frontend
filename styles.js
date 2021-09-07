@@ -11,6 +11,7 @@ const userName = document.getElementById('name');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
 const email = document.getElementById('email');
+const cart = []
 
 
 
@@ -24,15 +25,18 @@ fetch('https://final-project-api1.herokuapp.com/view-product/')
 
 const renderProduct = (item) => {
     output = ""
+    console.log(item);
     item.forEach(item => {
+    console.log(item);
         output += `
         <div class="card">
-            <div class="card-body first-slide" data-id=${item.product_id}>
-                <img src="${item.product_image}" class="card-pic"/>
-                <h2 class="card-title">${item.product_name}</h2>
-                <h3 class="card-desc">${item.product_desc}</h3>
-                <h4 class="card-price">R${item.product_price}</h4>
-                <h5 class="card-cat">${item.product_cat}</h5>
+            <div class="card-body first-slide" data-id=${item["product_id"]}>
+                <img src="${item["product_image"]}" class="card-pic"/>
+                <h2 class="card-title">${item["product_name"]}</h2>
+                <h3 class="card-desc">${item["product_desc"]}</h3>
+                <h4 class="card-price">R${item["product_price"]}</h4>
+                <h5 class="card-cat">${item["product_cat"]}</h5>
+                <button class="btn btn-primary shop-item-button" value="${item["product_id"]}" onclick="addtoCartclick(event, ${item["product_id"]})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -251,7 +255,7 @@ addSev()
 //   function to open modal
 function openModal() {
     document.getElementById("modal").classList.toggle("modal-active");
-  }
+}
 
 function registerUser(){
 
@@ -289,3 +293,70 @@ function registerUser(){
     });
 }
 registerUser()
+
+
+//   function to open modal
+function openCart() {
+    document.getElementById("carts-items").classList.toggle("carts-active");
+}
+
+
+function toCart(){
+
+    var addToCartButton = document.getElementsByClassName('shop-item-button')
+    for (var i = 0; i < addToCartButton.length; i++) {
+        var button = addToCartButton[i]
+        button.addEventListener('click', addtoCartclick)
+    }
+}
+
+function addtoCartclick(event, id) {
+    console.log(id);
+    var button = event.target
+    var shopItem = button.parentElement.parentElement
+    var title = shopItem.getElementsByClassName('card-title')[0].innerText 
+    var price = shopItem.getElementsByClassName('card-price')[0].innerText
+    var imageScr = shopItem.getElementsByClassName('card-pic')[0].src
+  
+    let card = [title, price, imageScr]
+    console.log(card)
+    addItemToCart(title , price, imageScr, id)
+}
+
+function addItemToCart(title, price, imageScr, cartItemId) {
+    let cartPage = document.querySelector(".cart-items")
+    let inCart = document.querySelector(".btn.btn-primary.shop-item-button")
+    let cartItem = document.querySelector('.btn.btn-primary.shop-item-button').value
+    console.log(inCart);
+    console.log(cartItem);
+    console.log(cartItemId);
+    
+    let item = {
+        "name": title, 
+        "price": price,
+        "url": imageScr, 
+        "id": cartItemId, 
+        }
+
+    if (cartItem == cartItemId){
+        cart.push(item)
+        cart.forEach(() => {
+        inCart.innerHTML = "";
+        inCart.disabled = true;
+        inCart.innerHTML += "In Cart Already";
+        console.log(cart);
+    },
+        cartPage.innerHTML +=`
+        <div class="card">
+        <div class="incart-item">
+            <p style="display: none" class="id">${cartItemId}<p>
+            <img src="${imageScr}" class="sale-card-pic"/>
+            <h2 class="cards-title">${title}</h2>
+            <h3 class="cards-desc">${price}</h3>
+        </div>
+    </div>
+        `)
+        console.log(cart)
+    }
+    
+}

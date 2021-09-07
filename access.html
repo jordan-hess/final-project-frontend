@@ -53,6 +53,7 @@
             <div class="access-con">
                 <div class="access">
                     <h1>Accessories</h1>
+                    <button class="user"><i class="fas fa-shopping-basket" onclick="openCart()"></i></button>
                 </div>
                 <div class="ass">
                 </div>
@@ -63,10 +64,14 @@
                     <div class="three"></div>
                     <div class="four"></div>
                 </div>
-                <div class="cart-items">
-                    <h1>cart</h1>
+                <div class="mycart" id="carts-items">
+                    <div class="top">
+                        <h1>cart</h1>
+                        <button class="close" onclick="openCart()">X</button>
+                    </div>
+                    <div class="cart-items"></div>
+                    <div class="cart-sale"></div>
                 </div>
-                <div class="cart-sale"></div>
             </div>
         </div>
     </div>

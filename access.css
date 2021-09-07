@@ -163,3 +163,74 @@ h1{
     height: 25vh;
     object-fit: cover;
 }
+
+
+#carts-items.carts-active {
+    display: block;
+    position: absolute;
+    left: 57%;
+    color: black;
+    transform: translate(-10%, -25%);
+    height: 170vh;
+    width: 50vw;
+    top: 470px;
+    background-color: white;
+    box-shadow: 5px;
+    padding: 5%;
+}
+
+#carts-items{
+    display: none;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+}
+
+.access{
+    display: flex;
+}
+
+.card{
+    display: flex;
+}
+
+.incart-item{
+    display: flex;
+    padding: 2%;
+}
+
+.incart-item h2{
+    margin-left: 50px;
+    margin-top: 10px;       
+}
+
+.incart-item h3{
+    margin-left: 80px;
+    margin-top: 14px;
+}
+
+.incart-item img{
+    width: 5vw;
+    height: 8vh;
+    object-fit: cover;    
+}
+
+.top button{
+    height: 5vh;
+    width: 5vw;
+    background-color: red;
+    margin-top: 15px;
+}
+
+.access button{
+    background-color: transparent;
+    border: none;
+}
+
+.access button :hover{
+    background-color: #e4e9f1;
+    padding: 5%;
+    border-radius: 50%;
+}
