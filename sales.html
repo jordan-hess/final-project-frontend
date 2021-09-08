@@ -52,7 +52,7 @@
                 <h1>Everything Must Go</h1>
                 <div class="three">
                     <input type="text" placeholder=""><i class="fas fa-search"></i>
-                <i class="fas fa-shopping-basket"></i>
+                    <button class="user"><i class="fas fa-shopping-basket" onclick="openCart()"></i></button>
                 </div>
             </div>
             <div class="button-container">
@@ -64,6 +64,14 @@
               </div>
             <div class="below">
                 <div class="sale-products"></div>
+            </div>
+            <div class="mycart" id="carts-items">
+                <div class="top">
+                    <h1>cart</h1>
+                    <button class="close" onclick="openCart()">X</button>
+                </div>
+                <div class="cart-items"></div>
+                <div class="cart-sale"></div>
             </div>
         </div>
 <script src="sales.js"></script>

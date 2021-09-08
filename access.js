@@ -173,6 +173,7 @@ function addtoCartclick(event, id) {
 function addItemToCart(title, price, imageScr, cartItemId) {
     let cartPage = document.querySelector(".cart-items") 
     let inCart = document.querySelectorAll(".btn.btn-primary.shop-item-button")[cartItemId - 1]
+    console.log(inCart)
 
     
     let item = {

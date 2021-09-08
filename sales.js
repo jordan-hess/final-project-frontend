@@ -1,5 +1,6 @@
 const saleProducts = document.querySelector('.sale-products');
 
+
 // Function allows users to see products on sale
 function onSale(){
 
@@ -26,6 +27,7 @@ function onSale(){
                         <h5 class="sale-card-cat">${item.sale_pro_cat}</h5>
                         <h4 class="sale-card-price">R${item.sale_pro_price}</h4>
                         <h6 class="card-was-price">R${item.was_price}</h6>
+                        <button class="shop-sale sale-btn" value="${item.sale_pro_id}" onclick="addtoCartclick(event, ${item.sale_pro_id})" type="button">ADD TO CART</button>
                     </div>
                 </div>
             </div>
@@ -68,3 +70,68 @@ function filterCards(category) {
     }
 }
 
+//   function to open modal
+function openCart() {
+    document.getElementById("carts-items").classList.toggle("carts-active");
+}
+
+
+function toCart(){
+
+    var addToCartButton = document.getElementsByClassName('shop-sale.sale-btn')
+    for (var i = 0; i < addToCartButton.length; i++) {
+        var button = addToCartButton[i]
+        button.addEventListener('click', addtoCartclick)
+    }
+}
+
+function addtoCartclick(event, id) {
+    console.log(id);
+    var button = event.target
+    var shopItem = button.parentElement.parentElement
+    var title = shopItem.getElementsByClassName('sale-card-title')[0].innerText 
+    var price = shopItem.getElementsByClassName('sale-card-price')[0].innerText
+    var imageScr = shopItem.getElementsByClassName('sale-card-pic')[0].src
+  
+    let card = [title, price, imageScr]
+    console.log(card)
+    addItemToCart(title , price, imageScr, id)
+}
+
+function addItemToCart(title, price, imageScr, cartItemId) {
+    let cartPage = document.querySelector(".cart-items") 
+    let inCartbtn = document.querySelectorAll(".shop-sale.sale-btn")
+    console.log(inCartbtn)
+    let cart =[]
+    console.log(typeof(cartItemId));
+    
+    let item = {
+        "name": title, 
+        "price": price,
+        "url": imageScr, 
+        "id": cartItemId, 
+        }
+        console.log(item);
+        console.log(typeof(item["id"]));
+
+    if (cartItemId == item["id"]){
+        cart.push(item)
+        cart.forEach(() => {
+        inCartbtn.innerHTML = "";
+        inCartbtn.disabled = true;
+        inCartbtn.innerHTML += "In Cart Already";
+    },
+        cartPage.innerHTML +=`
+        <div class="card">
+        <div class="incart-item">
+            <p style="display: none" class="id">${cartItemId}<p>
+            <img src="${imageScr}" class="sale-card-pic"/>
+            <h2 class="cards-title">${title}</h2>
+            <h3 class="cards-desc">${price}</h3>
+        </div>
+    </div>
+        `)
+        console.log(cart)
+    }
+    
+}
