@@ -56,7 +56,28 @@ i{
 }
 
 .kick-con{
-    padding: 4%;
+    padding: 0% 4% 4% 4%;
+}
+
+.righton-top{
+    display: flex;
+}
+
+.righton-top h1{
+    padding: 50px 0px 50px 70px;
+}
+
+.righton-top button{
+    background-color: transparent;
+    height: 8vh;
+    margin-top: 57px;
+    border: none;
+}
+
+.righton-top button :hover{
+    padding: 7%;
+    background-color: #e4e9f1;
+    border-radius: 50%;
 }
 
 h1{
@@ -64,13 +85,13 @@ h1{
     font-size: 60px;
     margin-left: 50px;
     margin-right: 50px;
-    width: 70vw;
+    width: 58vw;
 }
 
 .trend{
     display: flex;
     flex-wrap: wrap;
-    padding: 4%;
+    padding: 0% 4% 4% 4%;
 }
 
 .card{
@@ -136,4 +157,64 @@ h1{
     width: 19vw;
     height: 25vh;
     object-fit: cover;
+}
+
+#carts-items.carts-active {
+    display: block;
+    position: absolute;
+    left: 57%;
+    color: black;
+    transform: translate(-10%, -25%);
+    height: 170vh;
+    width: 40vw;
+    top: 470px;
+    background-color: white;
+    box-shadow: 5px;
+}
+
+#carts-items{
+    display: none;
+}
+
+.top{
+    display: flex;
+}
+
+.top h1{
+    padding: 4%;
+}
+
+.top button{
+    padding: 2%;
+    width: 7vw;
+    background-color: red;
+    height: 7vh;
+    margin-top: 35px;
+}
+
+
+.incart-item{
+    display: flex;
+    padding: 2%;
+}
+
+.incart-item h2{
+    margin-left: 50px;
+    margin-top: 10px;       
+}
+
+.incart-item h3{
+    margin-left: 80px;
+    margin-top: 14px;
+}
+
+.incart-item img{
+    width: 5vw;
+    height: 8vh;
+    object-fit: cover;    
+}
+
+
+@media only screen and (max-width: 1497.6px) {
+
 }

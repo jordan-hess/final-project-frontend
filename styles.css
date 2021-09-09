@@ -335,3 +335,7 @@ header{
     object-fit: cover;    
 }
 
+.incart-item button{
+    width: 5vw;
+    height: 5vh;
+}

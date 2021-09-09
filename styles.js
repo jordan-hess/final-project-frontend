@@ -12,6 +12,7 @@ const username = document.getElementById('username');
 const password = document.getElementById('password');
 const email = document.getElementById('email');
 
+
 let output = '';
 
 // to view products 
@@ -61,7 +62,7 @@ items.forEach(items => {
             <h3 class="cards-desc">${items.trend_desc}</h3>
             <h4 class="cards-price">R${items.trend_price}</h4>
             <h5 class="cards-cat">${items.trend_cat}</h5>
-            <button class="shop-trend btn" value="${items["trend_id"]}" onclick="addTrendCartclick(event, ${items["trend_id"]})" type="button">ADD TO CART</button>
+            <button class="shop-trend btn" value="${items["trend_id"]}" onclick="addTrendCartclick(event, ${items["trend_id"]})" type="button">+</button>
         </div>
     </div>
     `;
@@ -297,7 +298,7 @@ function registerUser(){
 registerUser()
 
 
-//   function to open modal
+//   function to open Cart
 function openCart() {
     document.getElementById("carts-items").classList.toggle("carts-active");
 }
@@ -417,7 +418,9 @@ function addTrendToCart(trendImg, trendName, trendPrice ,trendId) {
                 <p style="display: none" class="id">${trendId}<p>
                 <img src="${trendImg}" class="card-pic"/>
                 <h2 class="cards-title">${trendName}</h2>
-                <h3 class="cards-desc">${trendPrice}</h3>
+                <h3 class="cards-price">${trendPrice}</h3>
+                <input class="qty-input" type="number" value="2">
+                <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
             </div>
         </div>
         `)
@@ -818,3 +821,44 @@ function addTrendToCart7(trend7Id, trend7Img, trend7Price, trend7Name) {
     }
     
 }
+
+function removeBtn(){
+
+    // remove section
+    let removeFromCartBtn = document.getElementById('remove-btn');
+    let addAgain = document.querySelector('.shop-trend.btn');
+    console.log(addAgain);
+    cart = [];
+    console.log(removeFromCartBtn);
+    alert("press remove again to confirm")
+
+    // loops through the remove btn
+    
+    let removeButton = removeFromCartBtn
+    removeButton.addEventListener('click', function(event){
+        var buttonClicked = event.target
+        buttonClicked.parentElement.parentElement.remove()
+        addAgain.disabled = false;
+        updateCartTotal() 
+        
+    })
+}
+
+function updateCartTotal(){
+    let itemCon = document.getElementById('carts-items')[0]
+    var items = itemCon.getElementsByClassName('cart-items')
+    for (var i = 0; i < item.length; i++){
+        var item = items[i]
+        var priceElement = cartRow.getElementsByClassName('cards-price')[0]
+        var qtlElement = cartRow.getElementsByClassName('qty-input')[0]
+        console.log(priceElement, qtlElement)
+    }
+}
+
+const reloadButton = document.querySelector("#reload");
+// Reload everything:
+function reload() {
+    reload = location.reload();
+}
+// Event listeners for reload
+reloadButton.addEventListener("click", reload, false);

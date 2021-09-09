@@ -90,3 +90,75 @@ h1{
     text-decoration-thickness: 2px;
     text-decoration-color: red;
 }
+
+#carts-items.carts-active {
+    display: block;
+    position: absolute;
+    left: 57%;
+    color: black;
+    transform: translate(-10%, -25%);
+    height: 170vh;
+    width: 50vw;
+    top: 449px;
+    background-color: white;
+    box-shadow: 5px;
+    padding: 0% 5% 5% 5%;
+}
+
+#carts-items{
+    display: none;
+}
+
+
+.incart-item{
+    display: flex;
+    padding: 2%;
+}
+
+.incart-item h2{
+    margin-left: 50px;
+    margin-top: 10px;       
+}
+
+.incart-item h3{
+    margin-left: 80px;
+    margin-top: 14px;
+}
+
+.incart-item img{
+    width: 5vw;
+    height: 8vh;
+    object-fit: cover;    
+}
+
+.top-part{
+    display: flex;
+}
+
+.top-part button{
+    background-color: transparent;
+    border: none;
+}
+
+
+.top-part button :hover{
+    background-color: #e4e9f1;
+    padding: 5%;
+    border-radius: 50%;
+}
+
+.top{
+    margin-top: 30px;
+    display: flex;
+}
+
+.top button{
+    height: 5vh;
+    width: 5vw;
+    background-color: red;
+    margin-top: 40px;
+}
+
+.top h1{
+    margin-top: 0px;
+}

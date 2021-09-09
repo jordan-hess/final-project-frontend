@@ -112,7 +112,6 @@ function addItemToCart(title, price, imageScr, cartItemId) {
         "id": cartItemId, 
         }
         console.log(item);
-        console.log(typeof(item["id"]));
 
     if (cartItemId == item["id"]){
         cart.push(item)
@@ -120,6 +119,7 @@ function addItemToCart(title, price, imageScr, cartItemId) {
         inCartbtn.innerHTML = "";
         inCartbtn.disabled = true;
         inCartbtn.innerHTML += "In Cart Already";
+        alert("your item was added to your cart")
     },
         cartPage.innerHTML +=`
         <div class="card">
