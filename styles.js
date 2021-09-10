@@ -260,41 +260,21 @@ function openModal() {
 }
 
 function registerUser(){
+    let name = document.getElementById('name');
+    let usernm = document.getElementById('username');
+    let pass = document.getElementById('password');
+    let email = document.getElementById("email")
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-    
-        // const formData = new FormData(form);
-        // const newFormData = Object.fromEntries(formData);
-        let name = userName.value;
-        let user = username.value;
-        let pass = password.value;
-        let mail = email.value;
-    
-        fetch('https://final-project-api1.herokuapp.com/adding-users/', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: name,
-                username: user,
-                email: mail,
-                password: pass,
-                }),
-            Headers: {
-                'Content-Type' : 'application/json'
-            },
-        })
-        .then(res => console.log(res.json()))
-        .then(() =>{
-            console.log(window.localStorage.setItem("name", name))
-            console.log(window.localStorage.setItem("username", user))
-            console.log(window.localStorage.setItem("email", mail))
-            console.log(window.localStorage.setItem("password", pass))
-        }) 
-        
-        ;
-    });
+    // if the enties are left open (in english)
+    if(username.value == "" ||password.value.trim()==""){
+        alert("No blank values allowed");
+        return false;
+    }
+    else{
+        return true;
+    }
+
 }
-registerUser()
 
 
 //   function to open Cart
