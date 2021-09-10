@@ -374,6 +374,8 @@ function addSaleToCart2(salesImg, salesName, salesPrice , salesId) {
                 <img src="${salesImg}" class="two-card-pic"/>
                 <h2 class="two-card-title">${salesName}</h2>
                 <h3 class="two-card-desc">${salesPrice}</h3>
+                <input class="qty-input btn" type="number" value="2">
+                <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
             </div>
         </div>
         `)
@@ -400,6 +402,7 @@ function addSaleCartclick(event, sales2Id) {
     var sales2Name = shops2Sale.getElementsByClassName('card-title')[0].innerText 
     var sales2Price = shops2Sale.getElementsByClassName('card-price')[0].innerText
     var sales2Img = shops2Sale.getElementsByClassName('card-pic')[0].src
+    document.querySelector('.total').innerHTML = "r" + sale_pro_price
   
     let saleCard = [sales2Img, sales2Name, sales2Price ]
     console.log(saleCard);
@@ -438,10 +441,59 @@ function addSaleToCart2(sales2Img, sales2Name, sales2Price , sales2Id) {
                 <img src="${sales2Img}" class="two-card-pic"/>
                 <h2 class="two-card-title">${sales2Name}</h2>
                 <h3 class="two-card-desc">${sales2Price}</h3>
+                <input class="qty-input btn" type="number" value="2">
+                <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
             </div>
         </div>
         `)
         console.log(cart)
     }
     
+}
+
+
+function removeBtn(){
+
+    // remove section
+    let removeFromCartBtn = document.getElementById('remove-btn');
+    let addAgain = document.querySelector('.shop-it.btn');
+    console.log(addAgain);
+    cart = [];
+    console.log(removeFromCartBtn);
+    
+    let removeButton = removeFromCartBtn
+    removeButton.addEventListener('click', function(event){
+        var buttonClicked = event.target
+        buttonClicked.parentElement.parentElement.remove()
+        addAgain.innerHTML = "";
+        addAgain.disabled = false;
+        addAgain.innerHTML += "Add To Cart";
+        updateCartTotal() 
+        
+    })
+    
+    function updateCartTotal(){
+        let items = document.getElementsByClassName('incart-item')
+        console.log(items);
+        let total = 0;
+
+        for (let i = 0; i < items.length; i++){
+            let item = items[i]
+            let priceElement = document.getElementsByClassName('card-price')[0]
+            let price = priceElement.innerText.replace('R', '')
+            console.log(price)
+            let qtlElement = document.getElementsByClassName('qty-input btn')[i]
+            let qauntity = qtlElement.value
+            console.log(price , qauntity);
+            console.log(price * qauntity);
+            total = total + (price * qauntity)
+            document.querySelector('.total').innerHTML ="R" + total
+            console.log(cart)
+        }
+    }
+}
+
+
+function whenOpen(){
+    alert('to remove an item click the remove button twice for confirmation')
 }

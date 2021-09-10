@@ -12,7 +12,6 @@ const username = document.getElementById('username');
 const password = document.getElementById('password');
 const email = document.getElementById('email');
 
-
 let output = '';
 
 // to view products 
@@ -300,7 +299,8 @@ registerUser()
 
 //   function to open Cart
 function openCart() {
-    document.getElementById("carts-items").classList.toggle("carts-active");
+    document.getElementById("carts-items").classList.toggle("carts-active")
+    updateCartTotal()
 }
 
 
@@ -356,13 +356,16 @@ function addItemToCart(title, price, imageScr, cartItemId, e) {
             <p style="display: none" class="id">${cartCard["id"]}<p>
             <img src="${cartCard["url"]}" class="card-pic"/>
             <h2 class="cards-title">${cartCard["name"]}</h2>
-            <h3 class="cards-desc">${cartCard["price"]}</h3>
+            <h3 class="card-price">${cartCard["price"]}</h3>
+            <input class="qty-input btn" type="number" value="2">
+            <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
         </div>
     </div>
         `
     }, 
         )
-}}
+    }
+}
 
 
 function trendToCart(){
@@ -382,6 +385,7 @@ function addTrendCartclick(event, trendId) {
     var trendName = shopTrend.getElementsByClassName('cards-title')[0].innerText 
     var trendPrice = shopTrend.getElementsByClassName('cards-price')[0].innerText
     var trendImg = shopTrend.getElementsByClassName('cards-pic')[0].src
+    document.getElementsByTagName('span')[0].innerText = trendPrice
   
     let card = [trendImg, trendName, trendPrice ]
     console.log(card);
@@ -419,7 +423,7 @@ function addTrendToCart(trendImg, trendName, trendPrice ,trendId) {
                 <img src="${trendImg}" class="card-pic"/>
                 <h2 class="cards-title">${trendName}</h2>
                 <h3 class="cards-price">${trendPrice}</h3>
-                <input class="qty-input" type="number" value="2">
+                <input class="qty-input btn" type="number" value="2">
                 <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
             </div>
         </div>
@@ -826,39 +830,58 @@ function removeBtn(){
 
     // remove section
     let removeFromCartBtn = document.getElementById('remove-btn');
-    let addAgain = document.querySelector('.shop-trend.btn');
+    let addAgain = document.querySelector('.btn.btn-primary.shop-item-button');
     console.log(addAgain);
     cart = [];
     console.log(removeFromCartBtn);
-    alert("press remove again to confirm")
-
-    // loops through the remove btn
     
     let removeButton = removeFromCartBtn
     removeButton.addEventListener('click', function(event){
         var buttonClicked = event.target
         buttonClicked.parentElement.parentElement.remove()
+        addAgain.innerHTML = "";
         addAgain.disabled = false;
+        addAgain.innerHTML += "Add To Cart";
         updateCartTotal() 
         
     })
+    
+function updateCartTotal(){
+    let items = document.getElementsByClassName('incart-item')
+    console.log(items);
+    let total = 0;
+
+    for (let i = 0; i < items.length; i++){
+        let item = items[i]
+        let priceElement = document.getElementsByClassName('card-price')[0]
+        let price = priceElement.innerText.replace('R', '')
+        console.log(price)
+        let qtlElement = document.getElementsByClassName('qty-input btn')[i]
+        let qauntity = qtlElement.value
+        console.log(price , qauntity);
+        console.log(price * qauntity);
+        total = total + (price * qauntity)
+        document.querySelector('.total').innerHTML ="R" + total
+    }
+}
 }
 
-function updateCartTotal(){
-    let itemCon = document.getElementById('carts-items')[0]
-    var items = itemCon.getElementsByClassName('cart-items')
-    for (var i = 0; i < item.length; i++){
-        var item = items[i]
-        var priceElement = cartRow.getElementsByClassName('cards-price')[0]
-        var qtlElement = cartRow.getElementsByClassName('qty-input')[0]
-        console.log(priceElement, qtlElement)
+function inputTotal(){
+    let qtyInput = document.getElementsByClassName('qty-input btn')
+    for (let i = 0; i < items.length; i++){
+        let input = qtyInput.getElementsByClassName('incart-item')
+        input.addEventListener('change', qauntityChanged)
     }
 }
 
-const reloadButton = document.querySelector("#reload");
-// Reload everything:
-function reload() {
-    reload = location.reload();
+function qauntityChanged(event){
+    let input = event.target
+    if (isNaN(input.value) || input.value <= 0){
+        input.value = 1
+    }
+    removeButton()
 }
-// Event listeners for reload
-reloadButton.addEventListener("click", reload, false);
+
+function whenOpen(){
+    alert('to remove an item click the remove button twice for confirmation')
+}

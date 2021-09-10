@@ -55,7 +55,7 @@
                     <div class="three">
                         <input type="text" placeholder="What are you looking for?">
                         <div class="icons">
-                            <button class="cart"><i class="fas fa-shopping-basket" onclick="openCart()"></i></button>
+                            <button class="cart"><i class="fas fa-shopping-basket" onclick="openCart() & whenOpen()" ></i></button>
                             <button class="user"><i class="far fa-user" onclick="openModal()"></i></button>
                         </div>
                     </div>
@@ -81,10 +81,14 @@
                 <div class="mycart" id="carts-items">
                     <div class="top">
                         <h1>cart</h1>
-                        <button class="close" onclick="reload();" onclick="openCart()">X</button>
+                        <button class="close" onclick="openCart()">X</button>
                     </div>
-                    <div class="cart-items"></div>
                     <div class="cart-trend"></div>
+                    <div class="cart-items"></div>
+                    <div class="cart-total">
+                        <h1 class="total-head">Total:</h1>
+                        <span class="total">0.00</span>
+                    </div>
                 </div>
                 <div id="modal">
                     <button class="close" onclick="openModal()">X</button>
