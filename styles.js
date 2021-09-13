@@ -260,21 +260,37 @@ function openModal() {
 }
 
 function registerUser(){
-    let name = document.getElementById('name');
-    let usernm = document.getElementById('username');
-    let pass = document.getElementById('password');
-    let email = document.getElementById("email")
 
-    // if the enties are left open (in english)
-    if(username.value == "" ||password.value.trim()==""){
-        alert("No blank values allowed");
-        return false;
-    }
-    else{
-        return true;
-    }
+    fetch("https://final-project-api1.herokuapp.com/view-users/")
+    .then((response) => response.json())
+    .then((data) => {
+    //   Store the results
+    let users = data;
+    console.log(users)
 
-}
+    });
+
+    let name = document.getElementById('name').value;
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+    let email = document.getElementById("email").value;
+    localStorage.setItem("user_details", JSON.stringify(users));
+
+    let users = data.data;
+        users.forEach(user => {
+            
+        for (i = 0; i < users.length; i++){
+            if (username == user.username && password == user.password ){
+                alert('You are now a registered user')
+            }
+            else{
+                alert('There was a problem with the registeration')
+                
+            }
+        }       
+        }) 
+    }
+    
 
 
 //   function to open Cart
@@ -337,7 +353,7 @@ function addItemToCart(title, price, imageScr, cartItemId, e) {
             <img src="${cartCard["url"]}" class="card-pic"/>
             <h2 class="cards-title">${cartCard["name"]}</h2>
             <h3 class="card-price">${cartCard["price"]}</h3>
-            <input class="qty-input btn" type="number" value="2">
+            <input class="qty-input btn" type="number" value="1">
             <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
         </div>
     </div>
@@ -403,7 +419,7 @@ function addTrendToCart(trendImg, trendName, trendPrice ,trendId) {
                 <img src="${trendImg}" class="card-pic"/>
                 <h2 class="cards-title">${trendName}</h2>
                 <h3 class="cards-price">${trendPrice}</h3>
-                <input class="qty-input btn" type="number" value="2">
+                <input class="qty-input btn" type="number" value="1">
                 <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
             </div>
         </div>
@@ -865,3 +881,69 @@ function qauntityChanged(event){
 function whenOpen(){
     alert('to remove an item click the remove button twice for confirmation')
 }
+
+//   function to open Login
+function openLog() {
+    document.getElementById("login").classList.toggle("login-active")
+}
+
+
+function logIn() {
+    fetch("https://final-project-api1.herokuapp.com/view-users/")
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        let found = false;
+        let users = data.data;
+        users.forEach(user => {
+            if (
+                user.username == document.getElementById("logUsername").value && 
+                user.password == document.getElementById("logPassword").value 
+                ) {
+                    found = true;
+                    alert("Login successful");
+                    window.location = 'index.html'
+                    localStorage.setItem("user_details", JSON.stringify(user));
+            }
+        })
+        if (!found) {
+            alert("Username and password unrecognised , try again")
+        }
+        if(username.value == "" ||password.value.trim()==""){
+            alert("No blank values allowed");
+            return false;
+        }
+        else{
+            return true;
+        }
+
+        // alert
+        // let info  = data.data[0];
+        // console.log(info);
+        // let logUser = info["username"]
+        // let logPass = info["password"]
+        // let usersname = document.getElementById("logUsername").value
+        // console.log(usersname);
+        // let usersPassword = document.getElementById("logPassword").value
+        // console.log(usersPassword); 
+
+
+        // if(logUser === usersname && logPass === usersPassword){
+        //     alert("Login successful");
+        //     // window.location = 'index.html'
+
+        // }else{
+        //     alert("Username and password unrecognised , try again")
+        // }
+    })
+}
+
+function showDeatails() {
+    let user_details = JSON.parse(localStorage.getItem("user_details"));
+
+    
+    document.querySelector('.mes').innerText = "Welcome back " + user_details.username + "!";
+
+}
+
+showDeatails(); 

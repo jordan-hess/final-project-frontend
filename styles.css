@@ -339,3 +339,37 @@ header{
     width: 5vw;
     height: 5vh;
 }
+
+
+#login.login-active {
+    display: block;
+    position: absolute;
+    left: 30%;
+    color: black;
+    transform: translate(-10%, -25%);
+    height: 170vh;
+    width: 80vw;
+    top: 470px;
+    background-color: white;
+    box-shadow: 5px;
+    padding: 5%;
+}
+
+#login {
+    display: none;
+}
+
+.register-link{
+    text-decoration: underline;
+}
+
+.register-link:hover{
+    color: blue;
+}
+
+.mes{
+    padding: 4%;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 60px;
+    width: 60vw;
+}
