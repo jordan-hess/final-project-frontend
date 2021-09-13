@@ -373,3 +373,25 @@ header{
     font-size: 60px;
     width: 60vw;
 }
+
+.login-con{
+    display: flex;
+    flex-direction: column;
+}
+
+.login-con h1{
+    padding-left: 260px;
+}
+
+.login-con label{
+    margin: 30px;
+}
+
+.login-con input{
+    width: 15vw;
+}
+
+.login-con line{
+    width: 20vw;
+    height: 1px;
+}
