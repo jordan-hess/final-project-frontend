@@ -61,7 +61,6 @@ i{
 }
 
 .top h1{
-    font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     width: 40vw;
     padding: 0% 0% 2% 2%;
@@ -141,7 +140,6 @@ i{
 
 
 .trend-con h1{
-    font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     width: 100%;
     max-width: 100%;
@@ -288,7 +286,6 @@ input ::after{
 }
 
 header{
-    font-family: 'Luckiest Guy', cursive;
     margin: 50px;
     font-size: 25px;
 }
@@ -385,7 +382,6 @@ header{
 
 .mes{
     padding: 4%;
-    font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     width: 60vw;
 }

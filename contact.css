@@ -59,7 +59,6 @@ i{
 }
 
 .top h1{
-    font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     margin-left: 50px;
     margin-right: 100px;
@@ -123,7 +122,6 @@ i{
     background-color: black;
     color: white;
     border-radius: 15px;
-    font-family: 'Luckiest Guy', cursive;
     width: 10vw;
     border: 2px solid black;
 }
@@ -155,13 +153,11 @@ form{
 }
 
 h1{
-    font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     margin-left: 15px;
 }
 
 label{
-    font-family: 'Luckiest Guy', cursive;
     font-size: 20px;
     padding: 3%;
 }

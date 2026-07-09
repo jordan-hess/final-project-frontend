@@ -62,7 +62,6 @@ i{
 
 
 .bottom h1{
-    font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     margin-left: 50px;
     margin-right: 50px;
@@ -128,7 +127,6 @@ i{
     background-color: black;
     color: white;
     border-radius: 15px;
-    font-family: 'Luckiest Guy', cursive;
 }
 
 #carts-items.carts-active {
@@ -150,7 +148,6 @@ i{
 }
 
 h1{
-    font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
     margin-left: 50px;
     margin-right: 50px;
