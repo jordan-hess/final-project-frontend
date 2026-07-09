@@ -181,35 +181,10 @@ function addtoCartclick(event, id) {
 }
 
 function addItemToCart(title, price, imageScr, cartItemId, e) {
-    let cartPage = document.querySelector(".cart-items")
-
-    let item = {
-        "name": title,
-        "price": price,
-        "url": imageScr,
-        "id": cartItemId,
-        }
-
-    if (e.value == item["id"]){
-        cart.push(item)
-        cart.forEach(() => {
-        e.innerHTML = "";
-        e.disabled = true;
-        e.innerHTML += "In Cart Already";
-    },
-        cartPage.innerHTML +=`
-        <div class="card">
-        <div class="incart-item">
-            <p style="display: none" class="id">${cartItemId}<p>
-            <img src="${imageScr}" class="sale-card-pic"/>
-            <h2 class="cards-title">${title}</h2>
-            <h3 class="cards-desc">${price}</h3>
-        </div>
-    </div>
-        `)
-        console.log(cart)
-    }
-
+    CartStore.addItem({ id: cartItemId, name: title, price: price, image: imageScr });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 
@@ -233,45 +208,15 @@ function addtoCartclick2(event, saleId) {
 
     let cards = [saleName, salePrice, saleImg]
     console.log(cards);
-    addSaleToCart( saleImg, saleName, salePrice, saleId)
+    addSaleToCart( saleImg, saleName, salePrice, saleId, button2)
 }
 
 
-function addSaleToCart(saleImg, saleName, salePrice, saleId) {
-    let cartPage2 = document.querySelector(".cart-sale")
-    let saleCartBtn = document.querySelector('.shop-sale.sale-btn')
-
-    let items = {
-        "name": saleName,
-        "price": salePrice,
-        "img": saleImg,
-        "salesId": saleId,
-        };
-    let itemId = items["salesId"]
-    console.log(itemId)
-
-    if (saleId == itemId){
-        cart.push(itemId)
-        cart.forEach(() => {
-            saleCartBtn.innerHTML = "";
-            saleCartBtn.disabled = true;
-            saleCartBtn.innerHTML += "In cart already";
-        console.log(saleCartBtn);
-
-    },
-        cartPage2.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${saleId}<p>
-                <img src="${saleImg}" class="sale-card-pic"/>
-                <h2 class="cards-title">${saleName}</h2>
-                <h3 class="cards-desc">${salePrice}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addSaleToCart(saleImg, saleName, salePrice, saleId, e) {
+    CartStore.addItem({ id: saleId, name: saleName, price: salePrice, image: saleImg });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 
@@ -295,45 +240,15 @@ function addtoCartclick3(event2, sale2Id) {
 
     let cards2 = [salesName, salesPrice, salesImg]
     console.log(cards2);
-    addSaleToCart2( salesImg, salesName, salesPrice, sale2Id)
+    addSaleToCart2( salesImg, salesName, salesPrice, sale2Id, button3)
 }
 
 
-function addSaleToCart2(salesImg, salesName, salesPrice, sale2Id) {
-    let cartPage2 = document.querySelector(".cart-sale")
-    let sale2Btn = document.querySelector('.shop-sale-btn.saleBtn')
-
-    let item = {
-        "name": salesName,
-        "price": salesPrice,
-        "img": salesImg,
-        "saleId": sale2Id,
-        };
-    let item2Id = item["saleId"]
-    console.log(item2Id)
-
-    if (sale2Id == item2Id){
-        cart.push(item2Id)
-        cart.forEach(() => {
-            sale2Btn.innerHTML = "";
-            sale2Btn.disabled = true;
-            sale2Btn.innerHTML += "In cart already";
-        console.log(sale2Btn);
-    },
-
-        cartPage2.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${sale2Id}<p>
-                <img src="${salesImg}" class="sale-card-pic"/>
-                <h2 class="cards-title">${salesName}</h2>
-                <h3 class="cards-desc">${salesPrice}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addSaleToCart2(salesImg, salesName, salesPrice, sale2Id, e) {
+    CartStore.addItem({ id: sale2Id, name: salesName, price: salesPrice, image: salesImg });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 
@@ -358,45 +273,15 @@ function addtoCartclick4(event3, sale3Id) {
 
     let cards2 = [sale3Name, sale3Price, sale3Img]
     console.log(cards2);
-    addSaleToCart3( sale3Img, sale3Name, sale3Price, sale3Id)
+    addSaleToCart3( sale3Img, sale3Name, sale3Price, sale3Id, button4)
 }
 
 
-function addSaleToCart3(sale3Img, sale3Name, sale3Price, sale3Id) {
-    let cartPage2 = document.querySelector(".cart-sale")
-    let sale3Btn = document.querySelector('.shop-this-sale.salesBtn')
-
-    let item = {
-        "name": sale3Name,
-        "price": sale3Price,
-        "img": sale3Img,
-        "sale3id": sale3Id,
-        };
-    let item3Id = item["sale3id"]
-    console.log(item3Id)
-
-    if (sale3Id == item3Id){
-        cart.push(item3Id)
-        cart.forEach(() => {
-            sale3Btn.innerHTML = "";
-            sale3Btn.disabled = true;
-            sale3Btn.innerHTML += "In cart already";
-        console.log(sale3Btn);
-    },
-
-        cartPage2.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${sale3Id}<p>
-                <img src="${sale3Img}" class="sale-card-pic"/>
-                <h2 class="cards-title">${sale3Name}</h2>
-                <h3 class="cards-desc">${sale3Price}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addSaleToCart3(sale3Img, sale3Name, sale3Price, sale3Id, e) {
+    CartStore.addItem({ id: sale3Id, name: sale3Name, price: sale3Price, image: sale3Img });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 function saleLastCart(){
@@ -419,48 +304,22 @@ function addtoCartclick5(event4, sale4Id) {
 
     let cards3 = [sale4Name, sale4Price, sale4Img]
     console.log(cards3);
-    addSaleToCart5( sale4Img, sale4Name, sale4Price, sale4Id)
+    addSaleToCart5( sale4Img, sale4Name, sale4Price, sale4Id, button5)
 }
 
 
-function addSaleToCart5(sale4Img, sale4Name, sale4Price, sale4Id) {
-    let cartPage2 = document.querySelector(".cart-sale")
-    let sale4Btn = document.querySelector('.last-saleBtn')
-
-    let item = {
-        "name": sale4Name,
-        "price": sale4Price,
-        "img": sale4Img,
-        "sale4id": sale4Id,
-        };
-    let item4Id = item["sale4id"]
-    console.log(item4Id)
-
-    if (sale4Id == item4Id){
-        cart.push(item4Id)
-        cart.forEach(() => {
-            sale4Btn.innerHTML = "";
-            sale4Btn.disabled = true;
-            sale4Btn.innerHTML += "In cart already";
-        console.log(sale4Btn);
-    },
-
-        cartPage2.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-            <img src="${sale4Img}" class="sale-card-pic"/>
-                <p style="display: none" class="id">${sale4Id}<p>
-                <h2 class="cards-title">${sale4Name}</h2>
-                <h3 class="cards-desc">${sale4Price}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addSaleToCart5(sale4Img, sale4Name, sale4Price, sale4Id, e) {
+    CartStore.addItem({ id: sale4Id, name: sale4Name, price: sale4Price, image: sale4Img });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 //   function to open modal
 function openCart() {
-    document.getElementById("carts-items").classList.toggle("carts-active");
+    Motion.toggleDialog(document.getElementById("carts-items"), "carts-active");
 }
+
+Motion.animateHeaderShadow(".site-header");
+Motion.bindButtonFeedback();
+Motion.revealOnScroll(".ass .card, .onsale .card, .for-sale .card-ass, .three .card-3, .four .card-4");
