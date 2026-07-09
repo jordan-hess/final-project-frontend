@@ -27,7 +27,7 @@ const renderProduct = (item) => {
         output += `
         <div class="card">
             <div class="card-body first-slide" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -57,7 +57,7 @@ items.forEach(items => {
     <h1>Trending Kicks</h1>
         <div class="cards-body" data-id=${items.id}>
             <h2 class="cards-num">#${items.trend_num}</h2>
-            <img src="${items.image_url}" class="cards-pic"/>
+            <img src="${items.image_url}" class="cards-pic" alt="${escapeHtml(items.name)}"/>
             <h2 class="cards-title">${escapeHtml(items.name)}</h2>
             <h3 class="cards-desc">${escapeHtml(items.description)}</h3>
             <h4 class="cards-price">R${items.price}</h4>
@@ -87,7 +87,7 @@ function addSecond(){
         <div class="two-card">
             <div class="two-card-body" data-id=${items.id}>
                 <h2 class="two-card-num">#${items.trend_num}</h2>
-                <img src="${items.image_url}" class="two-card-pic"/>
+                <img src="${items.image_url}" class="two-card-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="two-card-title">${escapeHtml(items.name)}</h2>
                 <h3 class="two-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="two-card-price">R${items.price}</h4>
@@ -119,7 +119,7 @@ function addThird(){
         <div class="three-card">
             <div class="three-card-body" data-id=${items.id}>
                 <h2 class="three-card-num">#${items.trend_num}</h2>
-                <img src="${items.image_url}" class="three-card-pic"/>
+                <img src="${items.image_url}" class="three-card-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="three-card-title">${escapeHtml(items.name)}</h2>
                 <h3 class="three-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="three-card-price">R${items.price}</h4>
@@ -150,7 +150,7 @@ function addFourth(){
         <div class="four-card">
             <div class="four-card-body" data-id=${items.id}>
                 <h2 class="four-card-num">#${items.trend_num}</h2>
-                <img src="${items.image_url}" class="four-card-pic"/>
+                <img src="${items.image_url}" class="four-card-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="four-card-title">${escapeHtml(items.name)}</h2>
                 <h3 class="four-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="four-card-price">R${items.price}</h4>
@@ -180,7 +180,7 @@ function addFifth(){
         <div class="five-card">
             <div class="five-card-body" data-id=${items.id}>
                 <h2 class="five-card-num">#${items.trend_num}</h2>
-                <img src="${items.image_url}" class="five-card-pic"/>
+                <img src="${items.image_url}" class="five-card-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="five-card-title">${escapeHtml(items.name)}</h2>
                 <h3 class="five-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="five-card-price">R${items.price}</h4>
@@ -210,7 +210,7 @@ function addSix(){
         <div class="six-card">
             <div class="six-card-body" data-id=${items.id}>
                 <h2 class="six-card-num">#${items.trend_num}</h2>
-                <img src="${items.image_url}" class="six-card-pic"/>
+                <img src="${items.image_url}" class="six-card-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="six-card-title">${escapeHtml(items.name)}</h2>
                 <h3 class="six-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="six-card-price">R${items.price}</h4>
@@ -240,7 +240,7 @@ function addSev(){
         <div class="sev-card">
             <div class="sev-card-body" data-id=${items.id}>
                 <h2 class="sev-card-num">#${items.trend_num}</h2>
-                <img src="${items.image_url}" class="sev-card-pic"/>
+                <img src="${items.image_url}" class="sev-card-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="sev-card-title">${escapeHtml(items.name)}</h2>
                 <h3 class="sev-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="sev-card-price">R${items.price}</h4>

@@ -21,7 +21,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_trending', 
         output += `
         <div class="card">
             <div class="cards-body" data-id=${items.id}>
-                <img src="${items.image_url}" class="cards-pic"/>
+                <img src="${items.image_url}" class="cards-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="cards-title">${escapeHtml(items.name)}</h2>
                 <h3 class="cards-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="cards-price">R${items.price}</h4>
@@ -52,7 +52,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('id')
         output += `
         <div class="card-3">
             <div class="card3-body" data-id=${items.id}>
-                <img src="${items.image_url}" class="card3-pic"/>
+                <img src="${items.image_url}" class="card3-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="card3-title">${escapeHtml(items.name)}</h2>
                 <h3 class="card3-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="card3-price">R${items.price}</h4>
@@ -81,7 +81,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('id', { asce
         output += `
         <div class="card-2">
             <div class="card2-body" data-id=${items.id}>
-                <img src="${items.image_url}" class="card2-pic"/>
+                <img src="${items.image_url}" class="card2-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="card2-title">${escapeHtml(items.name)}</h2>
                 <h3 class="card2-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="card2-price">R${items.price}</h4>
@@ -112,7 +112,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('price')
         output += `
         <div class="card-1">
             <div class="card1-body" data-id=${items.id}>
-                <img src="${items.image_url}" class="card1-pic"/>
+                <img src="${items.image_url}" class="card1-pic" alt="${escapeHtml(items.name)}"/>
                 <h2 class="card1-title">${escapeHtml(items.name)}</h2>
                 <h3 class="card1-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="card1-price">R${items.price}</h4>
@@ -142,7 +142,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
         <div class="sale-card">
             <div class="sale-card-body" data-id=${items.id}>
                 <div class="info">
-                    <img src="${items.image_url}" class="sale-card-pic"/>
+                    <img src="${items.image_url}" class="sale-card-pic" alt="${escapeHtml(items.name)}"/>
                     <div class="details">
                     <h2 class="sale-card-title">${escapeHtml(items.name)}</h2>
                     <h3 class="sale-card-desc">${escapeHtml(items.description)}</h3>
@@ -176,7 +176,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
         <div class="sale-card">
             <div class="sale-card-body" data-id=${items.id}>
                 <div class="info">
-                    <img src="${items.image_url}" class="sale-card-pic"/>
+                    <img src="${items.image_url}" class="sale-card-pic" alt="${escapeHtml(items.name)}"/>
                     <div class="details">
                     <h2 class="sale-card-title">${escapeHtml(items.name)}</h2>
                     <h3 class="sale-card-desc">${escapeHtml(items.description)}</h3>

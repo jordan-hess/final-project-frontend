@@ -21,7 +21,7 @@ function onSale(){
         <div class="sale-card">
             <div class="sale-card-body" data-id=${item.id}>
                 <div class="info">
-                    <img src="${item.image_url}" class="sale-card-pic"/>
+                    <img src="${item.image_url}" class="sale-card-pic" alt="${escapeHtml(item.name)}"/>
                     <div class="details">
                         <h2 class="sale-card-title">${escapeHtml(item.name)}</h2>
                         <h3 class="sale-card-desc">${escapeHtml(item.description)}</h3>
@@ -55,7 +55,7 @@ function filterCards(category) {
         <div class="sale-card">
             <div class="sale-card-body" data-id=${product.id}>
                 <div class="info">
-                    <img src="${product.image_url}" class="sale-card-pic"/>
+                    <img src="${product.image_url}" class="sale-card-pic" alt="${escapeHtml(product.name)}"/>
                     <div class="details">
                         <h2 class="sale-card-title">${escapeHtml(product.name)}</h2>
                         <h3 class="sale-card-desc">${escapeHtml(product.description)}</h3>

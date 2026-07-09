@@ -28,7 +28,7 @@ function seeSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -60,7 +60,7 @@ function seeSale2(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -90,7 +90,7 @@ function firstSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -120,7 +120,7 @@ function secondSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -149,7 +149,7 @@ function thirdSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -178,7 +178,7 @@ function fourthSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -207,7 +207,7 @@ function fifthSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -236,7 +236,7 @@ function sixthSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -265,7 +265,7 @@ function sevenSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -294,7 +294,7 @@ function eighthSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
@@ -323,7 +323,7 @@ function lastSale(){
         output += `
         <div class="card">
             <div class="card-body" data-id=${item.id}>
-                <img src="${item.image_url}" class="card-pic"/>
+                <img src="${item.image_url}" class="card-pic" alt="${escapeHtml(item.name)}"/>
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
