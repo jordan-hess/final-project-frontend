@@ -45,7 +45,8 @@ i{
     display: flex;
     width: 100%;
     padding: 3%;
-    height: 10vh;
+    min-height: 10vh;
+    height: auto;
 }
 
 .landing input{
@@ -64,6 +65,19 @@ i{
     font-size: 60px;
     width: 40vw;
     padding: 0% 0% 2% 2%;
+}
+
+/* Scoped to the hero heading only (leaves the shared .top/.top h1 rules above,
+   used by the cart modal, untouched) so the Anton-driven heading gets its own
+   row instead of squeezing beside the search/cart/user controls in .three. */
+.landing .top{
+    flex-wrap: wrap;
+}
+
+.landing .top h1{
+    width: 100%;
+    flex-basis: 100%;
+    margin-bottom: 16px;
 }
 
 .top input{
@@ -129,7 +143,9 @@ i{
 .trend-con h1{
     font-family: 'Luckiest Guy', cursive;
     font-size: 60px;
-    width: 20vw;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
     margin-bottom: 20px;
     flex-wrap: wrap;
 }

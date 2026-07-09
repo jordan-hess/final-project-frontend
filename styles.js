@@ -267,7 +267,7 @@ async function registerUser(){
     const emailValue = email.value.trim();
 
     if (!name || !usernameValue || !passwordValue || !emailValue){
-        alert("No blank values allowed");
+        showToast("No blank values allowed", "error");
         return;
     }
 
@@ -834,7 +834,7 @@ function qauntityChanged(event){
 }
 
 function whenOpen(){
-    alert('to remove an item click the remove button twice for confirmation')
+    showToast('To remove an item, click the remove button twice for confirmation');
 }
 
 //   function to open Login
@@ -848,7 +848,7 @@ async function logIn() {
     const loginPassword = document.getElementById("logPassword").value;
 
     if (!loginEmail || !loginPassword){
-        alert("No blank values allowed");
+        showToast("No blank values allowed", "error");
         return;
     }
 
