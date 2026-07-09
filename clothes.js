@@ -339,7 +339,7 @@ lastSale()
 
 //   function to open Cart
 function openCart() {
-    document.getElementById("carts-items").classList.toggle("carts-active");
+    Motion.toggleDialog(document.getElementById("carts-items"), "carts-active");
 }
 
 function saleToCart2(){
@@ -353,58 +353,21 @@ function saleToCart2(){
 
 
 function addSaleCartclick2(event, salesId) {
-    console.log(salesId);
     var salesButton = event.target
     let shopsSale = salesButton.parentElement.parentElement
     var salesName = shopsSale.getElementsByClassName('card-title')[0].innerText
     var salesPrice = shopsSale.getElementsByClassName('card-price')[0].innerText
     var salesImg = shopsSale.getElementsByClassName('card-pic')[0].src
 
-    let saleCard = [salesImg, salesName, salesPrice ]
-    console.log(saleCard);
-    addSaleToCart2( salesImg, salesName, salesPrice, salesId)
+    addSaleToCart2(salesImg, salesName, salesPrice, salesId, salesButton)
 }
 
 
-function addSaleToCart2(salesImg, salesName, salesPrice , salesId) {
-    let cart = [];
-    let salesPage = document.querySelector(".cart-sale")
-    let salesCartBtn = document.querySelector('.shop-it.btn')
-    console.log(salesCartBtn);
-
-    let items = {
-        "name": salesName,
-        "price": salesPrice,
-        "img": salesImg,
-        "theId": salesId,
-        };
-    let itemsId = items["theId"]
-    console.log(itemsId)
-
-    if (salesId == itemsId){
-        cart.push(itemsId)
-        cart.forEach(() => {
-        salesCartBtn.innerHTML = "";
-        salesCartBtn.disabled = true;
-        salesCartBtn.innerHTML += "In cart already";
-        console.log(salesCartBtn);
-
-    },
-        salesPage.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${salesId}<p>
-                <img src="${salesImg}" class="two-card-pic"/>
-                <h2 class="two-card-title">${salesName}</h2>
-                <h3 class="two-card-desc">${salesPrice}</h3>
-                <input class="qty-input btn" type="number" value="2">
-                <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addSaleToCart2(imgSrc, name, price, id, e) {
+    CartStore.addItem({ id: id, name: name, price: price, image: imgSrc });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 
@@ -419,59 +382,30 @@ function saleToCart(){
 
 
 function addSaleCartclick(event, sales2Id) {
-    console.log(sales2Id);
     var salesButton2 = event.target
     let shops2Sale = salesButton2.parentElement.parentElement
     var sales2Name = shops2Sale.getElementsByClassName('card-title')[0].innerText
     var sales2Price = shops2Sale.getElementsByClassName('card-price')[0].innerText
     var sales2Img = shops2Sale.getElementsByClassName('card-pic')[0].src
-    document.querySelector('.total').innerHTML = "R" + sales2Price
 
-    let saleCard = [sales2Img, sales2Name, sales2Price ]
-    console.log(saleCard);
-    addSaleToCart2( sales2Img, sales2Name, sales2Price, sales2Id)
+    addSaleToCart2(sales2Img, sales2Name, sales2Price, sales2Id, salesButton2)
 }
 
 
-function addSaleToCart2(sales2Img, sales2Name, sales2Price , sales2Id) {
-    let cart = [];
-    let sales2Page = document.querySelector(".cart-sale")
-    let sales2CartBtn = document.querySelector('.sale-shop.btn')
-    console.log(sales2CartBtn);
+// Handler for the "sale1" grid (.card / .sale-shop rendered by firstSale()).
+// The rendered button markup called addTrendCartclick, but no matching
+// function was ever defined anywhere in the file, which threw a
+// ReferenceError on click. Wired up following the shape of its nearest
+// structural sibling, addSaleCartclick, which reads from the same card
+// field classes (card-title/card-price/card-pic).
+function addTrendCartclick(event, saleId) {
+    var trendButton = event.target
+    let shopTrend = trendButton.parentElement.parentElement
+    var trendName = shopTrend.getElementsByClassName('card-title')[0].innerText
+    var trendPrice = shopTrend.getElementsByClassName('card-price')[0].innerText
+    var trendImg = shopTrend.getElementsByClassName('card-pic')[0].src
 
-    let item = {
-        "name": sales2Name,
-        "price": sales2Price,
-        "img": sales2Img,
-        "theId": sales2Id,
-        };
-    let items2Id = item["theId"]
-    console.log(items2Id)
-
-    if (sales2Id == items2Id){
-        cart.push(items2Id)
-        cart.forEach(() => {
-        sales2CartBtn.innerHTML = "";
-        sales2CartBtn.disabled = true;
-        sales2CartBtn.innerHTML += "In cart already";
-        console.log(sales2CartBtn);
-
-    },
-        sales2Page.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${sales2Id}<p>
-                <img src="${sales2Img}" class="two-card-pic"/>
-                <h2 class="two-card-title">${sales2Name}</h2>
-                <h3 class="two-card-desc">${sales2Price}</h3>
-                <input class="qty-input btn" type="number" value="2">
-                <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+    addSaleToCart2(trendImg, trendName, trendPrice, saleId, trendButton)
 }
 
 
@@ -518,5 +452,9 @@ function removeBtn(){
 
 
 function whenOpen(){
-    alert('to remove an item click the remove button twice for confirmation')
+    showToast('Click Remove in the cart to remove an item')
 }
+
+Motion.animateHeaderShadow(".site-header");
+Motion.bindButtonFeedback();
+Motion.revealOnScroll(".new .card, .new2 .card, .sale-con .card");
