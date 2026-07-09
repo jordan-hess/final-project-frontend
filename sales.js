@@ -1,12 +1,13 @@
 const saleProducts = document.querySelector('.sale-products');
+let products = [];
 
 
 // Function allows users to see products on sale
 function onSale(){
 
-    fetch('https://final-project-api1.herokuapp.com/view-sale/')
-    .then(res => res.json())
-    .then(data => {
+    supabase.from('products').select('*').eq('is_on_sale', true).order('id')
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
         products = data;
 
         seeProduct(data)
@@ -18,16 +19,16 @@ function onSale(){
     item.forEach(item => {
         output += `
         <div class="sale-card">
-            <div class="sale-card-body" data-id=${item.sale_pro_id}>
+            <div class="sale-card-body" data-id=${item.id}>
                 <div class="info">
-                    <img src="${item.sale_pro_image}" class="sale-card-pic"/>
+                    <img src="${item.image_url}" class="sale-card-pic"/>
                     <div class="details">
-                        <h2 class="sale-card-title">${item.sale_pro_name}</h2>
-                        <h3 class="sale-card-desc">${item.sale_pro_desc}</h3>
-                        <h5 class="sale-card-cat">${item.sale_pro_cat}</h5>
-                        <h4 class="sale-card-price">R${item.sale_pro_price}</h4>
+                        <h2 class="sale-card-title">${escapeHtml(item.name)}</h2>
+                        <h3 class="sale-card-desc">${escapeHtml(item.description)}</h3>
+                        <h5 class="sale-card-cat">${escapeHtml(item.category)}</h5>
+                        <h4 class="sale-card-price">R${item.price}</h4>
                         <h6 class="card-was-price">R${item.was_price}</h6>
-                        <button class="shop-sale sale-btn" value="${item.sale_pro_id}" onclick="addtoCartclick(event, ${item.sale_pro_id})" type="button">ADD TO CART</button>
+                        <button class="shop-sale sale-btn" value="${item.id}" onclick="addtoCartclick(event, ${item.id})" type="button">ADD TO CART</button>
                     </div>
                 </div>
             </div>
@@ -42,7 +43,7 @@ onSale()
 
 function filterCards(category) {
     let productsContainer = document.querySelector(".sale-products");
-    let filteredProducts = products.filter(product => product.sale_pro_cat == category)
+    let filteredProducts = products.filter(product => product.category == category)
     console.log(category);
     console.log(products);
     console.log(filteredProducts);
@@ -52,21 +53,24 @@ function filterCards(category) {
         filteredProducts.forEach(product => {
             productsContainer.innerHTML += `
         <div class="sale-card">
-            <div class="sale-card-body" data-id=${product.sale_pro_id}>
+            <div class="sale-card-body" data-id=${product.id}>
                 <div class="info">
-                    <img src="${product.sale_pro_image}" class="sale-card-pic"/>
+                    <img src="${product.image_url}" class="sale-card-pic"/>
                     <div class="details">
-                        <h2 class="sale-card-title">${product.sale_pro_name}</h2>
-                        <h3 class="sale-card-desc">${product.sale_pro_desc}</h3>
-                        <h5 class="sale-card-cat">${product.sale_pro_cat}</h5>
-                        <h4 class="sale-card-price">R${product.sale_pro_price}</h4>
+                        <h2 class="sale-card-title">${escapeHtml(product.name)}</h2>
+                        <h3 class="sale-card-desc">${escapeHtml(product.description)}</h3>
+                        <h5 class="sale-card-cat">${escapeHtml(product.category)}</h5>
+                        <h4 class="sale-card-price">R${product.price}</h4>
                         <h6 class="card-was-price">R${product.was_price}</h6>
+                        <button class="shop-sale sale-btn" value="${product.id}" onclick="addtoCartclick(event, ${product.id})" type="button">ADD TO CART</button>
                     </div>
                 </div>
             </div>
         </div>
         `;
         })
+    } else {
+        productsContainer.innerHTML = "<p>No items on sale in this category right now.</p>";
     }
 }
 
@@ -89,36 +93,34 @@ function addtoCartclick(event, id) {
     console.log(id);
     var button = event.target
     var shopItem = button.parentElement.parentElement
-    var title = shopItem.getElementsByClassName('sale-card-title')[0].innerText 
+    var title = shopItem.getElementsByClassName('sale-card-title')[0].innerText
     var price = shopItem.getElementsByClassName('sale-card-price')[0].innerText
     var imageScr = shopItem.getElementsByClassName('sale-card-pic')[0].src
-  
+
     let card = [title, price, imageScr]
     console.log(card)
-    addItemToCart(title , price, imageScr, id)
+    addItemToCart(title , price, imageScr, id, button)
 }
 
-function addItemToCart(title, price, imageScr, cartItemId) {
-    let cartPage = document.querySelector(".cart-items") 
-    let inCartbtn = document.querySelectorAll(".shop-sale.sale-btn")
-    console.log(inCartbtn)
+function addItemToCart(title, price, imageScr, cartItemId, e) {
+    let cartPage = document.querySelector(".cart-items")
     let cart =[]
     console.log(typeof(cartItemId));
-    
+
     let item = {
-        "name": title, 
+        "name": title,
         "price": price,
-        "url": imageScr, 
-        "id": cartItemId, 
+        "url": imageScr,
+        "id": cartItemId,
         }
         console.log(item);
 
-    if (cartItemId == item["id"]){
+    if (e.value == item["id"]){
         cart.push(item)
         cart.forEach(() => {
-        inCartbtn.innerHTML = "";
-        inCartbtn.disabled = true;
-        inCartbtn.innerHTML += "In Cart Already";
+        e.innerHTML = "";
+        e.disabled = true;
+        e.innerHTML += "In Cart Already";
         alert("your item was added to your cart")
     },
         cartPage.innerHTML +=`
@@ -133,5 +135,5 @@ function addItemToCart(title, price, imageScr, cartItemId) {
         `)
         console.log(cart)
     }
-    
+
 }

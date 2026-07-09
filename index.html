@@ -95,7 +95,7 @@
                 </div>
                 <div id="modal">
                     <button class="close" onclick="openModal()">X</button>
-                    <form class="form" id="form" onsubmit="return registerUser()">
+                    <form class="form" id="form" onsubmit="event.preventDefault(); registerUser()">
                         <header>Register</header>
                         <div class="user-details">
                             <label for="name">Full Name</label>
@@ -105,7 +105,7 @@
                             <input type="text" id="username" class="log-usernm" placeholder="Type your username">
                             <div class="line"></div>
                             <label for="password">Password</label>
-                            <input type="text" id="password" class="log-pass" placeholder="Type your password">
+                            <input type="password" id="password" class="log-pass" placeholder="Type your password">
                             <div class="line"></div>
                             <label for="email">Email</label>
                             <input type="text" id="email" class="log-pass" placeholder="Email Address">
@@ -121,8 +121,8 @@
                     <form class="login-page" onsubmit="event.preventDefault(); logIn()">
                         <div class="login-con">
                             <h1>login</h1>
-                            <label for="username">Username</label>
-                            <input type="text" placeholder="Enter Username" id="logUsername" name="">
+                            <label for="email">Email</label>
+                            <input type="email" placeholder="Enter Email" id="logEmail" name="">
                             <div class="line"></div>
                             <label for="password">Password</label>
                             <input type="password" placeholder="Enter Password" id="logPassword" name="">
@@ -136,6 +136,8 @@
     </div>
 
     <!-- Scripts Section -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="supabaseClient.js"></script>
     <script src="./styles.js"></script>
 </body>
 </html>

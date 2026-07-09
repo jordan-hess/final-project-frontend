@@ -10,13 +10,16 @@ const saleSeven = document.querySelector('.sale7')
 const saleEight = document.querySelector('.sale8')
 const saleNine = document.querySelector('.sale9')
 
+const CLOTHES_CATEGORIES = ['Hoodie', 'T-shirt', 'Pants'];
 
 function seeSale(){
 
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe10/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').in('category', CLOTHES_CATEGORIES).order('id')
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -24,12 +27,12 @@ function seeSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.product_id}>
-                <img src="${item.product_image}" class="card-pic"/>
-                <h2 class="card-title">${item.product_name}</h2>
-                <h3 class="card-desc">${item.product_desc}</h3>
-                <h4 class="card-price">R${item.product_price}</h4>
-                <button class="shop-it btn" value="${item.product_id}" onclick="addSaleCartclick2(event, ${item.product_id})" type="button">ADD TO CART</button>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
+                <button class="shop-it btn" value="${item.id}" onclick="addSaleCartclick2(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -43,10 +46,12 @@ seeSale()
 
 function seeSale2(){
 
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe11/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').in('category', CLOTHES_CATEGORIES).order('id', { ascending: false })
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -54,12 +59,12 @@ function seeSale2(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.product_id}>
-                <img src="${item.product_image}" class="card-pic"/>
-                <h2 class="card-title">${item.product_name}</h2>
-                <h3 class="card-desc">${item.product_desc}</h3>
-                <h4 class="card-price">R${item.product_price}</h4>
-                <button class="sale-shop btn" value="${item.product_id}" onclick="addSaleCartclick(event, ${item.product_id})" type="button">ADD TO CART</button>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
+                <button class="sale-shop btn" value="${item.id}" onclick="addSaleCartclick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -71,10 +76,12 @@ function seeSale2(){
 seeSale2()
 
 function firstSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe1/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').in('category', CLOTHES_CATEGORIES).eq('is_on_sale', true).order('id')
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -82,13 +89,13 @@ function firstSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
-                <button class="sale-shop btn" value="${item.product_id}" onclick="addTrendCartclick(event, ${item.product_id})" type="button">ADD TO CART</button>
+                <button class="sale-shop btn" value="${item.id}" onclick="addTrendCartclick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -99,10 +106,12 @@ function firstSale(){
 firstSale()
 
 function secondSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe2/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').in('category', CLOTHES_CATEGORIES).eq('is_on_sale', true).order('id', { ascending: false })
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -110,11 +119,11 @@ function secondSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
             </div>
         </div>
@@ -126,10 +135,12 @@ function secondSale(){
 secondSale()
 
 function thirdSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe3/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').in('category', CLOTHES_CATEGORIES).eq('category', 'Hoodie').order('id')
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -137,11 +148,11 @@ function thirdSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
             </div>
         </div>
@@ -153,10 +164,12 @@ function thirdSale(){
 thirdSale()
 
 function fourthSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe4/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').eq('category', 'T-shirt').order('id')
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -164,11 +177,11 @@ function fourthSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
             </div>
         </div>
@@ -180,10 +193,12 @@ function fourthSale(){
 fourthSale()
 
 function fifthSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe5/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').eq('category', 'Pants').order('id')
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -191,11 +206,11 @@ function fifthSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
             </div>
         </div>
@@ -207,10 +222,12 @@ function fifthSale(){
 fifthSale()
 
 function sixthSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe6/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').eq('category', 'Hoodie').order('id', { ascending: false })
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -218,11 +235,11 @@ function sixthSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
             </div>
         </div>
@@ -234,10 +251,12 @@ function sixthSale(){
 sixthSale()
 
 function sevenSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe7/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').eq('category', 'T-shirt').order('id', { ascending: false })
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -245,11 +264,11 @@ function sevenSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
             </div>
         </div>
@@ -261,10 +280,12 @@ function sevenSale(){
 sevenSale()
 
 function eighthSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe8/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').eq('category', 'Pants').order('id', { ascending: false })
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -272,11 +293,11 @@ function eighthSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
             </div>
         </div>
@@ -288,10 +309,12 @@ function eighthSale(){
 eighthSale()
 
 function lastSale(){
-    // to view products 
-    fetch('https://final-project-api1.herokuapp.com/view-sale-clothe9/')
-    .then(res => res.json())
-    .then(data => renderProduct(data))
+    // to view products
+    supabase.from('products').select('*').in('category', CLOTHES_CATEGORIES).order('price', { ascending: false })
+    .then(({ data, error }) => {
+        if (error) { console.error(error); return; }
+        renderProduct(data);
+    })
 
 
     const renderProduct = (item) => {
@@ -299,11 +322,11 @@ function lastSale(){
     item.forEach(item => {
         output += `
         <div class="card">
-            <div class="card-body" data-id=${item.sale_pro_id}>
-                <img src="${item.sale_pro_image}" class="card-pic"/>
-                <h2 class="card-title">${item.sale_pro_name}</h2>
-                <h3 class="card-desc">${item.sale_pro_desc}</h3>
-                <h4 class="card-price">R${item.sale_pro_price}</h4>
+            <div class="card-body" data-id=${item.id}>
+                <img src="${item.image_url}" class="card-pic"/>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+                <h3 class="card-desc">${escapeHtml(item.description)}</h3>
+                <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
             </div>
         </div>
@@ -323,7 +346,7 @@ function saleToCart2(){
 
     var shopButton2 = document.querySelectorAll('.shop-it.btn')
     for (var i = 0; i < shopButton2.length; i++) {
-        var addItembutton = Button[i]
+        var addItembutton = shopButton2[i]
         addItembutton.addEventListener('click', addSaleCartclick2)
     }
 }
@@ -333,10 +356,10 @@ function addSaleCartclick2(event, salesId) {
     console.log(salesId);
     var salesButton = event.target
     let shopsSale = salesButton.parentElement.parentElement
-    var salesName = shopsSale.getElementsByClassName('card-title')[0].innerText 
+    var salesName = shopsSale.getElementsByClassName('card-title')[0].innerText
     var salesPrice = shopsSale.getElementsByClassName('card-price')[0].innerText
     var salesImg = shopsSale.getElementsByClassName('card-pic')[0].src
-  
+
     let saleCard = [salesImg, salesName, salesPrice ]
     console.log(saleCard);
     addSaleToCart2( salesImg, salesName, salesPrice, salesId)
@@ -345,15 +368,15 @@ function addSaleCartclick2(event, salesId) {
 
 function addSaleToCart2(salesImg, salesName, salesPrice , salesId) {
     let cart = [];
-    let salesPage = document.querySelector(".cart-sale") 
+    let salesPage = document.querySelector(".cart-sale")
     let salesCartBtn = document.querySelector('.shop-it.btn')
     console.log(salesCartBtn);
 
     let items = {
-        "name": salesName, 
+        "name": salesName,
         "price": salesPrice,
-        "img": salesImg, 
-        "theId": salesId, 
+        "img": salesImg,
+        "theId": salesId,
         };
     let itemsId = items["theId"]
     console.log(itemsId)
@@ -381,7 +404,7 @@ function addSaleToCart2(salesImg, salesName, salesPrice , salesId) {
         `)
         console.log(cart)
     }
-    
+
 }
 
 
@@ -389,7 +412,7 @@ function saleToCart(){
 
     var shopButton = document.querySelectorAll('.sale-shop.btn')
     for (var i = 0; i < shopButton.length; i++) {
-        var addItembutton2 = Button[i]
+        var addItembutton2 = shopButton[i]
         addItembutton2.addEventListener('click', addSaleCartclick)
     }
 }
@@ -399,11 +422,11 @@ function addSaleCartclick(event, sales2Id) {
     console.log(sales2Id);
     var salesButton2 = event.target
     let shops2Sale = salesButton2.parentElement.parentElement
-    var sales2Name = shops2Sale.getElementsByClassName('card-title')[0].innerText 
+    var sales2Name = shops2Sale.getElementsByClassName('card-title')[0].innerText
     var sales2Price = shops2Sale.getElementsByClassName('card-price')[0].innerText
     var sales2Img = shops2Sale.getElementsByClassName('card-pic')[0].src
-    document.querySelector('.total').innerHTML = "r" + sale_pro_price
-  
+    document.querySelector('.total').innerHTML = "R" + sales2Price
+
     let saleCard = [sales2Img, sales2Name, sales2Price ]
     console.log(saleCard);
     addSaleToCart2( sales2Img, sales2Name, sales2Price, sales2Id)
@@ -412,15 +435,15 @@ function addSaleCartclick(event, sales2Id) {
 
 function addSaleToCart2(sales2Img, sales2Name, sales2Price , sales2Id) {
     let cart = [];
-    let sales2Page = document.querySelector(".cart-sale") 
+    let sales2Page = document.querySelector(".cart-sale")
     let sales2CartBtn = document.querySelector('.sale-shop.btn')
     console.log(sales2CartBtn);
 
     let item = {
-        "name": sales2Name, 
+        "name": sales2Name,
         "price": sales2Price,
-        "img": sales2Img, 
-        "theId": sales2Id, 
+        "img": sales2Img,
+        "theId": sales2Id,
         };
     let items2Id = item["theId"]
     console.log(items2Id)
@@ -448,7 +471,7 @@ function addSaleToCart2(sales2Img, sales2Name, sales2Price , sales2Id) {
         `)
         console.log(cart)
     }
-    
+
 }
 
 
@@ -460,7 +483,7 @@ function removeBtn(){
     console.log(addAgain);
     cart = [];
     console.log(removeFromCartBtn);
-    
+
     let removeButton = removeFromCartBtn
     removeButton.addEventListener('click', function(event){
         var buttonClicked = event.target
@@ -468,10 +491,10 @@ function removeBtn(){
         addAgain.innerHTML = "";
         addAgain.disabled = false;
         addAgain.innerHTML += "Add To Cart";
-        updateCartTotal() 
-        
+        updateCartTotal()
+
     })
-    
+
     function updateCartTotal(){
         let items = document.getElementsByClassName('incart-item')
         console.log(items);
