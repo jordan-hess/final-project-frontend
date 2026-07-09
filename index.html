@@ -94,8 +94,8 @@
                         <span class="total" data-cart-total>R0.00</span>
                     </div>
                 </div>
-                <div id="modal">
-                    <button class="close" onclick="openModal()">X</button>
+                <div id="modal" role="dialog" aria-modal="true" aria-label="Register">
+                    <button class="close" onclick="openModal()" aria-label="Close register form">X</button>
                     <form class="form" id="form" onsubmit="event.preventDefault(); registerUser()">
                         <header>Register</header>
                         <div class="user-details">
@@ -118,7 +118,7 @@
                         </div> 
                     </form>
                 </div>
-                <div id="login">
+                <div id="login" role="dialog" aria-modal="true" aria-label="Log in">
                     <form class="login-page" onsubmit="event.preventDefault(); logIn()">
                         <div class="login-con">
                             <h1>login</h1>

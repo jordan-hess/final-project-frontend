@@ -18,9 +18,9 @@
 </head>
 <body>
     <div class="divid">
-        <nav>
+        <nav class="site-header" aria-label="Primary">
             <ul class="navbar">
-                <img src="logo.png">
+                <img src="logo.png" alt="Store logo">
                 <li>
                     <i class="fas fa-home"></i><a href="index.html" class="navbar-home">HOME</a>
                 </li>
@@ -43,7 +43,7 @@
                     <i class="fas fa-phone"></i><a href="contact.html" class="navbar-about">CONTACT</a>
                 </li>
                 <li>
-                    <i class="fas fa-shopping-cart"></i><a href="cart.html" class="navbar-cart">CART</a>
+                    <i class="fas fa-shopping-cart"></i><a href="cart.html" class="navbar-cart">CART <span class="cart-badge" aria-label="Items in cart">0</span></a>
                 </li>
             </ul>
         </nav>
@@ -58,20 +58,20 @@
                 <div class="contact-con">
                     <form action="">
                         <h1>Contact Us</h1>
-                        <label for="">Full Name</label>
-                        <input type="text" placeholder="*required">
+                        <label for="contact-name">Full Name</label>
+                        <input id="contact-name" type="text" placeholder="*required" required>
                         <div class="line"></div>
-                        <label for="">Contact Number</label>
-                        <input type="text" placeholder="*required">
+                        <label for="contact-number">Contact Number</label>
+                        <input id="contact-number" type="tel" placeholder="*required" required>
                         <div class="line"></div>
-                        <label for="">Email Address</label>
-                        <input type="text" placeholder="*required">
+                        <label for="contact-email">Email Address</label>
+                        <input id="contact-email" type="email" placeholder="*required" required>
                         <div class="line"></div>
-                        <label for="">Message</label>
-                        <input type="text" placeholder="Leave a message here">
+                        <label for="contact-message">Message</label>
+                        <input id="contact-message" type="text" placeholder="Leave a message here">
                         <div class="line"></div>
                         <div class="button-con">
-                            <button class="send">Send</button>
+                            <button class="btn btn-primary send" type="submit">Send</button>
                         </div>
                     </form>
                 </div>
