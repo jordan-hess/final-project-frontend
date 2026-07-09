@@ -18,9 +18,9 @@
 </head>
 <body>
     <div class="divid">
-        <nav>
+        <nav class="site-header" aria-label="Primary">
             <ul class="navbar">
-                <img src="logo.png">
+                <img src="logo.png" alt="Store logo">
                 <li>
                     <i class="fas fa-home"></i><a href="index.html" class="navbar-home">HOME</a>
                 </li>
@@ -43,7 +43,7 @@
                     <i class="fas fa-phone"></i><a href="contact.html" class="navbar-about">CONTACT</a>
                 </li>
                 <li>
-                    <i class="fas fa-shopping-cart"></i><a href="cart.html" class="navbar-cart">CART</a>
+                    <i class="fas fa-shopping-cart"></i><a href="cart.html" class="navbar-cart">CART <span class="cart-badge" aria-label="Items in cart">0</span></a>
                 </li>
             </ul>
         </nav>
@@ -69,13 +69,16 @@
                         <div class="onsale-kick"></div>
                         <div class="sale-kick"></div>
                     </div>
-                    <div class="mycart" id="carts-items">
+                    <div class="mycart" id="carts-items" role="dialog" aria-modal="true" aria-label="Shopping cart">
                         <div class="top">
                             <h1>cart</h1>
-                            <button class="close" onclick="openCart()">X</button>
+                            <button class="close" onclick="openCart()" aria-label="Close cart">X</button>
                         </div>
-                        <div class="cart-items"></div>
-                        <div class="cart-sale"></div>
+                        <div data-cart-items></div>
+                        <div class="cart-total">
+                            <h1 class="total-head">Total:</h1>
+                            <span class="total" data-cart-total>R0.00</span>
+                        </div>
                     </div>
                 </div>
             </div>

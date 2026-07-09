@@ -194,7 +194,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
 
 //   function to open Cart
 function openCart() {
-    document.getElementById("carts-items").classList.toggle("carts-active");
+    Motion.toggleDialog(document.getElementById("carts-items"), "carts-active");
 }
 
 
@@ -221,38 +221,33 @@ function addtoCartclick(event, id) {
 }
 
 function addToCart(title, price, imageScr, cartItemId, e) {
-    cart = []
-    let cartPage = document.querySelector(".cart-items")
+    CartStore.addItem({ id: cartItemId, name: title, price: price, image: imageScr });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
+}
 
-    let item = {
-        "name": title,
-        "price": price,
-        "url": imageScr,
-        "id": cartItemId,
-        }
+// Handler for the "new arrivals" three-kicks grid (.card-3 / .new-kick-cop).
+// This was referenced by the rendered button markup (addtoCartclick2) but had
+// no matching function defined, which threw a ReferenceError on click.
+function addtoCartclick2(event, id) {
+    console.log(id);
+    var button2 = event.target
+    var shopItem2 = button2.parentElement
+    var title = shopItem2.querySelector('.card3-title').innerText
+    var price = shopItem2.querySelector('.card3-price').innerText
+    var imageScr = shopItem2.querySelector('.card3-pic').src
 
-    if (cartItemId == item["id"]){
-        console.log(item["id"]);
-        cart.push(item)
-        cart.forEach(() => {
-        e.innerHTML = "";
-        e.disabled = true;
-        e.innerHTML += "In Cart Already";
-        alert('your product was added to your cart')
-    },
-        cartPage.innerHTML +=`
-        <div class="card">
-        <div class="incart-item">
-            <p style="display: none" class="id">${cartItemId}<p>
-            <img src="${imageScr}" class="sale-card-pic"/>
-            <h2 class="cards-title">${title}</h2>
-            <h3 class="cards-desc">${price}</h3>
-        </div>
-    </div>
-        `)
-        console.log(cart)
-    }
+    let card = [title, price, imageScr]
+    console.log(card)
+    addItemToCart2(title , price, imageScr, id, button2)
+}
 
+function addItemToCart2(title, price, imageScr, cartItemId, e) {
+    CartStore.addItem({ id: cartItemId, name: title, price: price, image: imageScr });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 
@@ -280,41 +275,10 @@ function addtoCartclick3(event, id) {
 }
 
 function addItemToCart(title, price, imageScr, cartItemId, e) {
-    let cart = [];
-    let cartPage = document.querySelector(".cart-items")
-    let cartItem = e.value
-    console.log(cartItem)
-
-
-    let item = {
-        "name": title,
-        "price": price,
-        "url": imageScr,
-        "id": cartItemId,
-        }
-    console.log(item)
-
-    if (cartItem == item["id"]){
-        cart.push(item)
-        cart.forEach((cartCard) => {
-        e.innerHTML = "";
-        e.disabled = true;
-        e.innerHTML += "In Cart Already";
-        console.log(cart);
-
-        cartPage.innerHTML +=`
-        <div class="card">
-        <div class="incart-item">
-            <p style="display: none" class="id">${cartCard["id"]}<p>
-            <img src="${cartCard["url"]}" class="card-pic"/>
-            <h2 class="cards-title">${cartCard["name"]}</h2>
-            <h3 class="cards-desc">${cartCard["price"]}</h3>
-        </div>
-    </div>
-        `
-    },
-        )
-}
+    CartStore.addItem({ id: cartItemId, name: title, price: price, image: imageScr });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 
@@ -341,41 +305,10 @@ function addtoCartclick4(event, id) {
 }
 
 function addItemToCart4(title, price, imageScr, cartItemId, e) {
-    let cart = [];
-    let cartPage = document.querySelector(".cart-items")
-    let cartItem = e.value
-    console.log(cartItem)
-
-
-    let item = {
-        "name": title,
-        "price": price,
-        "url": imageScr,
-        "id": cartItemId,
-        }
-    console.log(item)
-
-    if (cartItem == item["id"]){
-        cart.push(item)
-        cart.forEach((cartCard) => {
-        e.innerHTML = "";
-        e.disabled = true;
-        e.innerHTML += "In Cart Already";
-        console.log(cart);
-
-        cartPage.innerHTML +=`
-        <div class="card">
-        <div class="incart-item">
-            <p style="display: none" class="id">${cartCard["id"]}<p>
-            <img src="${cartCard["url"]}" class="card-pic"/>
-            <h2 class="cards-title">${cartCard["name"]}</h2>
-            <h3 class="cards-desc">${cartCard["price"]}</h3>
-        </div>
-    </div>
-        `
-    },
-        )
-}
+    CartStore.addItem({ id: cartItemId, name: title, price: price, image: imageScr });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 
@@ -399,47 +332,15 @@ function addSaleCartclick(event, saleId) {
 
     let trendCard = [saleImg, saleName, salePrice ]
     console.log(trendCard);
-    addSaleToCart( saleImg, saleName, salePrice, saleId)
+    addSaleToCart( saleImg, saleName, salePrice, saleId, saleButton)
 }
 
 
-function addSaleToCart(saleImg, saleName, salePrice , saleId) {
-    let cart = [];
-    let salePage = document.querySelector(".cart-sale")
-    let saleCartBtn = document.querySelector('.new-three.btn')
-    console.log(saleCartBtn);
-
-    let items = {
-        "name": saleName,
-        "price": salePrice,
-        "img": saleImg,
-        "theId": saleId,
-        };
-    let itemsId = items["theId"]
-    console.log(itemsId)
-
-    if (saleId == itemsId){
-        cart.push(itemsId)
-        cart.forEach(() => {
-        saleCartBtn.innerHTML = "";
-        saleCartBtn.disabled = true;
-        saleCartBtn.innerHTML += "In cart already";
-        console.log(saleCartBtn);
-
-    },
-        salePage.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${saleId}<p>
-                <img src="${saleImg}" class="two-card-pic"/>
-                <h2 class="two-card-title">${saleName}</h2>
-                <h3 class="two-card-desc">${salePrice}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addSaleToCart(saleImg, saleName, salePrice, saleId, e) {
+    CartStore.addItem({ id: saleId, name: saleName, price: salePrice, image: saleImg });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
 
 
@@ -463,45 +364,17 @@ function addSaleCartclick2(event, salesId) {
 
     let saleCard = [salesImg, salesName, salesPrice ]
     console.log(saleCard);
-    addSaleToCart2( salesImg, salesName, salesPrice, salesId)
+    addSaleToCart2( salesImg, salesName, salesPrice, salesId, salesButton)
 }
 
 
-function addSaleToCart2(salesImg, salesName, salesPrice , salesId) {
-    let cart = [];
-    let salesPage = document.querySelector(".cart-sale")
-    let salesCartBtn = document.querySelector('.new-four.btn')
-    console.log(salesCartBtn);
-
-    let items = {
-        "name": salesName,
-        "price": salesPrice,
-        "img": salesImg,
-        "theId": salesId,
-        };
-    let itemsId = items["theId"]
-    console.log(itemsId)
-
-    if (salesId == itemsId){
-        cart.push(itemsId)
-        cart.forEach(() => {
-        salesCartBtn.innerHTML = "";
-        salesCartBtn.disabled = true;
-        salesCartBtn.innerHTML += "In cart already";
-        console.log(salesCartBtn);
-
-    },
-        salesPage.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${salesId}<p>
-                <img src="${salesImg}" class="two-card-pic"/>
-                <h2 class="two-card-title">${salesName}</h2>
-                <h3 class="two-card-desc">${salesPrice}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addSaleToCart2(salesImg, salesName, salesPrice, salesId, e) {
+    CartStore.addItem({ id: salesId, name: salesName, price: salesPrice, image: salesImg });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
+
+Motion.animateHeaderShadow(".site-header");
+Motion.bindButtonFeedback();
+Motion.revealOnScroll(".trend .card, .three-kicks .card-3, .two-kicks .card-2, .one-kick .card-1, .onsale-kick .sale-card, .sale-kick .sale-card");
