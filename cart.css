@@ -66,3 +66,16 @@ i{
 .cart{
     padding: 4%;
 }
+
+/* Page-layout-level cart styling. .cart-line / .cart-line-image / .cart-empty
+   base styling already lives in tokens.css (shared with every page's cart
+   drawer since Task 6) — only the full-page container and total row are
+   added here. */
+.cart-con { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-5); }
+.cart-page-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-h3);
+  font-weight: 700;
+  padding-top: var(--space-3);
+}

@@ -10,7 +10,6 @@
     crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="cart.css">
-    <link rel="stylesheet" href="cart.js">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,12 +51,12 @@
                 <img src="papers.co-al90-nike-just-do-it-dark-simple-minimal-logo-art-35-3840x2160-4k-wallpaper.jpg" >
             </div>
             <div class="cart">
-                <div class="cart-items">
-                    <div class="cart-con">
-                        <h1>CART</h1>
-                        <div class="cart-item">
-                            
-                        </div>
+                <div class="cart-con">
+                    <h1>Your Cart</h1>
+                    <div data-cart-items></div>
+                    <div class="cart-page-total">
+                        <span>Total</span>
+                        <span data-cart-total>R0.00</span>
                     </div>
                 </div>
             </div>
@@ -67,6 +66,8 @@
     <script src="motion.js"></script>
     <script src="toast.js"></script>
     <script src="cartStore.js"></script>
-    <script src="cart.js"></script>
+    <script>
+      Motion.animateHeaderShadow(".site-header");
+    </script>
 </body>
 </html>
