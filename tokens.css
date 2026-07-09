@@ -169,3 +169,29 @@ h1, h2, .display-heading {
   opacity: 0;
 }
 .toast-error { background: var(--color-accent); }
+
+/* Shared cart line-item styling — used by every page's cart drawer via
+   cartStore.js's renderLineItems(). Without this, the .cart-line <img>
+   renders at its natural pixel size (e.g. 1920x1080) and blows out the
+   whole page layout. */
+.cart-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-grey-200);
+}
+.cart-line-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+.cart-line-info { flex: 1; }
+.cart-line-name { font-weight: 600; margin: 0; }
+.cart-line-price { color: var(--color-grey-500); font-size: var(--text-label); margin: 0; }
+.cart-line-qty { display: flex; align-items: center; gap: var(--space-2); }
+.qty-value { min-width: 1.5em; text-align: center; }
+.cart-line-subtotal { font-weight: 700; margin: 0 var(--space-2); }
+.cart-empty { padding: var(--space-4); color: var(--color-grey-500); }
