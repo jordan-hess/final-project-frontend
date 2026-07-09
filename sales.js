@@ -76,7 +76,7 @@ function filterCards(category) {
 
 //   function to open modal
 function openCart() {
-    document.getElementById("carts-items").classList.toggle("carts-active");
+    Motion.toggleDialog(document.getElementById("carts-items"), "carts-active");
 }
 
 
@@ -103,37 +103,12 @@ function addtoCartclick(event, id) {
 }
 
 function addItemToCart(title, price, imageScr, cartItemId, e) {
-    let cartPage = document.querySelector(".cart-items")
-    let cart =[]
-    console.log(typeof(cartItemId));
-
-    let item = {
-        "name": title,
-        "price": price,
-        "url": imageScr,
-        "id": cartItemId,
-        }
-        console.log(item);
-
-    if (e.value == item["id"]){
-        cart.push(item)
-        cart.forEach(() => {
-        e.innerHTML = "";
-        e.disabled = true;
-        e.innerHTML += "In Cart Already";
-        alert("your item was added to your cart")
-    },
-        cartPage.innerHTML +=`
-        <div class="card">
-        <div class="incart-item">
-            <p style="display: none" class="id">${cartItemId}<p>
-            <img src="${imageScr}" class="sale-card-pic"/>
-            <h2 class="cards-title">${title}</h2>
-            <h3 class="cards-desc">${price}</h3>
-        </div>
-    </div>
-        `)
-        console.log(cart)
-    }
-
+    CartStore.addItem({ id: cartItemId, name: title, price: price, image: imageScr });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast("Added to cart");
 }
+
+Motion.animateHeaderShadow(".site-header");
+Motion.bindButtonFeedback();
+Motion.revealOnScroll(".sale-products .sale-card");
