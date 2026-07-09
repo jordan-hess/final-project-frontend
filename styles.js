@@ -257,7 +257,7 @@ addSev()
 
 //   function to open registeration
 function openModal() {
-    document.getElementById("modal").classList.toggle("modal-active");
+    Motion.toggleDialog(document.getElementById("modal"), "modal-active");
 }
 
 async function registerUser(){
@@ -283,19 +283,18 @@ async function registerUser(){
     });
 
     if (error){
-        alert("There was a problem with the registration: " + error.message);
+        showToast("There was a problem with the registration: " + error.message, "error");
         return;
     }
 
-    alert("You are now a registered user");
+    showToast("You are now a registered user");
     openModal();
 }
 
 
 //   function to open Cart
 function openCart() {
-    document.getElementById("carts-items").classList.toggle("carts-active")
-    updateCartTotal()
+    Motion.toggleDialog(document.getElementById("carts-items"), "carts-active");
 }
 
 
@@ -322,43 +321,10 @@ function addtoCartclick(event, id) {
 }
 
 function addItemToCart(title, price, imageScr, cartItemId, e) {
-    let cart = [];
-    let cartPage = document.querySelector(".cart-items")
-    let cartItem = e.value
-    console.log(cartItem)
-
-
-    let item = {
-        "name": title,
-        "price": price,
-        "url": imageScr,
-        "id": cartItemId,
-        }
-    console.log(item)
-
-    if (cartItem == item["id"]){
-        cart.push(item)
-        cart.forEach((cartCard) => {
-        e.innerHTML = "";
-        e.disabled = true;
-        e.innerHTML += "In Cart Already";
-        console.log(cart);
-
-        cartPage.innerHTML +=`
-        <div class="card">
-        <div class="incart-item">
-            <p style="display: none" class="id">${cartCard["id"]}<p>
-            <img src="${cartCard["url"]}" class="card-pic"/>
-            <h2 class="cards-title">${cartCard["name"]}</h2>
-            <h3 class="card-price">${cartCard["price"]}</h3>
-            <input class="qty-input btn" type="number" value="1">
-            <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
-        </div>
-    </div>
-        `
-    },
-        )
-    }
+    CartStore.addItem({ id: cartItemId, name: title, price: price, image: imageScr });
+    e.innerHTML = "In Cart";
+    e.disabled = true;
+    showToast(title + " added to cart");
 }
 
 
@@ -873,7 +839,7 @@ function whenOpen(){
 
 //   function to open Login
 function openLog() {
-    document.getElementById("login").classList.toggle("login-active")
+    Motion.toggleDialog(document.getElementById("login"), "login-active");
 }
 
 
@@ -892,11 +858,11 @@ async function logIn() {
     });
 
     if (error) {
-        alert("Username and password unrecognised , try again");
+        showToast("Username and password unrecognised, try again", "error");
         return;
     }
 
-    alert("Login successful");
+    showToast("Login successful");
     openLog();
     showDeatails();
 }
@@ -916,3 +882,7 @@ async function showDeatails() {
 }
 
 showDeatails();
+
+Motion.animateHeaderShadow(".site-header");
+Motion.bindButtonFeedback();
+Motion.revealOnScroll(".products .card, .one-card, .two-card, .three-card, .four-card, .five-card, .six-card, .sev-card");
