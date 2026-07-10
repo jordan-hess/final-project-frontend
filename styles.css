@@ -79,6 +79,23 @@ i{
     margin-bottom: 16px;
 }
 
+/* The cart drawer's header also reuses the shared .top/.top h1 rules, whose
+   40vw width was sized for the hero heading. At drawer widths that leaves the
+   close button squeezed to only a few px wide (functionally unclickable), so
+   scope the drawer's own heading and lock the close button's width instead. */
+#carts-items .top h1{
+    width: auto;
+    flex: 1 1 auto;
+    font-size: 28px;
+    padding: 0;
+}
+
+#carts-items .top .close{
+    flex: 0 0 auto;
+    width: 40px;
+    min-width: 40px;
+}
+
 .top input{
     height: 30px;
     border-radius: 20px;
