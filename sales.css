@@ -112,6 +112,25 @@ i{
     overflow-wrap: break-word;
 }
 
+/* .details' own font-size: 22px above is a pre-token-system leftover that
+   otherwise inherits down to every text child (title/desc/category )
+   that doesn't have its own explicit font-size — .sale-card-price and
+   .card-was-price already override it below; title/desc/category didn't,
+   so they rendered at 22px instead of matching the canonical .card values. */
+.sale-card-title {
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.sale-card-desc {
+  color: var(--color-grey-500);
+  font-size: var(--text-label);
+}
+.sale-card-cat {
+  color: var(--color-grey-500);
+  font-size: var(--text-label);
+  font-weight: 400;
+}
+
 .card-was-price {
   color: var(--color-accent);
   text-decoration: line-through;

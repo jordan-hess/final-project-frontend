@@ -112,6 +112,26 @@ i{
     padding: 3%;
 }
 
+/* .cards-title/.cards3title/.cards4title (and their matching -desc/-price
+   siblings) are this page's on-sale card variants (renderSale/secondSale/
+   thirdSale/fourthSale in access.js) — none of these classes are named
+   "card-title"/"card-desc"/"card-price" exactly, so the canonical
+   `.card .card-title` etc. rules in tokens.css never matched them and they
+   rendered completely unstyled (raw browser-default h2/h3/h4 sizing).
+   Brought in line with the canonical .card values here. */
+.cards-title, .cards3title, .cards4title {
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.cards-desc, .card3-desc, .card4-desc {
+  color: var(--color-grey-500);
+  font-size: var(--text-label);
+}
+.cards-price, .card3-price, .card4-price {
+  font-size: var(--text-price);
+  font-weight: 700;
+}
+
 .card-ass img{
     width: 15vw;
     height: 25vh;
@@ -133,7 +153,16 @@ h1{
     overflow-wrap: break-word;
 }
 
-.ass-cards-was-price{
+/* Was previously the unused/dead ".ass-cards-was-price" (that class name is
+   never rendered by access.js — every sale section actually renders
+   "card-was-price"). tokens.css's canonical `.card .card-was-price` only
+   matches the one section still wrapped in div.card (renderSale); the
+   others (secondSale/thirdSale/fourthSale) use .card-ass/.card-3/.card-4
+   wrappers instead, so this unscoped rule covers those, matching the same
+   pattern already used in kicks.css/sales.css for the same class. */
+.card-was-price{
+    font-size: var(--text-label);
+    color: var(--color-accent);
     text-decoration: line-through;
     text-decoration-thickness: 2px;
     text-decoration-color: var(--color-accent);

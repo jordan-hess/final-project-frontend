@@ -97,6 +97,31 @@ h1{
     object-fit: cover;
 }
 
+/* None of this page's card-title/-desc/-price/-cat variants (.cards-*,
+   .card3-*, .card2-*, .card1-*, .sale-card-*) are named exactly
+   "card-title"/"card-desc"/"card-price", so the canonical `.card .card-title`
+   etc. rules in tokens.css never matched any of them and they rendered
+   completely unstyled (raw browser-default h2/h3/h4/h5 sizing). Brought in
+   line with the canonical .card values here, the same way .card-was-price
+   already was below. */
+.cards-title, .card3-title, .card2-title, .card1-title, .sale-card-title {
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.cards-desc, .card3-desc, .card2-desc, .card1-desc, .sale-card-desc {
+  color: var(--color-grey-500);
+  font-size: var(--text-label);
+}
+.cards-price, .card3-price, .card2-price, .card1-price, .sale-card-price {
+  font-size: var(--text-price);
+  font-weight: 700;
+}
+.cards-cat, .card3-cat, .card2-cat, .card1-cat, .sale-card-cat {
+  color: var(--color-grey-500);
+  font-size: var(--text-label);
+  font-weight: 400;
+}
+
 /* .card-3 / .card-2 / .card-1 / .sale-card don't reuse the shared .card
    class from tokens.css (unlike .trend's cards, which do and already get
    its background/radius/shadow/hover-lift for free), so give them the
