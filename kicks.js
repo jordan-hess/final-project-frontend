@@ -152,7 +152,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
                     <h3 class="sale-card-desc">${escapeHtml(items.description)}</h3>
                     <h5 class="sale-card-cat">${escapeHtml(items.category)}</h5>
                     <h4 class="sale-card-price">R${items.price}</h4>
-                    <h6 class="card-was-price">R${items.was_price}</h6>
+                    ${items.was_price ? `<h6 class="card-was-price">R${items.was_price}</h6>` : ''}
                     <button class="new-three btn btn-primary" value="${items.id}" onclick="addSaleCartclick(event, ${items.id})" type="button">ADD TO CART</button>
                 </div>
             </div>
@@ -187,7 +187,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
                     <h3 class="sale-card-desc">${escapeHtml(items.description)}</h3>
                     <h5 class="sale-card-cat">${escapeHtml(items.category)}</h5>
                     <h4 class="sale-card-price">R${items.price}</h4>
-                    <h6 class="card-was-price">R${items.was_price}</h6>
+                    ${items.was_price ? `<h6 class="card-was-price">R${items.was_price}</h6>` : ''}
                     <button class="new-four btn btn-primary" value="${items.id}" onclick="addSaleCartclick2(event, ${items.id})" type="button">ADD TO CART</button>
                 </div>
             </div>

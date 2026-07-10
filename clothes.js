@@ -96,7 +96,7 @@ function firstSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="sale-shop btn btn-primary" value="${item.id}" onclick="addTrendCartclick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -127,7 +127,7 @@ function secondSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -158,7 +158,7 @@ function thirdSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -189,7 +189,7 @@ function fourthSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -220,7 +220,7 @@ function fifthSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -251,7 +251,7 @@ function sixthSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -282,7 +282,7 @@ function sevenSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -313,7 +313,7 @@ function eighthSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -344,7 +344,7 @@ function lastSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <h5 class="card-was-price">R${item.was_price}</h5>
+                ${item.was_price ? `<h5 class="card-was-price">R${item.was_price}</h5>` : ''}
                 <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>

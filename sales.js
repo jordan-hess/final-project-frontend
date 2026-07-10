@@ -27,7 +27,7 @@ function onSale(){
                         <h3 class="sale-card-desc">${escapeHtml(item.description)}</h3>
                         <h5 class="sale-card-cat">${escapeHtml(item.category)}</h5>
                         <h4 class="sale-card-price">R${item.price}</h4>
-                        <h6 class="card-was-price">R${item.was_price}</h6>
+                        ${item.was_price ? `<h6 class="card-was-price">R${item.was_price}</h6>` : ''}
                         <button class="shop-sale btn btn-primary" value="${item.id}" onclick="addtoCartclick(event, ${item.id})" type="button">ADD TO CART</button>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ function filterCards(category) {
                         <h3 class="sale-card-desc">${escapeHtml(product.description)}</h3>
                         <h5 class="sale-card-cat">${escapeHtml(product.category)}</h5>
                         <h4 class="sale-card-price">R${product.price}</h4>
-                        <h6 class="card-was-price">R${product.was_price}</h6>
+                        ${product.was_price ? `<h6 class="card-was-price">R${product.was_price}</h6>` : ''}
                         <button class="shop-sale btn btn-primary" value="${product.id}" onclick="addtoCartclick(event, ${product.id})" type="button">ADD TO CART</button>
                     </div>
                 </div>
