@@ -63,7 +63,7 @@ items.forEach(items => {
             <h3 class="cards-desc">${escapeHtml(items.description)}</h3>
             <h4 class="cards-price">R${items.price}</h4>
             <h5 class="cards-cat">${escapeHtml(items.category)}</h5>
-            <button class="shop-trend btn" value="${items.id}" onclick="addTrendCartclick(event, ${items.id})" type="button">+</button>
+            <button class="shop-trend btn btn-primary" value="${items.id}" onclick="addTrendCartclick(event, ${items.id})" type="button">Add to cart</button>
         </div>
     </div>
     `;
@@ -94,7 +94,7 @@ function addSecond(){
                 <h3 class="two-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="two-card-price">R${items.price}</h4>
                 <h5 class="two-card-cat">${escapeHtml(items.category)}</h5>
-                <button class="shop-trends btnTwo" value="${items.id}" onclick="addTrendCartclick2(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="shop-trends btn btn-primary" value="${items.id}" onclick="addTrendCartclick2(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -127,7 +127,7 @@ function addThird(){
                 <h3 class="three-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="three-card-price">R${items.price}</h4>
                 <h5 class="three-card-cat">${escapeHtml(items.category)}</h5>
-                <button class="shop-this-item btn" value="${items.id}" onclick="addTrendCartclick3(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="shop-this-item btn btn-primary" value="${items.id}" onclick="addTrendCartclick3(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -159,7 +159,7 @@ function addFourth(){
                 <h3 class="four-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="four-card-price">R${items.price}</h4>
                 <h5 class="four-card-cat">${escapeHtml(items.category)}</h5>
-                <button class="shop-by-pressing btn" value="${items.id}" onclick="addTrendCartclick4(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="shop-by-pressing btn btn-primary" value="${items.id}" onclick="addTrendCartclick4(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -190,7 +190,7 @@ function addFifth(){
                 <h3 class="five-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="five-card-price">R${items.price}</h4>
                 <h5 class="five-card-cat">${escapeHtml(items.category)}</h5>
-                <button class="press-it-buy-it btn" value="${items.id}" onclick="addTrendCartclick5(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="press-it-buy-it btn btn-primary" value="${items.id}" onclick="addTrendCartclick5(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -221,7 +221,7 @@ function addSix(){
                 <h3 class="six-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="six-card-price">R${items.price}</h4>
                 <h5 class="six-card-cat">${escapeHtml(items.category)}</h5>
-                <button class="press-to-buy shopBtn" value="${items.id}" onclick="addTrendCartclick6(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="press-to-buy btn btn-primary" value="${items.id}" onclick="addTrendCartclick6(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -252,7 +252,7 @@ function addSev(){
                 <h3 class="sev-card-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="sev-card-price">R${items.price}</h4>
                 <h5 class="sev-card-cat">${escapeHtml(items.category)}</h5>
-                <button class="shop-it-buy btn" value="${items.id}" onclick="addTrendCartclick7(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="shop-it-buy btn btn-primary" value="${items.id}" onclick="addTrendCartclick7(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;

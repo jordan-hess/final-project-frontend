@@ -98,6 +98,28 @@ h1{
     object-fit: cover;
 }
 
+/* .card-3 / .card-2 / .card-1 / .sale-card don't reuse the shared .card
+   class from tokens.css (unlike .trend's cards, which do and already get
+   its background/radius/shadow/hover-lift for free), so give them the
+   same surface explicitly. */
+.card-3,
+.card-2,
+.card-1,
+.sale-card {
+  background: var(--color-paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-rest);
+  transition: box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.card-3:hover,
+.card-2:hover,
+.card-1:hover,
+.sale-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
 .card-3 img{
     width: 19vw;
     height: 25vh;

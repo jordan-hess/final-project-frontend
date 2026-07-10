@@ -139,10 +139,11 @@ i{
 }
 
 .trend-con{
-    height: 90vh;
+    min-height: 0;
     width: 83.5%;
     background-color: #e4e9f1;
     margin: 0px 0px 60px 60px;
+    padding-bottom: var(--space-6);
     display: flex;
 }
 
@@ -198,6 +199,52 @@ i{
     overflow-wrap: break-word;
     margin-bottom: 20px;
     flex-wrap: wrap;
+}
+
+/* Shared "card" chrome for the trending-kicks family (#1-#7). Each section
+   is rendered by its own bespoke function/class prefix (a known duplication
+   — see the design spec's cart-module note for the same pattern elsewhere)
+   but they're still one visual product-card component, so give them all
+   the same background/radius/shadow/hover-lift the "Just Dropped" grid's
+   .card already gets from tokens.css, instead of rendering as bare
+   image+text with no card surface at all. */
+.cards-body,
+.two-card-body,
+.three-card-body,
+.four-card-body,
+.five-card-body,
+.six-card-body,
+.sev-card-body {
+  background: var(--color-paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-rest);
+  padding: var(--space-3);
+  transition: box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.cards-body:hover,
+.two-card-body:hover,
+.three-card-body:hover,
+.four-card-body:hover,
+.five-card-body:hover,
+.six-card-body:hover,
+.sev-card-body:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.cards-title, .two-card-title, .three-card-title, .four-card-title,
+.five-card-title, .six-card-title, .sev-card-title {
+  font-size: var(--text-h3);
+}
+.cards-price, .two-card-price, .three-card-price, .four-card-price,
+.five-card-price, .six-card-price, .sev-card-price {
+  font-size: var(--text-price);
+  font-weight: 700;
+}
+.cards-desc, .two-card-desc, .three-card-desc, .four-card-desc,
+.five-card-desc, .six-card-desc, .sev-card-desc {
+  color: var(--color-grey-500);
+  font-size: var(--text-label);
 }
 
 .cards-body{

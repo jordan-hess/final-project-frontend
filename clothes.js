@@ -32,7 +32,7 @@ function seeSale(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <button class="shop-it btn" value="${item.id}" onclick="addSaleCartclick2(event, ${item.id})" type="button">ADD TO CART</button>
+                <button class="shop-it btn btn-primary" value="${item.id}" onclick="addSaleCartclick2(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -65,7 +65,7 @@ function seeSale2(){
                 <h2 class="card-title">${escapeHtml(item.name)}</h2>
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
-                <button class="sale-shop btn" value="${item.id}" onclick="addSaleCartclick(event, ${item.id})" type="button">ADD TO CART</button>
+                <button class="sale-shop btn btn-primary" value="${item.id}" onclick="addSaleCartclick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -97,7 +97,7 @@ function firstSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
-                <button class="sale-shop btn" value="${item.id}" onclick="addTrendCartclick(event, ${item.id})" type="button">ADD TO CART</button>
+                <button class="sale-shop btn btn-primary" value="${item.id}" onclick="addTrendCartclick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -128,6 +128,7 @@ function secondSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -158,6 +159,7 @@ function thirdSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -188,6 +190,7 @@ function fourthSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -218,6 +221,7 @@ function fifthSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -248,6 +252,7 @@ function sixthSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -278,6 +283,7 @@ function sevenSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -308,6 +314,7 @@ function eighthSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -338,6 +345,7 @@ function lastSale(){
                 <h3 class="card-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
+                <button class="btn btn-primary" value="${item.id}" onclick="addClothesCartClick(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -419,6 +427,28 @@ function addTrendCartclick(event, saleId) {
     addSaleToCart2(trendImg, trendName, trendPrice, saleId, trendButton)
 }
 
+
+// Shared handler for the .sale2-.sale9 grids (secondSale/thirdSale/
+// fourthSale/fifthSale/sixthSale/sevenSale/eighthSale/lastSale). Their
+// rendered card markup had no Add to Cart button at all — those 8 sections
+// were entirely un-purchasable — so one is added to each below. They all
+// render the same field classes (card-title/card-price/card-pic) as the
+// sections addSaleCartclick/addTrendCartclick already handle, so this
+// reuses addSaleToCart2 instead of adding an 8th near-duplicate handler.
+function addClothesCartClick(event, id) {
+    var button = event.target;
+    // .closest('.card') rather than a fixed number of .parentElement hops:
+    // these templates have a stray unclosed <h5 class="cards-was-price">
+    // (written as `<h5>...<h5>` instead of `</h5>`), so the browser's HTML
+    // parser nests everything after it — including this button — one level
+    // deeper than the template's indentation implies. closest() finds the
+    // right ancestor regardless of exactly how deep that nesting goes.
+    var shopItem = button.closest('.card');
+    var title = shopItem.querySelector('.card-title').innerText;
+    var price = shopItem.querySelector('.card-price').innerText;
+    var imageScr = shopItem.querySelector('.card-pic').src;
+    addSaleToCart2(imageScr, title, price, id, button);
+}
 
 function removeBtn(){
 

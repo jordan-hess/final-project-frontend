@@ -53,7 +53,7 @@ const renderSale = (item) => {
                 <h3 class="cards-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="cards-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
-                <button class="shop-sale sale-btn" value="${item.id}" onclick="addtoCartclick2(event, ${item.id})" type="button">ADD TO CART</button>
+                <button class="shop-sale btn btn-primary" value="${item.id}" onclick="addtoCartclick2(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -83,7 +83,7 @@ function secondSale(){
                 <h3 class="cards-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="cards-price">R${item.price}</h4>
                 <h5 class="cards-was-price">R${item.was_price}<h5>
-                <button class="shop-sale-btn saleBtn" value="${item.id}" onclick="addtoCartclick3(event, ${item.id})" type="button">ADD TO CART</button>
+                <button class="shop-sale-btn btn btn-primary" value="${item.id}" onclick="addtoCartclick3(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -117,7 +117,7 @@ function thirdSale(){
                 <h3 class="card3-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card3-price">R${item.price}</h4>
                 <h5 class="card3-was-price">R${item.was_price}<h5>
-                <button class="shop-this-sale salesBtn" value="${item.id}" onclick="addtoCartclick4(event, ${item.id})" type="button">ADD TO CART</button>
+                <button class="shop-this-sale btn btn-primary" value="${item.id}" onclick="addtoCartclick4(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -151,7 +151,7 @@ function fourthSale(){
                 <h3 class="card4-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card4-price">R${item.price}</h4>
                 <h5 class="card4-was-price">R${item.was_price}<h5>
-                <button class="last-saleBtn" value="${item.id}" onclick="addtoCartclick5(event, ${item.id})" type="button">ADD TO CART</button>
+                <button class="last-saleBtn btn btn-primary" value="${item.id}" onclick="addtoCartclick5(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;

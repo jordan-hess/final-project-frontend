@@ -26,7 +26,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_trending', 
                 <h3 class="cards-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="cards-price">R${items.price}</h4>
                 <h5 class="cards-cat">${escapeHtml(items.category)}</h5>
-                <button class="shop-this-now btn" value="${items.id}" onclick="addtoCartclick(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="shop-this-now btn btn-primary" value="${items.id}" onclick="addtoCartclick(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -58,7 +58,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('id')
                 <h3 class="card3-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="card3-price">R${items.price}</h4>
                 <h5 class="card3-cat">${escapeHtml(items.category)}</h5>
-                <button class="new-kick-cop btn" value="${items.id}" onclick="addtoCartclick2(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="new-kick-cop btn btn-primary" value="${items.id}" onclick="addtoCartclick2(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -88,7 +88,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('id', { asce
                 <h3 class="card2-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="card2-price">R${items.price}</h4>
                 <h5 class="card2-cat">${escapeHtml(items.category)}</h5>
-                <button class="new-one btn" value="${items.id}" onclick="addtoCartclick3(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="new-one btn btn-primary" value="${items.id}" onclick="addtoCartclick3(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -120,7 +120,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('price')
                 <h3 class="card1-desc">${escapeHtml(items.description)}</h3>
                 <h4 class="card1-price">R${items.price}</h4>
                 <h5 class="card1-cat">${escapeHtml(items.category)}</h5>
-                <button class="new-two btn" value="${items.id}" onclick="addtoCartclick4(event, ${items.id})" type="button">ADD TO CART</button>
+                <button class="new-two btn btn-primary" value="${items.id}" onclick="addtoCartclick4(event, ${items.id})" type="button">ADD TO CART</button>
             </div>
         </div>
         `;
@@ -153,7 +153,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
                     <h5 class="sale-card-cat">${escapeHtml(items.category)}</h5>
                     <h4 class="sale-card-price">R${items.price}</h4>
                     <h6 class="card-was-price">R${items.was_price}</h6>
-                    <button class="new-three btn" value="${items.id}" onclick="addSaleCartclick(event, ${items.id})" type="button">ADD TO CART</button>
+                    <button class="new-three btn btn-primary" value="${items.id}" onclick="addSaleCartclick(event, ${items.id})" type="button">ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -188,7 +188,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
                     <h5 class="sale-card-cat">${escapeHtml(items.category)}</h5>
                     <h4 class="sale-card-price">R${items.price}</h4>
                     <h6 class="card-was-price">R${items.was_price}</h6>
-                    <button class="new-four btn" value="${items.id}" onclick="addSaleCartclick2(event, ${items.id})" type="button">ADD TO CART</button>
+                    <button class="new-four btn btn-primary" value="${items.id}" onclick="addSaleCartclick2(event, ${items.id})" type="button">ADD TO CART</button>
                 </div>
             </div>
         </div>
