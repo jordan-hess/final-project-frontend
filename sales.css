@@ -99,10 +99,15 @@ i{
     width: 33vw;
 }
 
-.sale-card{
-    padding: 4%;
-    display: flex;
+.sale-card {
+  padding: 4%;
+  display: flex;
+  background: var(--color-paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-rest);
+  transition: box-shadow var(--duration-base) var(--ease-standard);
 }
+.sale-card:hover { box-shadow: var(--shadow-hover); }
 
 .info{
     display: flex;
@@ -118,10 +123,12 @@ i{
     overflow-wrap: break-word;
 }
 
-.card-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: red;
+.card-was-price {
+  color: var(--color-accent);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-accent);
+  font-size: var(--text-label);
 }
 
 .button-container{
@@ -131,12 +138,9 @@ i{
     justify-content: space-evenly;
 }
 
-.button-container button{
-    padding: 1%;
-    background-color: black;
-    color: white;
-    border-radius: 15px;
-}
+/* Color/background/border-radius now come from .btn-secondary in tokens.css;
+   .sale-card-price also uses tokens.css defaults. */
+.sale-card-price { font-size: var(--text-price); font-weight: 700; }
 
 #carts-items.carts-active {
     display: block;
@@ -184,35 +188,4 @@ h1{
     object-fit: cover;
 }
 
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--color-paper);
-  transition: box-shadow var(--duration-base) var(--ease-standard);
-}
-.site-header.is-scrolled { box-shadow: var(--shadow-rest); }
-.cart-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 4px;
-  margin-left: var(--space-1);
-  border-radius: 999px;
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
-  font-size: 0.6875rem;
-  font-weight: 700;
-}
-
-.sale-card {
-  background: var(--color-paper);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-rest);
-  transition: box-shadow var(--duration-base) var(--ease-standard);
-}
-.sale-card:hover { box-shadow: var(--shadow-hover); }
-.sale-card-price { font-size: var(--text-price); font-weight: 700; }
-.card-was-price { color: var(--color-accent); text-decoration: line-through; font-size: var(--text-label); }
+/* .site-header / .cart-badge moved to tokens.css (shared across all pages) */
