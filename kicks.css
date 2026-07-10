@@ -166,6 +166,8 @@ h1{
 }
 
 .card-was-price{
+    font-size: var(--text-label);
+    color: var(--color-accent);
     text-decoration: line-through;
     text-decoration-thickness: 2px;
     text-decoration-color: var(--color-accent);
