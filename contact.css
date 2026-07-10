@@ -99,29 +99,10 @@ i{
     height: 100%;
 }
 
-.button-con{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 2%;
-    margin-top: 15px;
-}
-
-.button-con button{
-    padding: 1%;
-    background-color: black;
-    color: white;
-    border-radius: 15px;
-    width: 10vw;
-    border: 2px solid black;
-}
-
-.button-con button:hover{
-    background-color: var(--color-accent);
-    transition: 0.5s;
-    padding: 2%;
-    color: black;
-}
+/* Layout for .button-con lives further down, next to the other
+   .contact-con-scoped rules — .button-con button's old background/radius/
+   hover overrides were removed there (the Send button already carries
+   .btn.btn-primary from tokens.css). */
 
 .contact-con{
     background: rgba(255, 355, 355, 0.15);
@@ -167,7 +148,10 @@ input{
     margin: 10px;
 }
 
-.contact-con input {
+.contact-con input,
+.contact-con textarea {
+  width: 100%;
+  margin-left: 0;
   padding: var(--space-2) 0;
   font-family: var(--font-body);
   font-size: var(--text-body);
@@ -175,8 +159,10 @@ input{
   border-bottom: 1px solid var(--color-grey-300);
   background: transparent;
   transition: border-color var(--duration-fast) var(--ease-standard);
+  resize: vertical;
 }
-.contact-con input:focus-visible {
+.contact-con input:focus-visible,
+.contact-con textarea:focus-visible {
   border-color: var(--color-ink);
   outline: none;
 }
@@ -187,4 +173,19 @@ input{
   color: var(--color-grey-500);
   margin-top: var(--space-3);
   display: block;
+}
+
+/* The Send button already carries .btn.btn-primary (tokens.css) for its
+   actual visual treatment; this page's own .button-con button rule used
+   to duplicate/override that (a different radius, a red hover state with
+   black text instead of the shared shadow-lift hover every other primary
+   button on the site gets) with higher specificity than a bare .btn-primary
+   class selector, so it silently won regardless of tokens.css load order.
+   Scoped to layout only now. */
+.button-con {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2%;
+  margin-top: 15px;
 }

@@ -57,7 +57,7 @@
             </div>
             <div class="contact">
                 <div class="contact-con">
-                    <form action="">
+                    <form action="" onsubmit="event.preventDefault(); handleContactSubmit(this);">
                         <h1>Contact Us</h1>
                         <label for="contact-name">Full Name</label>
                         <input id="contact-name" type="text" placeholder="*required" required>
@@ -69,7 +69,7 @@
                         <input id="contact-email" type="email" placeholder="*required" required>
                         <div class="line"></div>
                         <label for="contact-message">Message</label>
-                        <input id="contact-message" type="text" placeholder="Leave a message here">
+                        <textarea id="contact-message" placeholder="Leave a message here" rows="4"></textarea>
                         <div class="line"></div>
                         <div class="button-con">
                             <button class="btn btn-primary send" type="submit">Send</button>
