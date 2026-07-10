@@ -94,11 +94,13 @@ i{
     width: 100%;
     float: right;
     background-color: black;
+    display: flex;
+    justify-content: center;
 }
 
     .tick img{
         height: 140px;
-        margin-left: 500px;
+        max-width: 100%;
     }
 
 .sep{
@@ -136,6 +138,50 @@ i{
     background-color: #e4e9f1;
     margin: 0px 0px 60px 60px;
     display: flex;
+}
+
+/* At narrow widths the fixed 60px margin-left plus the 83.5% width can add up
+   to more than the available space (percentages are resolved against the
+   parent's full width, not parent-minus-margin), pushing .trend-con past
+   .sep's right edge. Scoped to small screens only so the desktop/tablet
+   layout (already fitting) is untouched. */
+@media (max-width: 600px) {
+    .trend-con{
+        width: calc(100% - 60px);
+        flex-wrap: wrap;
+    }
+
+    /* .left-con's fixed 25vw is sized to sit beside .other-trends on desktop;
+       at mobile, wrapping .trend-con alone still leaves .left-con squeezing
+       .other-trends into the remaining ~75vw on the same row before it wraps.
+       Full-width stacks .left-con above .other-trends instead. */
+    .left-con{
+        width: 100%;
+    }
+
+    /* The trend-card family (.left-con, .two/.three/.four/.five/.six/.sev-card)
+       uses fixed 40-60px margins between each card's image and its text body,
+       sized for desktop. At mobile widths those fixed margins alone can exceed
+       the viewport, pushing .other-trends past .sep's right edge even with
+       flex-wrap (wrap only breaks items onto new lines, it doesn't shrink an
+       individual item that's wider than its container). Reduced to a small
+       fixed gap that still separates image from text without depending on
+       viewport width. */
+    .left-con{
+        margin-right: 8px;
+    }
+    .three-card-pic{
+        margin-right: 8px;
+    }
+    .three-card-body{
+        margin-left: 8px;
+    }
+    .five-card-pic{
+        margin-right: 8px;
+    }
+    .six-card-pic{
+        margin-right: 8px;
+    }
 }
 
 

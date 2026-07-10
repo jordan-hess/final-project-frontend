@@ -43,12 +43,14 @@ i{
 .tick{
     background-color: black;
     width: 80vw;
+    display: flex;
+    justify-content: center;
 }
 
 .tick img{
     height: 20vh;
     width: auto;
-    margin-left: 500px ;
+    max-width: 100%;
 }
 
 .sep{
@@ -60,6 +62,8 @@ i{
     margin-left: 50px;
     margin-right: 50px;
     width: 40vw;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 
 .access-con{
@@ -112,6 +116,7 @@ i{
 
 .sale-ass{
     display: flex;
+    flex-wrap: wrap;
     padding: 2%;
 }
 
@@ -120,6 +125,8 @@ h1{
     margin-left: 50px;
     margin-right: 50px;
     width: 40vw;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 
 .ass-cards-was-price{
@@ -187,6 +194,7 @@ h1{
 
 .access{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .card{

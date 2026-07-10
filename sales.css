@@ -47,17 +47,20 @@ i{
 .tick{
     background-color: black;
     width: 80vw;
+    display: flex;
+    justify-content: center;
 }
 
 .tick img{
     height: 20vh;
     width: auto;
-    margin-left: 500px ;
+    max-width: 100%;
 }
 
 .bottom{
     padding: 4%;
     display: flex;
+    flex-wrap: wrap;
 }
 
 
@@ -66,6 +69,8 @@ i{
     margin-left: 50px;
     margin-right: 50px;
     width: 40vw;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 
 .three{
@@ -108,6 +113,9 @@ i{
     flex-direction: column;
     font-size: 22px;
     padding: 3%;
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .card-was-price{
@@ -119,6 +127,7 @@ i{
 .button-container{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 }
 

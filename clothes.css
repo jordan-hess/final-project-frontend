@@ -43,12 +43,14 @@ i{
 .tick{
     background-color: black;
     width: 80vw;
+    display: flex;
+    justify-content: center;
 }
 
 .tick img{
     height: 20vh;
     width: auto;
-    margin-left: 500px ;
+    max-width: 100%;
 }
 
 .sep{
@@ -61,6 +63,8 @@ h1{
     margin-right: 50px;
     width: 40vw;
     padding: 4%;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 
 .card-body{
@@ -76,6 +80,7 @@ h1{
 .pros{
     padding: 0% 4% 4% 6%;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .sale-con{
@@ -132,6 +137,7 @@ h1{
 
 .top-part{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .top-part button{

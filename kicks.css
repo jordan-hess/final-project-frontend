@@ -42,17 +42,20 @@ i{
 
 .sep{
     margin-left: 20%;
+    width: 80%;
 }
 
 .tick{
     background-color: black;
     width: 80vw;
+    display: flex;
+    justify-content: center;
 }
 
 .tick img{
     height: 20vh;
     width: auto;
-    margin-left: 500px ;
+    max-width: 100%;
 }
 
 .kick-con{
@@ -61,6 +64,7 @@ i{
 
 .righton-top{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .righton-top h1{
@@ -85,6 +89,8 @@ h1{
     margin-left: 50px;
     margin-right: 50px;
     width: 58vw;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 
 .trend{
@@ -122,6 +128,7 @@ h1{
 
 .all-kicks{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .one-kick{
@@ -140,6 +147,7 @@ h1{
 
 .kicks-sale{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .sale-card-body{
