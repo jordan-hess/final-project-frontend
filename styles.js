@@ -616,7 +616,7 @@ function qauntityChanged(event){
 }
 
 function whenOpen(){
-    showToast('To remove an item, click the remove button twice for confirmation');
+    showToast('Use + / - to adjust quantity, or Remove to take an item out');
 }
 
 //   function to open Login

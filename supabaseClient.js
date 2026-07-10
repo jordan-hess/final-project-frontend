@@ -8,12 +8,7 @@ const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_1bpPWlzWAnvRsxgegb3TVw_2KoIKTmM
 // `supabase` namespace object; this overwrites it with the actual client.
 supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-function escapeHtml(value) {
-    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;",
-    }[char]));
-}
+// escapeHtml now lives in cartStore.js (loaded on every page, including the
+// 3 pages — cart/contact/brand — that never load this file at all), so it's
+// always defined regardless of which page is rendering. See the comment
+// there for why.

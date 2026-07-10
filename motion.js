@@ -126,8 +126,23 @@ window.Motion = (function () {
     );
   }
 
+  // Every dialog root (#modal, #login, #carts-items) is now a full-viewport
+  // flex backdrop wrapping a nested card/panel (see tokens.css's "Dialogs"
+  // section), so a click that lands on the root itself (not one of its
+  // descendants) is necessarily a click on the dim backdrop area — close on
+  // it, same as Escape. Bound once per element, not once per open.
+  const backdropBound = new WeakSet();
+  function bindBackdropClose(el, close) {
+    if (backdropBound.has(el)) return;
+    backdropBound.add(el);
+    el.addEventListener("click", (event) => {
+      if (event.target === el) close();
+    });
+  }
+
   function openDialogFocusTrap(el, close) {
     ensureGlobalKeydownListener();
+    bindBackdropClose(el, close);
     const previouslyFocused = document.activeElement;
     openDialogStack.push({ el, close, previouslyFocused });
 
@@ -149,21 +164,38 @@ window.Motion = (function () {
   // is whatever class the existing onclick handler already toggles (e.g.
   // "modal-active", "login-active", "carts-active") — this wraps that
   // existing toggle with a fade/scale instead of an instant show/hide.
+  //
+  // Closing removes `activeClass` only after the fade-out animation
+  // finishes (via anime's `complete` callback) rather than synchronously up
+  // front. `activeClass` is what makes the dialog `display: flex` (its base
+  // rule is `display: none`), so removing it immediately — as this used to
+  // do — hid the element before a single animated frame could paint,
+  // silently skipping the close animation entirely every time.
   function toggleDialog(el, activeClass) {
     if (!el) return;
     const opening = !el.classList.contains(activeClass);
-    el.classList.toggle(activeClass, opening);
+
     if (opening) {
+      el.classList.add(activeClass);
       openDialogFocusTrap(el, () => toggleDialog(el, activeClass));
-    } else {
-      closeDialogFocusTrap(el);
-    }
-    if (prefersReducedMotion() || !window.anime) return;
-    if (opening) {
+      if (prefersReducedMotion() || !window.anime) return;
       anime({ targets: el, opacity: [0, 1], scale: [0.96, 1], duration: 220, easing: "easeOutCubic" });
-    } else {
-      anime({ targets: el, opacity: [1, 0], scale: [1, 0.96], duration: 160, easing: "easeInCubic" });
+      return;
     }
+
+    closeDialogFocusTrap(el);
+    if (prefersReducedMotion() || !window.anime) {
+      el.classList.remove(activeClass);
+      return;
+    }
+    anime({
+      targets: el,
+      opacity: [1, 0],
+      scale: [1, 0.96],
+      duration: 160,
+      easing: "easeInCubic",
+      complete: () => el.classList.remove(activeClass),
+    });
   }
 
   // --- Collapsible icon-rail sidebar --------------------------------------

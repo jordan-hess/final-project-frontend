@@ -1,3 +1,24 @@
+// escapeHtml is used by cartStore.js's own renderLineItems() below, and also
+// by every page's product-card render functions (styles.js, access.js,
+// kicks.js, clothes.js, sales.js). It used to live only in supabaseClient.js,
+// which loads before cartStore.js on the 5 product pages that have it — but
+// cartStore.js itself, plus cart.html/contact.html/brand.html, don't load
+// supabaseClient.js at all (they have no Supabase queries to make), so
+// rendering cart line items there threw "escapeHtml is not defined" and
+// silently broke the cart drawer/page's item list. cartStore.js loads on
+// every one of the 8 pages, so it's the correct single home for this.
+if (typeof window.escapeHtml !== "function") {
+  window.escapeHtml = function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    }[char]));
+  };
+}
+
 window.CartStore = (function () {
   const STORAGE_KEY = "cart_items_v1";
 
@@ -85,13 +106,15 @@ window.CartStore = (function () {
             <p class="cart-line-name">${escapeHtml(item.name)}</p>
             <p class="cart-line-price">R${item.price.toFixed(2)}</p>
           </div>
-          <div class="cart-line-qty">
-            <button type="button" class="btn btn-secondary qty-decrement" aria-label="Decrease quantity for ${escapeHtml(item.name)}">-</button>
-            <span class="qty-value">${item.qty}</span>
-            <button type="button" class="btn btn-secondary qty-increment" aria-label="Increase quantity for ${escapeHtml(item.name)}">+</button>
+          <div class="cart-line-actions">
+            <div class="cart-line-qty">
+              <button type="button" class="btn btn-secondary qty-decrement" aria-label="Decrease quantity for ${escapeHtml(item.name)}">-</button>
+              <span class="qty-value">${item.qty}</span>
+              <button type="button" class="btn btn-secondary qty-increment" aria-label="Increase quantity for ${escapeHtml(item.name)}">+</button>
+            </div>
+            <p class="cart-line-subtotal">R${(item.price * item.qty).toFixed(2)}</p>
+            <button type="button" class="btn btn-secondary cart-line-remove" aria-label="Remove ${escapeHtml(item.name)} from cart">Remove</button>
           </div>
-          <p class="cart-line-subtotal">R${(item.price * item.qty).toFixed(2)}</p>
-          <button type="button" class="btn btn-secondary cart-line-remove" aria-label="Remove ${escapeHtml(item.name)} from cart">Remove</button>
         </div>
       `
       )

@@ -130,24 +130,8 @@ i{
    .sale-card-price also uses tokens.css defaults. */
 .sale-card-price { font-size: var(--text-price); font-weight: 700; }
 
-#carts-items.carts-active {
-    display: block;
-    position: absolute;
-    left: 57%;
-    color: black;
-    transform: translate(-10%, -25%);
-    height: 170vh;
-    width: 50vw;
-    top: 470px;
-    background-color: white;
-    box-shadow: 5px;
-    padding: 5%;
-}
-
-#carts-items{
-    display: none;
-}
-
+/* #carts-items geometry (backdrop + docked .cart-panel) now lives in
+   tokens.css as a shared dialog pattern. */
 h1{
     font-size: 60px;
     margin-left: 50px;

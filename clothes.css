@@ -85,24 +85,8 @@ h1{
     text-decoration-color: var(--color-accent);
 }
 
-#carts-items.carts-active {
-    display: block;
-    position: absolute;
-    left: 57%;
-    color: black;
-    transform: translate(-10%, -25%);
-    height: 170vh;
-    width: 50vw;
-    top: 449px;
-    background-color: white;
-    box-shadow: 5px;
-    padding: 0% 5% 5% 5%;
-}
-
-#carts-items{
-    display: none;
-}
-
+/* #carts-items geometry (backdrop + docked .cart-panel) now lives in
+   tokens.css as a shared dialog pattern. */
 
 .incart-item{
     display: flex;

@@ -85,51 +85,54 @@
                     <div class="right7"></div>
                 </div>
                 <div class="mycart" id="carts-items" role="dialog" aria-modal="true" aria-label="Shopping cart">
-                    <div class="top">
-                        <h1>cart</h1>
-                        <button class="close" onclick="openCart()" aria-label="Close cart">X</button>
-                    </div>
-                    <div data-cart-items></div>
-                    <div class="cart-total">
-                        <h1 class="total-head">Total:</h1>
-                        <span class="total" data-cart-total>R0.00</span>
+                    <div class="cart-panel">
+                        <div class="top">
+                            <h1>cart</h1>
+                            <button class="close" onclick="openCart()" aria-label="Close cart" type="button">X</button>
+                        </div>
+                        <div data-cart-items></div>
+                        <div class="cart-total">
+                            <h1 class="total-head">Total:</h1>
+                            <span class="total" data-cart-total>R0.00</span>
+                        </div>
                     </div>
                 </div>
                 <div id="modal" role="dialog" aria-modal="true" aria-label="Register">
-                    <button class="close" onclick="openModal()" aria-label="Close register form">X</button>
                     <form class="form" id="form" onsubmit="event.preventDefault(); registerUser()">
+                        <button class="close" onclick="openModal()" aria-label="Close register form" type="button">X</button>
                         <header>Register</header>
                         <div class="user-details">
                             <label for="name">Full Name</label>
-                            <input type="text" id="name" class="regi-name" placeholder="Your name">
+                            <input type="text" id="name" class="regi-name" placeholder="Your name" required>
                             <div class="line"></div>
                             <label for="username">Username</label>
-                            <input type="text" id="username" class="log-usernm" placeholder="Type your username">
+                            <input type="text" id="username" class="log-usernm" placeholder="Type your username" required>
                             <div class="line"></div>
                             <label for="password">Password</label>
-                            <input type="password" id="password" class="log-pass" placeholder="Type your password">
+                            <input type="password" id="password" class="log-pass" placeholder="Type your password" required>
                             <div class="line"></div>
                             <label for="email">Email</label>
-                            <input type="text" id="email" class="log-pass" placeholder="Email Address">
+                            <input type="email" id="email" class="log-pass" placeholder="Email Address" required>
                             <div class="line"></div>
-                            <button class="sign-up-btn" id="sign-up" type="submit">Submit</button>
-                            <div class="log">
-                                <li><a onclick="openLog()" class="register-link">Already a Registered User? Log in</a></li>                            
-                            </div>
-                        </div> 
+                            <button class="btn btn-primary sign-up-btn" id="sign-up" type="submit">Submit</button>
+                            <p class="log">
+                                <a href="#" onclick="event.preventDefault(); openLog()" class="register-link">Already a Registered User? Log in</a>
+                            </p>
+                        </div>
                     </form>
                 </div>
                 <div id="login" role="dialog" aria-modal="true" aria-label="Log in">
                     <form class="login-page" onsubmit="event.preventDefault(); logIn()">
+                        <button class="close" onclick="openLog()" aria-label="Close log in form" type="button">X</button>
                         <div class="login-con">
                             <h1>login</h1>
-                            <label for="email">Email</label>
-                            <input type="email" placeholder="Enter Email" id="logEmail" name="">
+                            <label for="logEmail">Email</label>
+                            <input type="email" placeholder="Enter Email" id="logEmail" name="" required>
                             <div class="line"></div>
-                            <label for="password">Password</label>
-                            <input type="password" placeholder="Enter Password" id="logPassword" name="">
+                            <label for="logPassword">Password</label>
+                            <input type="password" placeholder="Enter Password" id="logPassword" name="" required>
                             <div class="line"></div>
-                            <button type="submit" class="log-me-in">Log in</button>
+                            <button type="submit" class="btn btn-primary log-me-in">Log in</button>
                         </div>
                     </form>
                 </div>

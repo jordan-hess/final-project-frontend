@@ -174,10 +174,17 @@ h1, h2, .display-heading {
    cartStore.js's renderLineItems(). Without this, the .cart-line <img>
    renders at its natural pixel size (e.g. 1920x1080) and blows out the
    whole page layout. */
+/* Two-row layout (image+name+price on top, quantity/subtotal/remove below)
+   rather than one long single row — a single row can't fit in the 420px
+   cart drawer without overflowing (price/remove getting clipped past the
+   drawer's edge), and this same component renders on the full-width cart
+   page too, so one flex-wrap-based layout is used everywhere rather than
+   maintaining a second, wider variant just for that page. */
 .cart-line {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2) var(--space-3);
   padding: var(--space-3) 0;
   border-bottom: 1px solid var(--color-grey-200);
 }
@@ -188,13 +195,137 @@ h1, h2, .display-heading {
   border-radius: var(--radius-sm);
   flex-shrink: 0;
 }
-.cart-line-info { flex: 1; }
-.cart-line-name { font-weight: 600; margin: 0; }
+.cart-line-info { flex: 1 1 160px; min-width: 0; }
+.cart-line-name { font-weight: 600; margin: 0; overflow-wrap: break-word; }
 .cart-line-price { color: var(--color-grey-500); font-size: var(--text-label); margin: 0; }
-.cart-line-qty { display: flex; align-items: center; gap: var(--space-2); }
+.cart-line-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex: 1 1 100%;
+}
+.cart-line-qty { display: flex; align-items: center; gap: var(--space-1); }
+.cart-line-qty .btn {
+  width: 28px;
+  height: 28px;
+  min-width: 0;
+  padding: 0;
+  font-size: var(--text-label);
+}
 .qty-value { min-width: 1.5em; text-align: center; }
-.cart-line-subtotal { font-weight: 700; margin: 0 var(--space-2); }
+.cart-line-subtotal { font-weight: 700; margin: 0; white-space: nowrap; }
+.cart-line-remove {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-label);
+  margin-left: auto;
+}
 .cart-empty { padding: var(--space-4); color: var(--color-grey-500); }
+
+/* ---------------------------------------------------------------------
+   Dialogs: register modal (#modal), login modal (#login), and the cart
+   drawer (#carts-items). Previously each of the 5-6 pages that use these
+   duplicated a broken hack (position: absolute; top: 470px; height: 170vh;
+   transform: translate(-10%, -25%); box-shadow: 5px — an invalid shadow
+   value that renders as none) that didn't reliably center or contain the
+   dialog and produced a box ~1.7x the viewport's own height. Replaced with
+   one shared pattern: the outer element (already the dialog root in the
+   existing markup, toggled by Motion.toggleDialog) becomes a real
+   viewport-covering flex backdrop; a nested card (`.form`/`.login-page`
+   for the two modals, `.cart-panel` for the drawer) holds the actual
+   visual surface. Clicking the dim backdrop itself (not the card) closes
+   the dialog — see motion.js's bindBackdropClose. */
+#modal, #login, #carts-items {
+  display: none;
+}
+#modal.modal-active,
+#login.login-active,
+#carts-items.carts-active {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(10, 10, 10, 0.5);
+  overflow-y: auto;
+}
+#modal.modal-active,
+#login.login-active {
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+#carts-items.carts-active {
+  justify-content: flex-end;
+}
+#modal .form,
+#login .login-page {
+  position: relative;
+  width: min(420px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  background: var(--color-paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  padding: var(--space-5);
+}
+.cart-panel {
+  position: relative;
+  width: min(420px, 92vw);
+  height: 100%;
+  max-height: 100vh;
+  background: var(--color-paper);
+  box-shadow: var(--shadow-modal);
+  padding: var(--space-4);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+#modal .close,
+#login .close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+}
+#modal .close:hover,
+#login .close:hover {
+  background: var(--color-grey-100);
+}
+/* Each product page reuses the generic `.top` class name for both its own
+   hero header AND the cart drawer's header, and several pages give plain
+   `.top button` a large accent-colored size (sized for the hero's
+   cart/user icon buttons) that would otherwise leak onto the drawer's
+   close button too. Pin its appearance here so it's identical everywhere
+   regardless of that per-page rule's specificity/order. */
+.cart-panel .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+}
+.cart-panel .top h1 {
+  font-size: var(--text-h2);
+  margin: 0;
+}
+.cart-panel .top .close,
+.cart-panel .top button.close {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  margin: 0;
+  background: transparent;
+  color: var(--color-ink);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+}
+.cart-panel .top .close:hover {
+  background: var(--color-grey-100);
+}
 
 /* ---------------------------------------------------------------------
    Collapsible icon-rail sidebar

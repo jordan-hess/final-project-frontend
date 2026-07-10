@@ -271,39 +271,18 @@ i{
 
 
 
-#modal.modal-active {
-    display: block;
-    position: absolute;
-    left: 30%;
-    color: black;
-    transform: translate(-10%, -25%);
-    height: 170vh;
-    width: 80vw;
-    top: 470px;
-    background-color: white;
-    box-shadow: 5px;
-    padding: 5%;
-}
-
-#modal {
-    display: none;
-}
-
+/* #modal / #login geometry (backdrop + centered card) now lives in
+   tokens.css as a shared dialog pattern — see the "Dialogs" section
+   there. What remains here is this page's own form-field styling. */
 form{
     text-align: center;
-    justify-content: center;
-    width: 45vw;
-    height: 79vh;
-    background-color: white;
-    border-radius: 5%;
-    margin-left: 150px;
 }
 
 .line{
-    width: 20vw;
-    border: 1px solid gray;
+    width: 100%;
+    border: 1px solid var(--color-grey-300);
     align-self: center;
-    margin: 10px;
+    margin: var(--space-2) 0;
 }
 
 .user-details{
@@ -312,11 +291,19 @@ form{
 }
 
 input{
-    width: 20vw;
+    width: 100%;
     align-self: center;
     border: none;
+    border-bottom: 1px solid var(--color-grey-300);
     background: transparent;
-    font-size: 15px;
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    padding: var(--space-2) 0;
+    transition: border-color var(--duration-fast) var(--ease-standard);
+}
+input:focus-visible {
+    border-color: var(--color-ink);
+    outline: none;
 }
 
 input ::after{
@@ -324,7 +311,10 @@ input ::after{
 }
 
 .user-details label{
-    margin: 10px;
+    font-size: var(--text-label);
+    color: var(--color-grey-500);
+    text-align: left;
+    margin-top: var(--space-3);
 }
 
 .user {
@@ -338,8 +328,12 @@ input ::after{
 }
 
 header{
-    margin: 50px;
-    font-size: 25px;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    font-size: var(--text-h1);
+    margin-bottom: var(--space-4);
+    display: block;
 }
 
 .log a{
@@ -350,29 +344,21 @@ header{
     margin: 20px;
 }
 
+.sign-up-btn,
+.log-me-in {
+    width: 100%;
+    margin-top: var(--space-4);
+}
+
 .close{
-    background-color: white;
+    background-color: transparent;
     border: none;
+    font-size: var(--text-body);
+    cursor: pointer;
 }
 
-#carts-items.carts-active {
-    display: block;
-    position: absolute;
-    left: 57%;
-    color: black;
-    transform: translate(-10%, -25%);
-    height: 170vh;
-    width: 50vw;
-    top: 470px;
-    background-color: white;
-    box-shadow: 5px;
-    padding: 5%;
-}
-
-#carts-items{
-    display: none;
-}
-
+/* #carts-items geometry (backdrop + docked .cart-panel) now lives in
+   tokens.css as a shared dialog pattern. */
 .top{
     display: flex;
     flex-direction: row;
@@ -406,24 +392,6 @@ header{
 }
 
 
-#login.login-active {
-    display: block;
-    position: absolute;
-    left: 30%;
-    color: black;
-    transform: translate(-10%, -25%);
-    height: 170vh;
-    width: 80vw;
-    top: 470px;
-    background-color: white;
-    box-shadow: 5px;
-    padding: 5%;
-}
-
-#login {
-    display: none;
-}
-
 .register-link{
     text-decoration: underline;
 }
@@ -441,23 +409,25 @@ header{
 .login-con{
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .login-con h1{
-    padding-left: 260px;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: var(--text-h1);
+    margin-bottom: var(--space-3);
 }
 
 .login-con label{
-    margin: 30px;
+    font-size: var(--text-label);
+    color: var(--color-grey-500);
+    text-align: left;
+    margin-top: var(--space-3);
 }
 
 .login-con input{
-    width: 15vw;
-}
-
-.login-con line{
-    width: 20vw;
-    height: 1px;
+    width: 100%;
 }
 
 /* .site-header / .cart-badge moved to tokens.css (shared across all pages) */

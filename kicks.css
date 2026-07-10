@@ -155,23 +155,8 @@ h1{
     object-fit: cover;
 }
 
-#carts-items.carts-active {
-    display: block;
-    position: absolute;
-    left: 57%;
-    color: black;
-    transform: translate(-10%, -25%);
-    height: 170vh;
-    width: 40vw;
-    top: 470px;
-    background-color: white;
-    box-shadow: 5px;
-}
-
-#carts-items{
-    display: none;
-}
-
+/* #carts-items geometry (backdrop + docked .cart-panel) now lives in
+   tokens.css as a shared dialog pattern. */
 .top{
     display: flex;
 }
