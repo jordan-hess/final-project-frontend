@@ -76,12 +76,6 @@ i{
     object-fit: cover;
 }
 
-.cards-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--color-accent);
-}
-
 .cards-body{
     padding: 3%;
     width: 15vw;
@@ -157,21 +151,9 @@ h1{
     margin-left: 50px;
 }
 
-.card3-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--color-accent);
-}
-
 .card-4-body{
     padding: 3%;
     margin-left: 50px;
-}
-
-.card4-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--color-accent);
 }
 
 .card-4-body img{

@@ -52,7 +52,7 @@ const renderSale = (item) => {
                 <h2 class="cards-title">${escapeHtml(item.name)}</h2>
                 <h3 class="cards-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="cards-price">R${item.price}</h4>
-                <h5 class="cards-was-price">R${item.was_price}<h5>
+                <h5 class="card-was-price">R${item.was_price}</h5>
                 <button class="shop-sale btn btn-primary" value="${item.id}" onclick="addtoCartclick2(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -82,7 +82,7 @@ function secondSale(){
                 <h2 class="cards-title">${escapeHtml(item.name)}</h2>
                 <h3 class="cards-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="cards-price">R${item.price}</h4>
-                <h5 class="cards-was-price">R${item.was_price}<h5>
+                <h5 class="card-was-price">R${item.was_price}</h5>
                 <button class="shop-sale-btn btn btn-primary" value="${item.id}" onclick="addtoCartclick3(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -116,7 +116,7 @@ function thirdSale(){
                 <h2 class="cards3title">${escapeHtml(item.name)}</h2>
                 <h3 class="card3-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card3-price">R${item.price}</h4>
-                <h5 class="card3-was-price">R${item.was_price}<h5>
+                <h5 class="card-was-price">R${item.was_price}</h5>
                 <button class="shop-this-sale btn btn-primary" value="${item.id}" onclick="addtoCartclick4(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>
@@ -150,7 +150,7 @@ function fourthSale(){
                 <h2 class="cards4title">${escapeHtml(item.name)}</h2>
                 <h3 class="card4-desc">${escapeHtml(item.description)}</h3>
                 <h4 class="card4-price">R${item.price}</h4>
-                <h5 class="card4-was-price">R${item.was_price}<h5>
+                <h5 class="card-was-price">R${item.was_price}</h5>
                 <button class="last-saleBtn btn btn-primary" value="${item.id}" onclick="addtoCartclick5(event, ${item.id})" type="button">ADD TO CART</button>
             </div>
         </div>

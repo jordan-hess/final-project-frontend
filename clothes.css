@@ -79,12 +79,6 @@ h1{
     flex-wrap: wrap;
 }
 
-.cards-was-price{
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--color-accent);
-}
-
 /* #carts-items geometry (backdrop + docked .cart-panel) now lives in
    tokens.css as a shared dialog pattern. */
 
