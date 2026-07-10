@@ -126,8 +126,6 @@ i{
 .card-was-price {
   color: var(--color-accent);
   text-decoration: line-through;
-  text-decoration-thickness: 2px;
-  text-decoration-color: var(--color-accent);
   font-size: var(--text-label);
 }
 
