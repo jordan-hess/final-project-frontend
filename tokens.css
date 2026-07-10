@@ -75,6 +75,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Form controls don't inherit font-family from their ancestors by default in
+   any browser (even without a competing rule elsewhere), so bare <input>/
+   <button>/<select>/<textarea> render in the browser's UI font instead of
+   Inter unless every one of them is given an explicit font-family. Rather
+   than repeat that per element/per page, inherit it once here so every
+   control picks up whatever font its context provides. */
+button, input, select, textarea {
+  font-family: inherit;
+}
+
 h1, h2, .display-heading {
   font-family: var(--font-display);
   letter-spacing: 0.01em;
