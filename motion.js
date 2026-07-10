@@ -57,6 +57,94 @@ window.Motion = (function () {
     apply();
   }
 
+  // --- Dialog focus management -------------------------------------------
+  // aria-modal="true" implies Escape-to-close and a Tab focus trap. Every
+  // dialog on the site (register modal, login modal, cart drawer) opens
+  // and closes exclusively through toggleDialog(), so the trap lives here
+  // once instead of being duplicated per page/dialog.
+  //
+  // Dialogs can legitimately stack (the login modal is opened via a link
+  // that lives *inside* the register modal, so the register modal is still
+  // "active" underneath it). openDialogStack tracks that nesting so Escape
+  // and Tab only ever affect the topmost dialog — closing it reveals the
+  // one beneath with its own focus/trap still intact.
+  const FOCUSABLE_SELECTOR =
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  const openDialogStack = [];
+  let globalKeydownBound = false;
+
+  function getFocusableElements(el) {
+    const all = Array.from(el.querySelectorAll(FOCUSABLE_SELECTOR));
+    const visible = all.filter((node) => node.offsetParent !== null);
+    return visible.length ? visible : all;
+  }
+
+  // Prefer the dialog's own close/X button (the pattern used by every
+  // dialog that has one); fall back to the first focusable element for
+  // dialogs like #login that have no explicit close control.
+  function getInitialFocusTarget(el, focusables) {
+    const closeBtn = el.querySelector(".close");
+    if (closeBtn && focusables.includes(closeBtn)) return closeBtn;
+    return focusables[0] || null;
+  }
+
+  function ensureGlobalKeydownListener() {
+    if (globalKeydownBound) return;
+    globalKeydownBound = true;
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (!openDialogStack.length) return;
+        const top = openDialogStack[openDialogStack.length - 1];
+
+        if (event.key === "Escape") {
+          event.preventDefault();
+          top.close();
+          return;
+        }
+
+        if (event.key !== "Tab") return;
+        const focusables = getFocusableElements(top.el);
+        if (!focusables.length) {
+          event.preventDefault();
+          return;
+        }
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement;
+        if (event.shiftKey) {
+          if (active === first || !top.el.contains(active)) {
+            event.preventDefault();
+            last.focus();
+          }
+        } else if (active === last || !top.el.contains(active)) {
+          event.preventDefault();
+          first.focus();
+        }
+      },
+      true
+    );
+  }
+
+  function openDialogFocusTrap(el, close) {
+    ensureGlobalKeydownListener();
+    const previouslyFocused = document.activeElement;
+    openDialogStack.push({ el, close, previouslyFocused });
+
+    const focusables = getFocusableElements(el);
+    const target = getInitialFocusTarget(el, focusables);
+    if (target) target.focus();
+  }
+
+  function closeDialogFocusTrap(el) {
+    const index = openDialogStack.findIndex((entry) => entry.el === el);
+    if (index === -1) return;
+    const [entry] = openDialogStack.splice(index, 1);
+    if (entry.previouslyFocused && typeof entry.previouslyFocused.focus === "function") {
+      entry.previouslyFocused.focus();
+    }
+  }
+
   // Anime.js-driven open/close for modals and the cart drawer. `activeClass`
   // is whatever class the existing onclick handler already toggles (e.g.
   // "modal-active", "login-active", "carts-active") — this wraps that
@@ -65,6 +153,11 @@ window.Motion = (function () {
     if (!el) return;
     const opening = !el.classList.contains(activeClass);
     el.classList.toggle(activeClass, opening);
+    if (opening) {
+      openDialogFocusTrap(el, () => toggleDialog(el, activeClass));
+    } else {
+      closeDialogFocusTrap(el);
+    }
     if (prefersReducedMotion() || !window.anime) return;
     if (opening) {
       anime({ targets: el, opacity: [0, 1], scale: [0.96, 1], duration: 220, easing: "easeOutCubic" });
