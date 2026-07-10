@@ -231,9 +231,13 @@ i{
   box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
 }
+/* Matches the canonical .card .card-title size/weight in tokens.css
+   (--text-body, not --text-h3) now that h1 has its own distinct Bowlby One
+   SC treatment and h2 card titles step down to read as clearly subordinate. */
 .cards-title, .two-card-title, .three-card-title, .four-card-title,
 .five-card-title, .six-card-title, .sev-card-title {
-  font-size: var(--text-h3);
+  font-size: var(--text-body);
+  font-weight: 600;
 }
 .cards-price, .two-card-price, .three-card-price, .four-card-price,
 .five-card-price, .six-card-price, .sev-card-price {
@@ -244,6 +248,12 @@ i{
 .five-card-desc, .six-card-desc, .sev-card-desc {
   color: var(--color-grey-500);
   font-size: var(--text-label);
+}
+.cards-cat, .two-card-cat, .three-card-cat, .four-card-cat,
+.five-card-cat, .six-card-cat, .sev-card-cat {
+  color: var(--color-grey-500);
+  font-size: var(--text-label);
+  font-weight: 400;
 }
 
 .cards-body{
@@ -373,8 +383,12 @@ input ::after{
     border-radius: 50%;
 }
 
+/* The register modal's title markup uses <header> rather than <h1> (a
+   pre-existing markup quirk), but it plays the exact same "modal heading"
+   role as the login modal's <h1> below — kept on --font-heading so the two
+   sibling dialogs don't visually disagree (one Bowlby One SC, one Anton). */
 header{
-    font-family: var(--font-display);
+    font-family: var(--font-heading);
     text-transform: uppercase;
     letter-spacing: 0.01em;
     font-size: var(--text-h1);
@@ -459,7 +473,7 @@ header{
 }
 
 .login-con h1{
-    font-family: var(--font-display);
+    font-family: var(--font-heading);
     text-transform: uppercase;
     font-size: var(--text-h1);
     margin-bottom: var(--space-3);
