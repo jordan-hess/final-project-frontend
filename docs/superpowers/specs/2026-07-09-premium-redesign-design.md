@@ -37,6 +37,22 @@ never had one). If any of these turn out to be genuinely needed for a
 page to make sense, that's a separate follow-up conversation, not part
 of this pass.
 
+> **Update 2026-07-10:** The "no sidebar" line above was written when it
+> was true of the *intent* for this pass, but turned out not to describe
+> the actual rendered layout: the primary nav's underlying CSS
+> (`.navbar { width: 20vw; height: 100%; position: fixed; }`, unchanged
+> since before this redesign started) has always rendered as a fixed,
+> full-height, ~20vw-wide vertical column — i.e., a sidebar in
+> everything but name. Given that reality, the "no sidebar" decision was
+> deliberately reversed per explicit user request: convert that
+> already-sidebar-shaped nav into an intentional, well-designed
+> collapsible/hover-reveal icon-rail sidebar (Linear/Vercel/Stripe-style,
+> with a click/tap toggle for touch and keyboard users, not hover-only)
+> rather than leaving it as an accidental, unstyled artifact. See the
+> sidebar work applied across all 8 pages via the shared `motion.js`
+> helper and `tokens.css`, delivered alongside a broader visual/UX
+> elevation pass on the same date.
+
 ## Design tokens
 
 Defined once as CSS custom properties in `styles.css` (loaded on every

@@ -166,5 +166,101 @@ window.Motion = (function () {
     }
   }
 
-  return { prefersReducedMotion, bindButtonFeedback, revealOnScroll, animateHeaderShadow, toggleDialog };
+  // --- Collapsible icon-rail sidebar --------------------------------------
+  // Pinned state is persisted in localStorage and re-applied synchronously
+  // by a tiny inline script at the top of <body> on every page (before this
+  // file even loads) so there's no flash of the wrong state. This module
+  // owns the *interactive* half: the toggle button's click handler and
+  // syncing its aria-expanded/label, marking the current page's nav link,
+  // and collapsing the pinned rail on outside-click for small screens
+  // (where a permanently-docked 240px rail would crowd out the page).
+  const SIDEBAR_STORAGE_KEY = "sidebarPinned";
+  const MOBILE_BREAKPOINT = 640;
+
+  function isSidebarPinned() {
+    return document.documentElement.classList.contains("sidebar-pinned");
+  }
+
+  function syncSidebarToggleButtons() {
+    const pinned = isSidebarPinned();
+    document.querySelectorAll(".sidebar-toggle").forEach((btn) => {
+      btn.setAttribute("aria-expanded", String(pinned));
+      btn.setAttribute("aria-label", pinned ? "Collapse navigation" : "Expand navigation");
+    });
+  }
+
+  function setSidebarPinned(pinned) {
+    document.documentElement.classList.toggle("sidebar-pinned", pinned);
+    try {
+      localStorage.setItem(SIDEBAR_STORAGE_KEY, String(pinned));
+    } catch (e) {
+      /* localStorage unavailable (private mode, etc.) — state just won't persist */
+    }
+    syncSidebarToggleButtons();
+  }
+
+  // Called from the toggle button's onclick attribute, matching the same
+  // onclick-driven pattern used by openCart()/openModal()/openLog() elsewhere.
+  //
+  // `event` is passed so that, when the user un-pins, we can blur the toggle
+  // button itself. Without this the button (which lives inside .site-header)
+  // keeps :focus-within true after the click that un-pinned it, so the CSS
+  // hover/focus "peek" rule keeps the rail visually expanded — collapsing
+  // only once focus/hover moves elsewhere. That reads as "the collapse
+  // button doesn't work." Blurring on un-pin makes the collapse immediate,
+  // matching the explicit, deliberate nature of the pin toggle (as opposed
+  // to the incidental hover/tab-through peek, which is left untouched).
+  function toggleSidebarPin(event) {
+    const pinned = !isSidebarPinned();
+    setSidebarPinned(pinned);
+    if (!pinned && event && event.currentTarget && typeof event.currentTarget.blur === "function") {
+      event.currentTarget.blur();
+    }
+  }
+
+  function markActiveNavLink() {
+    const current = location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll(".navbar li a[href]").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href === current) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  // On phones, a pinned/docked rail reflows `.sep` down to a sliver, so
+  // pinning there is treated as a transient overlay: tapping anywhere
+  // outside the rail (or its toggle) closes it again.
+  function bindSidebarOutsideClose() {
+    document.addEventListener("click", (event) => {
+      if (window.innerWidth > MOBILE_BREAKPOINT) return;
+      if (!isSidebarPinned()) return;
+      const header = document.querySelector(".site-header");
+      if (!header) return;
+      if (header.contains(event.target)) return;
+      setSidebarPinned(false);
+    });
+  }
+
+  function initSidebar() {
+    syncSidebarToggleButtons();
+    markActiveNavLink();
+    bindSidebarOutsideClose();
+  }
+
+  if (typeof document !== "undefined" && document.addEventListener) {
+    document.addEventListener("DOMContentLoaded", initSidebar);
+  }
+
+  return {
+    prefersReducedMotion,
+    bindButtonFeedback,
+    revealOnScroll,
+    animateHeaderShadow,
+    toggleDialog,
+    toggleSidebarPin,
+    initSidebar,
+  };
 })();

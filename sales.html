@@ -15,33 +15,35 @@
     <title>Sale</title>
 </head>
 <body>
+    <script>document.documentElement.classList.toggle('sidebar-pinned', localStorage.getItem('sidebarPinned') === 'true');</script>
     <div class="divid">
-        <nav class="site-header" aria-label="Primary">
+        <nav class="site-header" aria-label="Primary" id="primary-nav">
+            <button type="button" class="sidebar-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Expand navigation" onclick="Motion.toggleSidebarPin(event)"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
             <ul class="navbar">
                 <img src="logo.png" alt="Store logo">
                 <li>
-                    <i class="fas fa-home"></i><a href="index.html" class="navbar-home">HOME</a>
+                    <a href="index.html" class="navbar-home"><i class="fas fa-home" aria-hidden="true"></i><span class="nav-label">Home</span></a>
                 </li>
                 <li>
-                    <i class="fas fa-percentage"></i><a href="sales.html" class="navbar-about">SALE</a>
+                    <a href="sales.html" class="navbar-about"><i class="fas fa-percentage" aria-hidden="true"></i><span class="nav-label">Sale</span></a>
                 </li>
                 <li>
-                    <i class="fas fa-tag"></i><a href="brand.html" class="navbar-home">BRANDS</a>
+                    <a href="brand.html" class="navbar-home"><i class="fas fa-tag" aria-hidden="true"></i><span class="nav-label">Brands</span></a>
                 </li>
                 <li>
-                    <i class="fab fa-redhat"></i><a href="access.html" class="navbar-about">ACCESSORIES</a>
+                    <a href="access.html" class="navbar-about"><i class="fab fa-redhat" aria-hidden="true"></i><span class="nav-label">Accessories</span></a>
                 </li>
                 <li>
-                    <i class="fas fa-shoe-prints"></i><a href="kicks.html" class="navbar-home">FOOTWEAR</a>
+                    <a href="kicks.html" class="navbar-home"><i class="fas fa-shoe-prints" aria-hidden="true"></i><span class="nav-label">Footwear</span></a>
                 </li>
                 <li>
-                    <i class="fas fa-tshirt"></i><a href="clothes.html" class="navbar-about">APPAREL</a>
+                    <a href="clothes.html" class="navbar-about"><i class="fas fa-tshirt" aria-hidden="true"></i><span class="nav-label">Apparel</span></a>
                 </li>
                 <li>
-                    <i class="fas fa-phone"></i><a href="contact.html" class="navbar-about">CONTACT</a>
+                    <a href="contact.html" class="navbar-about"><i class="fas fa-phone" aria-hidden="true"></i><span class="nav-label">Contact</span></a>
                 </li>
                 <li>
-                    <i class="fas fa-shopping-cart"></i><a href="cart.html" class="navbar-cart">CART <span class="cart-badge" aria-label="Items in cart">0</span></a>
+                    <a href="cart.html" class="navbar-cart"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="nav-label">Cart</span><span class="cart-badge" aria-label="Items in cart">0</span></a>
                 </li>
             </ul>
         </nav>

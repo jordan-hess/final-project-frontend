@@ -196,15 +196,184 @@ h1, h2, .display-heading {
 .cart-line-subtotal { font-weight: 700; margin: 0 var(--space-2); }
 .cart-empty { padding: var(--space-4); color: var(--color-grey-500); }
 
-/* Shared sticky header + cart badge — used by every page's header. */
+/* ---------------------------------------------------------------------
+   Collapsible icon-rail sidebar
+   -----------------------------------------------------------------------
+   The primary nav's underlying box model (`.navbar`: width 20vw, height
+   100%, position fixed — defined per-page, see e.g. styles.css) has
+   always rendered as a fixed full-height vertical column, i.e. a sidebar
+   in everything but name. This turns that into an intentional,
+   Linear/Vercel/Stripe-style collapsible rail:
+   - Collapsed by default (icon-only, --sidebar-w-collapsed wide).
+   - Hovering or keyboard-focusing into it (pointer:fine devices only)
+     temporarily overlays the expanded width — this does NOT reflow
+     `.sep` (main content), since the rail is `position: fixed` and out
+     of flow already; it just overlays with a shadow, like a peek/preview.
+   - A real <button class="sidebar-toggle"> pins it open persistently
+     (works via click/tap on touch devices and via Enter/Space on
+     keyboard, independent of hover) — pinned state is stored in
+     localStorage and re-applied on every page via a tiny inline
+     anti-flash script at the top of <body>, and DOES reflow `.sep` so
+     the docked rail has room instead of overlaying content.
+   - See motion.js `toggleSidebarPin`/`initSidebar` for the JS half. */
+:root {
+  --sidebar-w-collapsed: 72px;
+  --sidebar-w-expanded: 240px;
+}
+
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-w-collapsed);
+  height: 100vh;
   background: var(--color-paper);
-  transition: box-shadow var(--duration-base) var(--ease-standard);
+  border-right: 1px solid var(--color-grey-200);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
 }
 .site-header.is-scrolled { box-shadow: var(--shadow-rest); }
+
+@media (hover: hover) and (pointer: fine) {
+  html:not(.sidebar-pinned) .site-header:hover,
+  html:not(.sidebar-pinned) .site-header:focus-within {
+    width: var(--sidebar-w-expanded);
+    box-shadow: var(--shadow-hover);
+  }
+}
+html.sidebar-pinned .site-header {
+  width: var(--sidebar-w-expanded);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Toggle/pin button — always visible, always operable by click/tap/keyboard
+   regardless of hover support, per the "not hover-only" requirement. */
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  margin: var(--space-2) auto var(--space-1);
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+.sidebar-toggle:hover { background: var(--color-grey-100); }
+.sidebar-toggle i {
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+html.sidebar-pinned .sidebar-toggle i { transform: rotate(180deg); }
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: var(--space-2) 0 var(--space-4);
+  background: transparent;
+  position: static;
+  list-style: none;
+}
+.navbar img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  padding: 0;
+  background: transparent;
+  margin: var(--space-2) auto var(--space-4);
+  flex-shrink: 0;
+}
+.navbar li {
+  padding: 0;
+  list-style: none;
+}
+.navbar li a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 2px var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--color-ink);
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+.navbar li a:hover,
+.navbar li a:focus-visible {
+  background: var(--color-grey-100);
+}
+.navbar li a[aria-current="page"] {
+  background: var(--color-grey-100);
+  font-weight: 700;
+}
+.navbar i {
+  flex-shrink: 0;
+  width: 20px;
+  margin: 0;
+  font-size: 18px;
+  text-align: center;
+}
+.nav-label {
+  display: inline-block;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transition: opacity var(--duration-fast) var(--ease-standard),
+              max-width var(--duration-base) var(--ease-standard);
+}
+html.sidebar-pinned .nav-label,
+.site-header:hover .nav-label,
+.site-header:focus-within .nav-label {
+  opacity: 1;
+  max-width: 160px;
+}
+/* Cart badge lives inside the rail's cart link and must stay visible even
+   collapsed (it's the one bit of nav-label-hidden content users still need
+   at a glance), so it's excluded from the .nav-label collapse above. */
+.navbar .navbar-cart .cart-badge {
+  position: absolute;
+  top: 4px;
+  left: 30px;
+  margin-left: 0;
+}
+html.sidebar-pinned .navbar .navbar-cart .cart-badge,
+.site-header:hover .navbar .navbar-cart .cart-badge,
+.site-header:focus-within .navbar .navbar-cart .cart-badge {
+  position: static;
+  margin-left: var(--space-1);
+}
+
+/* Main content never gets crushed by a docked/pinned rail on small
+   screens — keep it an overlay there instead of reflowing. */
+@media (max-width: 640px) {
+  html.sidebar-pinned .site-header { width: min(var(--sidebar-w-expanded), 82vw); }
+  html.sidebar-pinned .sep {
+    margin-left: var(--sidebar-w-collapsed) !important;
+    width: calc(100% - var(--sidebar-w-collapsed)) !important;
+  }
+}
+
+/* Pinning docks the rail open (reflows `.sep`); hover/focus alone only
+   overlays it (each page's own CSS sets `.sep`'s base/collapsed offset —
+   see styles.css/access.css/etc. — this just raises it when pinned). */
+html.sidebar-pinned .sep {
+  margin-left: var(--sidebar-w-expanded);
+  width: calc(100% - var(--sidebar-w-expanded));
+}
+
 .cart-badge {
   display: inline-flex;
   align-items: center;
