@@ -32,6 +32,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_trending', 
         `;
     });
     trendingKicks.innerHTML = output;
+    Motion.revealOnScroll(".trend .card");
 }
 
 
@@ -63,6 +64,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('id')
         `;
     });
     threeKicks.innerHTML = output;
+    Motion.revealOnScroll(".three-kicks .card-3");
 }
 
 // to view products
@@ -92,6 +94,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('id', { asce
         `;
     });
     twoKicks.innerHTML = output;
+    Motion.revealOnScroll(".two-kicks .card-2");
 }
 
 
@@ -123,6 +126,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').order('price')
         `;
     });
     oneKick.innerHTML = output;
+    Motion.revealOnScroll(".one-kick .card-1");
 }
 
 
@@ -156,6 +160,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
         `;
     });
     saleKicks.innerHTML = output;
+    Motion.revealOnScroll(".onsale-kick .sale-card");
 }
 
 
@@ -190,6 +195,7 @@ supabase.from('products').select('*').eq('category', 'Shoes').eq('is_on_sale', t
         `;
     });
     salesKicks.innerHTML = output;
+    Motion.revealOnScroll(".sale-kick .sale-card");
 }
 
 //   function to open Cart
@@ -377,4 +383,3 @@ function addSaleToCart2(salesImg, salesName, salesPrice, salesId, e) {
 
 Motion.animateHeaderShadow(".site-header");
 Motion.bindButtonFeedback();
-Motion.revealOnScroll(".trend .card, .three-kicks .card-3, .two-kicks .card-2, .one-kick .card-1, .onsale-kick .sale-card, .sale-kick .sale-card");

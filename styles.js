@@ -38,6 +38,7 @@ const renderProduct = (item) => {
         `;
     });
     productList.innerHTML = output;
+    Motion.revealOnScroll(".products .card");
 }
 
 // following functions show trending products one at a time
@@ -68,6 +69,7 @@ items.forEach(items => {
     `;
 });
 oneProduct.innerHTML = output;
+Motion.revealOnScroll(".one-card");
 }
 }
 viewFirst()
@@ -98,6 +100,7 @@ function addSecond(){
         `;
     });
     allTrends.innerHTML = output;
+    Motion.revealOnScroll(".two-card");
 }
 
 }
@@ -130,6 +133,7 @@ function addThird(){
         `;
     });
     thirdTrend.innerHTML = output;
+    Motion.revealOnScroll(".three-card");
 }
 }
 addThird()
@@ -161,6 +165,7 @@ function addFourth(){
         `;
     });
     forthTrend.innerHTML = output;
+    Motion.revealOnScroll(".four-card");
 }
 }
 addFourth()
@@ -191,6 +196,7 @@ function addFifth(){
         `;
     });
     fifthTrend.innerHTML = output;
+    Motion.revealOnScroll(".five-card");
 }
 }
 addFifth()
@@ -221,6 +227,7 @@ function addSix(){
         `;
     });
     sixTrend.innerHTML = output;
+    Motion.revealOnScroll(".six-card");
 }
 }
 addSix()
@@ -251,6 +258,7 @@ function addSev(){
         `;
     });
     sevTrend.innerHTML = output;
+    Motion.revealOnScroll(".sev-card");
 }
 }
 addSev()
@@ -345,52 +353,18 @@ function addTrendCartclick(event, trendId) {
     var trendName = shopTrend.getElementsByClassName('cards-title')[0].innerText
     var trendPrice = shopTrend.getElementsByClassName('cards-price')[0].innerText
     var trendImg = shopTrend.getElementsByClassName('cards-pic')[0].src
-    document.getElementsByTagName('span')[0].innerText = trendPrice
 
     let card = [trendImg, trendName, trendPrice ]
     console.log(card);
-    addTrendToCart( trendImg, trendName, trendPrice ,trendId)
+    addTrendToCart( trendImg, trendName, trendPrice ,trendId, button2)
 }
 
 
-function addTrendToCart(trendImg, trendName, trendPrice ,trendId) {
-    let cart = [];
-    let cartPage = document.querySelector(".cart-trend")
-    let trendCartBtn = document.querySelector('.shop-trend.btn')
-
-    let items = {
-        "name": trendName,
-        "price": trendPrice,
-        "img": trendImg,
-        "theId": trendId,
-        };
-    let itemId = items["theId"]
-    console.log(itemId)
-
-    if (trendId == itemId){
-        cart.push(itemId)
-        cart.forEach(() => {
-        trendCartBtn.innerHTML = "";
-        trendCartBtn.disabled = true;
-        trendCartBtn.innerHTML += "In cart already";
-        console.log(trendCartBtn);
-
-    },
-        cartPage.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${trendId}<p>
-                <img src="${trendImg}" class="card-pic"/>
-                <h2 class="cards-title">${trendName}</h2>
-                <h3 class="cards-price">${trendPrice}</h3>
-                <input class="qty-input btn" type="number" value="1">
-                <button id="remove-btn" onclick="removeBtn()" type="button">-</button>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addTrendToCart(trendImg, trendName, trendPrice, trendId, e) {
+    CartStore.addItem({ id: trendId, name: trendName, price: trendPrice, image: trendImg });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast(trendName + " added to cart");
 }
 
 // second trend
@@ -414,47 +388,15 @@ function addTrendCartclick2(event, trendsId) {
 
     let trendCard = [trendsImg, trendsName, trendsPrice ]
     console.log(trendCard);
-    addTrendToCart2( trendsImg, trendsName, trendsPrice ,trendsId)
+    addTrendToCart2( trendsImg, trendsName, trendsPrice ,trendsId, button2)
 }
 
 
-function addTrendToCart2(trendsImg, trendsName, trendsPrice ,trendsId) {
-    let cart = [];
-    let trendPage = document.querySelector(".cart-trend")
-    let trendCartBtn2 = document.querySelector('.shop-trends.btnTwo')
-    console.log(trendCartBtn2);
-
-    let items = {
-        "name": trendsName,
-        "price": trendsPrice,
-        "img": trendsImg,
-        "theId": trendsId,
-        };
-    let itemsId = items["theId"]
-    console.log(itemsId)
-
-    if (trendsId == itemsId){
-        cart.push(itemsId)
-        cart.forEach(() => {
-        trendCartBtn2.innerHTML = "";
-        trendCartBtn2.disabled = true;
-        trendCartBtn2.innerHTML += "In cart already";
-        console.log(trendCartBtn2);
-
-    },
-        trendPage.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${trendsId}<p>
-                <img src="${trendsImg}" class="two-card-pic"/>
-                <h2 class="two-card-title">${trendsName}</h2>
-                <h3 class="two-card-desc">${trendsPrice}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addTrendToCart2(trendsImg, trendsName, trendsPrice, trendsId, e) {
+    CartStore.addItem({ id: trendsId, name: trendsName, price: trendsPrice, image: trendsImg });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast(trendsName + " added to cart");
 }
 
 // third trend
@@ -478,47 +420,15 @@ function addTrendCartclick3(event, trendingId) {
 
     let trenCard = [trendingId, trendingImg, trendingPrice, trendingName ]
     console.log(trenCard);
-    addTrendToCart3( trendingId, trendingImg, trendingPrice, trendingName)
+    addTrendToCart3( trendingId, trendingImg, trendingPrice, trendingName, button3)
 }
 
 
-function addTrendToCart3(trendingId, trendingImg, trendingPrice, trendingName) {
-    let cart = [];
-    let trendingPage = document.querySelector(".cart-trend")
-    let trendCartBtn3 = document.querySelector('.shop-this-item.btn')
-    console.log(trendCartBtn3);
-
-    let items = {
-        "name": trendingName,
-        "price":trendingPrice,
-        "img":  trendingImg,
-        "theId": trendingId,
-        };
-    let iteId = items["theId"]
-    console.log(iteId)
-
-    if (trendingId == iteId){
-        cart.push(iteId)
-        cart.forEach(() => {
-        trendCartBtn3.innerHTML = "";
-        trendCartBtn3.disabled = true;
-        trendCartBtn3.innerHTML += "In cart already";
-        console.log(trendCartBtn3);
-
-    },
-        trendingPage.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${trendingId}<p>
-                <img src="${trendingImg}" class="two-card-pic"/>
-                <h2 class="two-card-title">${trendingName}</h2>
-                <h3 class="two-card-desc">${trendingPrice}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addTrendToCart3(trendingId, trendingImg, trendingPrice, trendingName, e) {
+    CartStore.addItem({ id: trendingId, name: trendingName, price: trendingPrice, image: trendingImg });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast(trendingName + " added to cart");
 }
 
 
@@ -543,47 +453,15 @@ function addTrendCartclick4(event, trend4Id) {
 
     let trend4Card = [trend4Id, trend4Img, trend4Price, trend4Name ]
     console.log(trend4Card);
-    addTrendToCart4( trend4Id, trend4Img, trend4Price, trend4Name)
+    addTrendToCart4( trend4Id, trend4Img, trend4Price, trend4Name, button4)
 }
 
 
-function addTrendToCart4(trend4Id, trend4Img, trend4Price, trend4Name) {
-    let cart = [];
-    let trend4Page = document.querySelector(".cart-trend")
-    let trendCartBtn4 = document.querySelector('.shop-by-pressing.btn')
-    console.log(trendCartBtn4);
-
-    let items = {
-        "name": trend4Name,
-        "price":trend4Price,
-        "img":  trend4Img,
-        "theId": trend4Id,
-        };
-    let itId = items["theId"]
-    console.log(itId)
-
-    if (trend4Id == itId){
-        cart.push(itId)
-        cart.forEach(() => {
-        trendCartBtn4.innerHTML = "";
-        trendCartBtn4.disabled = true;
-        trendCartBtn4.innerHTML += "In cart already";
-        console.log(trendCartBtn4);
-
-    },
-        trend4Page.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${trend4Id}<p>
-                <img src="${trend4Img}" class="two-card-pic"/>
-                <h2 class="two-card-title">${trend4Name}</h2>
-                <h3 class="two-card-desc">${trend4Price}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addTrendToCart4(trend4Id, trend4Img, trend4Price, trend4Name, e) {
+    CartStore.addItem({ id: trend4Id, name: trend4Name, price: trend4Price, image: trend4Img });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast(trend4Name + " added to cart");
 }
 
 // fifth trend
@@ -607,47 +485,15 @@ function addTrendCartclick5(event, trend5Id) {
 
     let trend5Card = [trend5Id, trend5Img, trend5Price, trend5Name ]
     console.log(trend5Card);
-    addTrendToCart5( trend5Id, trend5Img, trend5Price, trend5Name)
+    addTrendToCart5( trend5Id, trend5Img, trend5Price, trend5Name, button5)
 }
 
 
-function addTrendToCart5(trend5Id, trend5Img, trend5Price, trend5Name) {
-    let cart = [];
-    let trend5Page = document.querySelector(".cart-trend")
-    let trendCartBtn5 = document.querySelector('.press-it-buy-it.btn')
-    console.log(trendCartBtn5);
-
-    let items = {
-        "name": trend5Name,
-        "price":trend5Price,
-        "img":  trend5Img,
-        "theId": trend5Id,
-        };
-    let idkId = items["theId"]
-    console.log(idkId)
-
-    if (trend5Id == idkId){
-        cart.push(idkId)
-        cart.forEach(() => {
-        trendCartBtn5.innerHTML = "";
-        trendCartBtn5.disabled = true;
-        trendCartBtn5.innerHTML += "In cart already";
-        console.log(trendCartBtn5);
-
-    },
-        trend5Page.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${trend5Id}<p>
-                <img src="${trend5Img}" class="two-card-pic"/>
-                <h2 class="two-card-title">${trend5Name}</h2>
-                <h3 class="two-card-desc">${trend5Price}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addTrendToCart5(trend5Id, trend5Img, trend5Price, trend5Name, e) {
+    CartStore.addItem({ id: trend5Id, name: trend5Name, price: trend5Price, image: trend5Img });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast(trend5Name + " added to cart");
 }
 
 // sixth trend
@@ -671,47 +517,15 @@ function addTrendCartclick6(event, trend6Id) {
 
     let trend6Card = [trend6Id, trend6Img, trend6Price, trend6Name ]
     console.log(trend6Card);
-    addTrendToCart6( trend6Id, trend6Img, trend6Price, trend6Name)
+    addTrendToCart6( trend6Id, trend6Img, trend6Price, trend6Name, button6)
 }
 
 
-function addTrendToCart6(trend6Id, trend6Img, trend6Price, trend6Name) {
-    let cart = [];
-    let trend6Page = document.querySelector(".cart-trend")
-    let trendCartBtn6 = document.querySelector('.press-to-buy.shopBtn')
-    console.log(trendCartBtn6);
-
-    let items = {
-        "name": trend6Name,
-        "price":trend6Price,
-        "img":  trend6Img,
-        "theId": trend6Id,
-        };
-    let idkeId = items["theId"]
-    console.log(idkeId)
-
-    if (trend6Id == idkeId){
-        cart.push(idkeId)
-        cart.forEach(() => {
-        trendCartBtn6.innerHTML = "";
-        trendCartBtn6.disabled = true;
-        trendCartBtn6.innerHTML += "In cart already";
-        console.log(trendCartBtn6);
-
-    },
-        trend6Page.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${trend6Id}<p>
-                <img src="${trend6Img}" class="two-card-pic"/>
-                <h2 class="two-card-title">${trend6Name}</h2>
-                <h3 class="two-card-desc">${trend6Price}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addTrendToCart6(trend6Id, trend6Img, trend6Price, trend6Name, e) {
+    CartStore.addItem({ id: trend6Id, name: trend6Name, price: trend6Price, image: trend6Img });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast(trend6Name + " added to cart");
 }
 
 // seventh trend
@@ -734,47 +548,15 @@ function addTrendCartclick7(event, trend7Id) {
 
     let trend7Card = [trend7Id, trend7Img, trend7Price, trend7Name ]
     console.log(trend7Card);
-    addTrendToCart7( trend7Id, trend7Img, trend7Price, trend7Name)
+    addTrendToCart7( trend7Id, trend7Img, trend7Price, trend7Name, button7)
 }
 
 
-function addTrendToCart7(trend7Id, trend7Img, trend7Price, trend7Name) {
-    let cart = [];
-    let trend7Page = document.querySelector(".cart-trend")
-    let trendCartBtn7 = document.querySelector('.shop-it-buy.btn')
-    console.log(trendCartBtn7);
-
-    let items = {
-        "name": trend7Name,
-        "price":trend7Price,
-        "img":  trend7Img,
-        "theId": trend7Id,
-        };
-    let idkenId = items["theId"]
-    console.log(idkenId)
-
-    if (trend7Id == idkenId){
-        cart.push(idkenId)
-        cart.forEach(() => {
-        trendCartBtn7.innerHTML = "";
-        trendCartBtn7.disabled = true;
-        trendCartBtn7.innerHTML += "In cart already";
-        console.log(trendCartBtn7);
-
-    },
-        trend7Page.innerHTML +=`
-        <div class="card">
-            <div class="incart-item">
-                <p style="display: none" class="id">${trend7Id}<p>
-                <img src="${trend7Img}" class="two-card-pic"/>
-                <h2 class="two-card-title">${trend7Name}</h2>
-                <h3 class="two-card-desc">${trend7Price}</h3>
-            </div>
-        </div>
-        `)
-        console.log(cart)
-    }
-
+function addTrendToCart7(trend7Id, trend7Img, trend7Price, trend7Name, e) {
+    CartStore.addItem({ id: trend7Id, name: trend7Name, price: trend7Price, image: trend7Img });
+    e.innerHTML = "In Cart Already";
+    e.disabled = true;
+    showToast(trend7Name + " added to cart");
 }
 
 function removeBtn(){
@@ -885,4 +667,3 @@ showDeatails();
 
 Motion.animateHeaderShadow(".site-header");
 Motion.bindButtonFeedback();
-Motion.revealOnScroll(".products .card, .one-card, .two-card, .three-card, .four-card, .five-card, .six-card, .sev-card");

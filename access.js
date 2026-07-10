@@ -31,6 +31,7 @@ const renderProduct = (item) => {
         `;
     });
     accessoriList.innerHTML = output;
+    Motion.revealOnScroll(".ass .card");
 }
 
 
@@ -58,6 +59,7 @@ const renderSale = (item) => {
         `;
     });
     saleList.innerHTML = output;
+    Motion.revealOnScroll(".onsale .card");
 }
 
 
@@ -87,6 +89,7 @@ function secondSale(){
         `;
     });
     secondassSale.innerHTML = output;
+    Motion.revealOnScroll(".for-sale .card-ass");
 }
 }
 
@@ -120,6 +123,7 @@ function thirdSale(){
         `;
     });
     tHirdSale.innerHTML = output;
+    Motion.revealOnScroll(".three .card-3");
 }
 }
 
@@ -153,6 +157,7 @@ function fourthSale(){
         `;
     });
     fourSale.innerHTML = output;
+    Motion.revealOnScroll(".four .card-4");
 }
 }
 
@@ -322,4 +327,3 @@ function openCart() {
 
 Motion.animateHeaderShadow(".site-header");
 Motion.bindButtonFeedback();
-Motion.revealOnScroll(".ass .card, .onsale .card, .for-sale .card-ass, .three .card-3, .four .card-4");

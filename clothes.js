@@ -38,6 +38,7 @@ function seeSale(){
         `;
     });
     forSale.innerHTML = output;
+    Motion.revealOnScroll(".new .card");
 }
 }
 
@@ -70,6 +71,7 @@ function seeSale2(){
         `;
     });
     forSale2.innerHTML = output;
+    Motion.revealOnScroll(".new2 .card");
 }
 }
 
@@ -101,6 +103,7 @@ function firstSale(){
         `;
     });
     saleOne.innerHTML = output;
+    Motion.revealOnScroll(".sale1 .card");
 }
 }
 firstSale()
@@ -130,6 +133,7 @@ function secondSale(){
         `;
     });
     saleTwo.innerHTML = output;
+    Motion.revealOnScroll(".sale2 .card");
 }
 }
 secondSale()
@@ -159,6 +163,7 @@ function thirdSale(){
         `;
     });
     saleThree.innerHTML = output;
+    Motion.revealOnScroll(".sale3 .card");
 }
 }
 thirdSale()
@@ -188,6 +193,7 @@ function fourthSale(){
         `;
     });
     saleFour.innerHTML = output;
+    Motion.revealOnScroll(".sale4 .card");
 }
 }
 fourthSale()
@@ -217,6 +223,7 @@ function fifthSale(){
         `;
     });
     saleFive.innerHTML = output;
+    Motion.revealOnScroll(".sale5 .card");
 }
 }
 fifthSale()
@@ -246,6 +253,7 @@ function sixthSale(){
         `;
     });
     saleSix.innerHTML = output;
+    Motion.revealOnScroll(".sale6 .card");
 }
 }
 sixthSale()
@@ -275,6 +283,7 @@ function sevenSale(){
         `;
     });
     saleSeven.innerHTML = output;
+    Motion.revealOnScroll(".sale7 .card");
 }
 }
 sevenSale()
@@ -304,6 +313,7 @@ function eighthSale(){
         `;
     });
     saleEight.innerHTML = output;
+    Motion.revealOnScroll(".sale8 .card");
 }
 }
 eighthSale()
@@ -333,6 +343,7 @@ function lastSale(){
         `;
     });
     saleNine.innerHTML = output;
+    Motion.revealOnScroll(".sale9 .card");
 }
 }
 lastSale()
@@ -457,4 +468,3 @@ function whenOpen(){
 
 Motion.animateHeaderShadow(".site-header");
 Motion.bindButtonFeedback();
-Motion.revealOnScroll(".new .card, .new2 .card, .sale-con .card");

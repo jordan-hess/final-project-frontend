@@ -37,6 +37,7 @@ function onSale(){
     });
 
     saleProducts.innerHTML = output;
+    Motion.revealOnScroll(".sale-products .sale-card");
 }
 }
 onSale()
@@ -111,4 +112,3 @@ function addItemToCart(title, price, imageScr, cartItemId, e) {
 
 Motion.animateHeaderShadow(".site-header");
 Motion.bindButtonFeedback();
-Motion.revealOnScroll(".sale-products .sale-card");

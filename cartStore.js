@@ -80,18 +80,18 @@ window.CartStore = (function () {
       .map(
         (item) => `
         <div class="cart-line" data-id="${item.id}">
-          <img src="${item.image}" alt="" class="cart-line-image" />
+          <img src="${escapeHtml(item.image)}" alt="" class="cart-line-image" />
           <div class="cart-line-info">
-            <p class="cart-line-name">${item.name}</p>
+            <p class="cart-line-name">${escapeHtml(item.name)}</p>
             <p class="cart-line-price">R${item.price.toFixed(2)}</p>
           </div>
           <div class="cart-line-qty">
-            <button type="button" class="btn btn-secondary qty-decrement" aria-label="Decrease quantity for ${item.name}">-</button>
+            <button type="button" class="btn btn-secondary qty-decrement" aria-label="Decrease quantity for ${escapeHtml(item.name)}">-</button>
             <span class="qty-value">${item.qty}</span>
-            <button type="button" class="btn btn-secondary qty-increment" aria-label="Increase quantity for ${item.name}">+</button>
+            <button type="button" class="btn btn-secondary qty-increment" aria-label="Increase quantity for ${escapeHtml(item.name)}">+</button>
           </div>
           <p class="cart-line-subtotal">R${(item.price * item.qty).toFixed(2)}</p>
-          <button type="button" class="btn btn-secondary cart-line-remove" aria-label="Remove ${item.name} from cart">Remove</button>
+          <button type="button" class="btn btn-secondary cart-line-remove" aria-label="Remove ${escapeHtml(item.name)} from cart">Remove</button>
         </div>
       `
       )
